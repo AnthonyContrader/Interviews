@@ -4,13 +4,13 @@ package it.contrader.view;
 import it.contrader.controller.Request;
 import it.contrader.main.MainDispatcher;
 
-public class HomeUserView extends AbstractView{
+public class HomeClientView extends AbstractView{
 
 	String choice;
 
 	@Override
 	public void showResults(Request request) {
-		System.out.println("\n-----Purtroppo in questo sample l'utente non puà fare nulla, ci scusiamo per il disagio.-----");
+    	System.out.println("\n Benvenuto in SAMPLE PROJECT "+request.get("username").toString() + "\n");
 
 	}
 

@@ -33,8 +33,12 @@ public class HomeController implements Controller {
 				MainDispatcher.getInstance().callView("HomeAdmin", request);
 				break;
 				
-			case "USER": 
-				MainDispatcher.getInstance().callView("HomeUser", request);
+			case "CLIENT": 
+				MainDispatcher.getInstance().callView("HomeClient", request);
+				break;
+				
+			case "RECRUITER": 
+				MainDispatcher.getInstance().callView("HomeRecruiter", request);
 				break;
 			
 			default:
