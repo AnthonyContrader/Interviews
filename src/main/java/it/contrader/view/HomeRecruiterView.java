@@ -7,26 +7,35 @@ import it.contrader.main.MainDispatcher;
 public class HomeRecruiterView extends AbstractView{
 
 	String choice;
-
+	private String usertype;
+	
 	@Override
 	public void showResults(Request request) {
-		System.out.println("\n-----Purtroppo in questo sample l'utente non puà fare nulla, ci scusiamo per il disagio.-----");
-
+		if(request!=null) {
+			usertype=request.get("usertype").toString();
+			if(request.getParameters().containsKey("username"))
+				System.out.println("\n Benvenuto in SAMPLE PROJECT "+request.get("username").toString() + "\n");
+	    }
 	}
 
 	@Override
 	public void showOptions() {
 		System.out.println("-------------MENU------------\n");
-		System.out.println("NESSUNA OPZIONE DISPONIBILE!");
-		System.out.println("\n Esatto, puoi solo uscire...");
-		choice = this.getInput();
-
+		System.out.println(" Seleziona cosa vuoi gestire:");
+		System.out.println("[D]omande [E]logout");
+        choice = this.getInput();
 	}
 
 	@Override
 	public void submit() {
 
 		switch (choice) {
+		
+		case "d":
+			Request request=new Request();
+			request.put("usertype", usertype);
+			MainDispatcher.getInstance().callView("Question", request);
+        	break;
 
 		case "e":
 			MainDispatcher.getInstance().callAction("Login", "doControl", null);

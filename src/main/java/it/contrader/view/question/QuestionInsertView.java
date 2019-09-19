@@ -11,19 +11,23 @@ public class QuestionInsertView extends AbstractView{
 	private String sector;
 	private int companyid;
 	private final String mode = "INSERT";
+	private String usertype;
 
 	public QuestionInsertView() {
 	}
 	
 	/**
-	 * Se la request non è nulla (ovvero se si arriva dalla mode INSERT del controller) mostra
+	 * Se la request non ï¿½ nulla (ovvero se si arriva dalla mode INSERT del controller) mostra
 	 * l'esito dell'operazione
 	 */
 	@Override
 	public void showResults(Request request) {
 		if (request!=null) {
-			System.out.println("Inserimento andato a buon fine.\n");
-			MainDispatcher.getInstance().callView("Question", null);
+			usertype = request.get("usertype").toString();
+			if (request.getParameters().containsKey("mode")) {
+				System.out.println("Inserimento andato a buon fine.\n");
+				MainDispatcher.getInstance().callView("Question", request);
+			}
 		}
 	}
 
@@ -58,6 +62,7 @@ public class QuestionInsertView extends AbstractView{
 		request.put("sector", sector);
 		request.put("companyid", companyid);
 		request.put("mode", mode);
+		request.put("usertype", usertype);
 		MainDispatcher.getInstance().callAction("Question", "doControl", request);
 	}
 

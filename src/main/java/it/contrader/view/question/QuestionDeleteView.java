@@ -9,19 +9,23 @@ public class QuestionDeleteView extends AbstractView {
 
 	private int id;
 	private final String mode = "DELETE";
+	private String usertype;
 
 	public QuestionDeleteView() {
 	}
 
 	/**
-	 * Se la request non è nulla (ovvero se si arriva dalla mode DELETE del controller) mostra
+	 * Se la request non ï¿½ nulla (ovvero se si arriva dalla mode DELETE del controller) mostra
 	 * l'esito dell'operazione
 	 */
 	@Override
 	public void showResults(Request request) {
 		if (request!=null) {
-			System.out.println("Cancellazione andata a buon fine.\n");
-			MainDispatcher.getInstance().callView("Question", null);
+			usertype = request.get("usertype").toString();
+			if (request.getParameters().containsKey("mode")) {
+				System.out.println("Cancellazione andata a buon fine.\n");
+				MainDispatcher.getInstance().callView("Question", request);
+			}
 		}
 	}
 
@@ -43,6 +47,7 @@ public class QuestionDeleteView extends AbstractView {
 		request = new Request();
 		request.put("id", id);
 		request.put("mode", mode);
+		request.put("usertype", usertype);
 		MainDispatcher.getInstance().callAction("Question", "doControl", request);
 	}
 

@@ -17,13 +17,14 @@ public class QuestionReadView extends AbstractView {
 	private int id;
 	private Request request;
 	private final String mode = "READ";
+	private String usertype;
 
 	public QuestionReadView() {
 	}
 
 	/**
-	 * Se la request è null (ovvero quando arriva dal controller con mode GETCHOICE e choice L 
-	 * il metodo è vuoto.
+	 * Se la request ï¿½ null (ovvero quando arriva dal controller con mode GETCHOICE e choice L 
+	 * il metodo ï¿½ vuoto.
 	 * 
 	 * Altrimenti se arriva con uno user nella request (ovvero quando arriva
 	 * dal controller con mode READ) mostra lo user. In questo caso torna alla UserView senza eseguire
@@ -31,13 +32,16 @@ public class QuestionReadView extends AbstractView {
 	 */
 	@Override
 	public void showResults(Request request) {
-		if (request != null) {
-			System.out.println("\n------------------- Gestione domande ----------------\n");
-			System.out.println("ID\tDomanda\tSettore\tAzienda");
-			System.out.println("----------------------------------------------------\n");
-			QuestionDTO question = (QuestionDTO) request.get("question");
-			System.out.println(question);
-			MainDispatcher.getInstance().callView("Question", null);
+		if (request!=null) {
+			usertype = request.get("usertype").toString();
+			if (request.getParameters().containsKey("mode")) {
+				System.out.println("\n------------------- Gestione domande ----------------\n");
+				System.out.println("ID\tDomanda\tSettore\tAzienda");
+				System.out.println("----------------------------------------------------\n");
+				QuestionDTO question = (QuestionDTO) request.get("question");
+				System.out.println(question);
+				MainDispatcher.getInstance().callView("Question", request);
+			}
 		}
 	}
 
@@ -59,6 +63,7 @@ public class QuestionReadView extends AbstractView {
 		request = new Request();
 		request.put("id", id);
 		request.put("mode", mode);
+		request.put("usertype", usertype);
 		MainDispatcher.getInstance().callAction("Question", "doControl", request);
 	}
 

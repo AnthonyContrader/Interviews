@@ -18,7 +18,8 @@ public class QuestionView extends AbstractView {
 
 	private Request request;
 	private String choice;
-
+	private String usertype;
+	
 	public QuestionView() {
 		
 	}
@@ -28,12 +29,14 @@ public class QuestionView extends AbstractView {
 	 */
 	@Override
 	public void showResults(Request request) {
-		
+		if(request!=null) {
+			usertype = request.get("usertype").toString();
+		}
 	}
 
 	/**
 	 * Chiede all'utente un input (lettera da tastiera) per la choice (vedi UserController). 
-	 * Mette la modalità GETCHOICE nella mode.
+	 * Mette la modalitï¿½ GETCHOICE nella mode.
 	 */
 	@Override
 	public void showOptions() {
@@ -53,6 +56,7 @@ public class QuestionView extends AbstractView {
 		request = new Request();
 		request.put("choice", choice);
 		request.put("mode", "GETCHOICE");
+		request.put("usertype", usertype);
 		MainDispatcher.getInstance().callAction("Question", "doControl", this.request);
 	}
 

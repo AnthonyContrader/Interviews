@@ -22,7 +22,7 @@ public class MainDispatcher {
 	private static MainDispatcher instance;
 	
 	/*
-	 * il metodo getInstance è alla base del pattern Singleton
+	 * il metodo getInstance ï¿½ alla base del pattern Singleton
 	 * per ulteriori rimandi vedere la classe Connection Singleton o la guida SEZIONE 10	
 	 */
 	public static MainDispatcher getInstance() {
@@ -34,19 +34,19 @@ public class MainDispatcher {
 	
 	/*
 	 * metodo CallAction
-	 * parametri:  - String controller : è una stringa che rappresenta il nome specifico dell'entità di cui vogliamo chiamare 
+	 * parametri:  - String controller : ï¿½ una stringa che rappresenta il nome specifico dell'entitï¿½ di cui vogliamo chiamare 
 	 * 									 il controller. 
 	 * 									esempio "UtenteController" verra chiamato tramite "Utente"
-     * 			   - String action : è una stringa che indica il metodo che voglio far compiere dal controller prima indicato
-     * 									esempio " UtenteController.doControll() " verrà chiamato semplicemente con "doControl"
+     * 			   - String action : ï¿½ una stringa che indica il metodo che voglio far compiere dal controller prima indicato
+     * 									esempio " UtenteController.doControll() " verrï¿½ chiamato semplicemente con "doControl"
      * 			   - Request request: contiene una map di valori salvati come ("chiave","valore") che verranno passati al Controller
 	 *
 	 * output: niente essendo di tipo void.
 	 * funzionamento : tramite questa " semplice " funzione riusciamo ad accedere ai vari controller senza doverli instanziare di
 	 * 					volta in volta nelle varie view.
-	 * 					Essa quando chiamata cerchera di creare un'instanza della classe inserita in controller, controllerà
+	 * 					Essa quando chiamata cerchera di creare un'instanza della classe inserita in controller, controllerï¿½
 	 * 					in seguito se essa possiede un metodo con il nome inviato e passati tutti questi controlli 
-	 * 					invocherà tale metodo passando ad esso la request contente i vari dati che stiamo facendo viaggiare 
+	 * 					invocherï¿½ tale metodo passando ad esso la request contente i vari dati che stiamo facendo viaggiare 
 	 * 					all'interno del programma.
 	 */
 	public void callAction(String controller, String action, Request request) {
@@ -64,7 +64,7 @@ public class MainDispatcher {
 	/*
 	 * metodo callView
 	 * parametri: String view : contiene il nome della classe che implementa la view interessata
-	 * 							esempio "UtenteView" verrà chiamato tramite "Utente"
+	 * 							esempio "UtenteView" verrï¿½ chiamato tramite "Utente"
  * 				  Request request : contiene la mappa di dati salvata come ("chiave","valore") che utilizziamo per il trasporto 
  * 									delle informazioni
  * 		output: nessuno in quanto metodo di tipo void

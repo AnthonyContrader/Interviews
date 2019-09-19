@@ -33,10 +33,10 @@ public class QuestionController implements Controller {
 	
 	/**
 	 * Metodo dell'interfaccia Controller. Estrae dalla request la mode
-	 * (che riceve dalle view specifiche e può essere la richesta di una 
+	 * (che riceve dalle view specifiche e puï¿½ essere la richesta di una 
 	 * scelta da parte dell'utente "GETCHOICE") e la scelta dell'utente.
 	 * 
-	 * Se la modalità corrisponde ad una CRUD il controller chiama i service,
+	 * Se la modalitï¿½ corrisponde ad una CRUD il controller chiama i service,
 	 * altrimenti rimanda alla View della CRUD per richiedere i parametri
 	 */
 	@Override
@@ -44,9 +44,8 @@ public class QuestionController implements Controller {
 		
 		//Estrae dalla request mode e choice
 		String mode = (String) request.get("mode");
-		
+		String usertype = (String) request.get("usertype");
 		String choice = (String) request.get("choice");
-
 		//Definisce i campi della classe (serviranno sempre, tanto vale definirli una sola volta)
 		int id;
 		String question;
@@ -75,6 +74,7 @@ public class QuestionController implements Controller {
 			questionService.insert(questiontoinsert);
 			request = new Request();
 			request.put("mode", "mode");
+			request.put("usertype", usertype);
 			//Rimanda alla view con la risposta
 			MainDispatcher.getInstance().callView(sub_package + "QuestionInsert", request);
 			break;
@@ -86,6 +86,7 @@ public class QuestionController implements Controller {
 			questionService.delete(id);
 			request = new Request();
 			request.put("mode", "mode");
+			request.put("usertype", usertype);
 			MainDispatcher.getInstance().callView(sub_package + "QuestionDelete", request);
 			break;
 		
@@ -100,6 +101,7 @@ public class QuestionController implements Controller {
 			questionService.update(questiontoupdate);
 			request = new Request();
 			request.put("mode", "mode");
+			request.put("usertype", usertype);
 			MainDispatcher.getInstance().callView(sub_package + "QuestionUpdate", request);
 			break;
 			
@@ -116,26 +118,28 @@ public class QuestionController implements Controller {
 		case "GETCHOICE":
 					
 					//toUpperCase() mette in maiuscolo la scelta
+			request = new Request();
+			request.put("usertype", usertype);
 			switch (choice.toUpperCase()) {
 			
 			case "T":
-				MainDispatcher.getInstance().callView(sub_package + "QuestionAll", null);
+				MainDispatcher.getInstance().callView(sub_package + "QuestionAll", request);
 				break;
 				
 			case "L":
-				MainDispatcher.getInstance().callView(sub_package + "QuestionRead", null);
+				MainDispatcher.getInstance().callView(sub_package + "QuestionRead", request);
 				break;
 				
 			case "I":
-				MainDispatcher.getInstance().callView(sub_package + "QuestionInsert", null);
+				MainDispatcher.getInstance().callView(sub_package + "QuestionInsert", request);
 				break;
 				
 			case "M":
-				MainDispatcher.getInstance().callView(sub_package + "QuestionUpdate", null);
+				MainDispatcher.getInstance().callView(sub_package + "QuestionUpdate", request);
 				break;
 				
 			case "C":
-				MainDispatcher.getInstance().callView(sub_package + "QuestionDelete", null);
+				MainDispatcher.getInstance().callView(sub_package + "QuestionDelete", request);
 				break;
 				
 			case "E":
@@ -143,7 +147,14 @@ public class QuestionController implements Controller {
 				break;
 
 			case "B":
-				MainDispatcher.getInstance().callView("HomeAdmin", null);
+				switch(usertype.toUpperCase()) {
+					case("ADMIN"):
+						MainDispatcher.getInstance().callView("HomeAdmin", request);
+						break;
+					case("RECRUITER"):
+						MainDispatcher.getInstance().callView("HomeRecruiter", request);
+						break;
+				}
 				break;
 				
 			default:
