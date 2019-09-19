@@ -34,9 +34,16 @@ public class QuestionDeleteView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
+		boolean correct=false;
+		while(!correct) {
 			System.out.println("Inserisci id della domanda:");
-			id = Integer.parseInt(getInput());
-
+			try {
+				id = Integer.parseInt(getInput());
+				correct=true;
+			} catch (NumberFormatException e) {
+				System.out.println("L'id deve essere un numero");
+			}
+		}
 	}
 
 	/**

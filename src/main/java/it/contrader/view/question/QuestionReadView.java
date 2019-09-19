@@ -50,8 +50,16 @@ public class QuestionReadView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		System.out.println("Inserisci l'ID della domanda:");
-		id = Integer.parseInt(getInput());
+		boolean correct=false;
+		while(!correct) {
+			System.out.println("Inserisci id della domanda:");
+			try {
+				id = Integer.parseInt(getInput());
+				correct=true;
+			} catch (NumberFormatException e) {
+				System.out.println("L'id deve essere un numero");
+			}
+		}
 	}
 
 	/**

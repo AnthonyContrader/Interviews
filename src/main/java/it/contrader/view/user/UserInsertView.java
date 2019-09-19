@@ -40,20 +40,41 @@ public class UserInsertView extends AbstractView{
 	 */
 	@Override
 	public void showOptions() {
+		boolean correct=false;
+		while(!correct) {
 			System.out.println("Inserisci username dell'utente:");
 			username = getInput();
+			if (!username.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Username non può essere vuoto");
+		}
+		correct=false;
+		while(!correct) {
 			System.out.println("Inserisci password dell'utente:");
 			password = getInput();
+			if (!password.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Password non può essere vuoto");
+		}
+		correct=false;
+		while(!correct) {
 			System.out.println("Inserisci l'usertype:");
 			System.out.println("[R]ecruiter [C]lient");
 			switch (getInput().toUpperCase()) {
 				case "R":
 					usertype="RECRUITER";
+					correct=true;
 					break;
 				case "C":
 					usertype="CLIENT";
+					correct=true;
 					break;
+				default:
+	        		System.out.println("Usertype Sconosciuto");	
 			}
+		}
 	}
 
 	/**

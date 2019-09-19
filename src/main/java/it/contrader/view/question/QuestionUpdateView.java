@@ -39,25 +39,43 @@ public class QuestionUpdateView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		try {
+		boolean correct=false;
+		while(!correct) {
 			System.out.println("Inserisci id della domanda:");
-			id = Integer.parseInt(getInput());
+			try {
+				id = Integer.parseInt(getInput());
+				correct=true;
+			} catch (NumberFormatException e) {
+				System.out.println("L'id deve essere un numero");
+			}
+		}
+		correct=false;
+		while(!correct) {
 			System.out.println("Inserisci la domanda:");
 			question = getInput();
+			if (!question.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Domanda non può essere vuoto");
+		}
+		correct=false;
+		while(!correct) {
 			System.out.println("Inserisci il settore:");
 			sector = getInput();
-			boolean correct = false;
-			while(!correct) {
-				System.out.println("Inserisci l'id dell'azienda:");
-				try {
-				    companyid = Integer.parseInt(getInput());
-				    correct = true;
-				}catch(NumberFormatException ex) {
-					System.out.println("L'id dell'azienda deve essere un numero.");
-				}
+			if (!sector.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Settore non può essere vuoto");
+		}
+		correct = false;
+		while(!correct) {
+			System.out.println("Inserisci l'id dell'azienda:");
+			try {
+			    companyid = Integer.parseInt(getInput());
+			    correct = true;
+			}catch(NumberFormatException ex) {
+				System.out.println("L'id dell'azienda deve essere un numero.");
 			}
-		} catch (Exception e) {
-
 		}
 	}
 

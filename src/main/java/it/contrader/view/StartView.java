@@ -17,9 +17,20 @@ public class StartView extends AbstractView {
 		
 		System.out.println("----- .:Benvenuto:. ----");
 		
-		System.out.println("Seleziona cosa vuoi fare: ");
-		System.out.println("[R]egistrati [L]ogin");
-		this.choice = getInput();
+		boolean correct = false;
+		while (!correct) {
+			System.out.println("Seleziona cosa vuoi fare: ");
+			System.out.println("[R]egistrati [L]ogin");
+			this.choice = getInput().toUpperCase();
+			switch (choice) {
+		        case "R":
+		        case "L":
+		        	correct = true;
+		        	break;
+	        	default:
+	        		System.out.println("Comando Sconosciuto");
+	        }
+		}
 	}
 
 	/**

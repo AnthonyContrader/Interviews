@@ -36,20 +36,34 @@ public class QuestionInsertView extends AbstractView{
 	 */
 	@Override
 	public void showOptions() {
+		boolean correct=false;
+		while(!correct) {
 			System.out.println("Inserisci la domanda:");
 			question = getInput();
+			if (!question.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Domanda non può essere vuoto");
+		}
+		correct=false;
+		while(!correct) {
 			System.out.println("Inserisci il settore:");
 			sector = getInput();
-			boolean correct = false;
-			while(!correct) {
-				System.out.println("Inserisci l'id dell'azienda:");
-				try {
-				    companyid = Integer.parseInt(getInput());
-				    correct = true;
-				}catch(NumberFormatException ex) {
-					System.out.println("L'id dell'azienda deve essere un numero.");
-				}
+			if (!sector.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Settore non può essere vuoto");
+		}
+		correct = false;
+		while(!correct) {
+			System.out.println("Inserisci l'id dell'azienda:");
+			try {
+			    companyid = Integer.parseInt(getInput());
+			    correct = true;
+			}catch(NumberFormatException ex) {
+				System.out.println("L'id dell'azienda deve essere un numero.");
 			}
+		}
 	}
 
 	/**

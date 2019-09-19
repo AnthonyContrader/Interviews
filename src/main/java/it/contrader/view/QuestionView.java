@@ -36,12 +36,25 @@ public class QuestionView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		System.out.println("          Scegli l'operazione da effettuare:");
-		System.out.println("[T]utto [L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]logout");
-
-		this.choice = getInput();
-
-		
+		boolean correct=false;
+		while(!correct) {
+			System.out.println("          Scegli l'operazione da effettuare:");
+			System.out.println("[T]utto [L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]logout");
+			this.choice = getInput().toUpperCase();
+			switch (choice) {
+		        case "T":
+		        case "L":
+		        case "I":
+		        case "M":
+		        case "C":
+		        case "B":
+		        case "E":
+		        	correct = true;
+		        	break;
+	      	default:
+	      		System.out.println("Comando Sconosciuto");
+			}
+		}
 	}
 	
 	/**

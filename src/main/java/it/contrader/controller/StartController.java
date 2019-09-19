@@ -16,12 +16,13 @@ public class StartController implements Controller {
 		if (request!=null) {
 			String choice=request.get("choice").toString();
 			switch (choice.toUpperCase()) {
-			case "R":
-				request.put("register", "register");
-				MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
-				break;
-			case "L":
-				MainDispatcher.getInstance().callView("Login", null);
+				case "R":
+					request.put("register", "register");
+					MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
+					break;
+				case "L":
+					MainDispatcher.getInstance().callView("Login", null);
+					break;
 			}
 		} else {
 			MainDispatcher.getInstance().callView("Start", null);

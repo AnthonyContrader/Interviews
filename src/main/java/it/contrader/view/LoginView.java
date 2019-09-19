@@ -18,12 +18,25 @@ public class LoginView extends AbstractView {
 	public void showOptions() {
 		
 		System.out.println("----- .:LOGIN:. ----");
+		boolean correct=false;
+		while(!correct) {
+			System.out.println(" Nome utente:");
+			this.username = getInput();
+			if (!username.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Utente non può essere vuoto");
+		}
+		correct=false;
+		while(!correct) {
+			System.out.println(" Password:");
+			this.password = getInput();
+			if (!password.isEmpty())
+				correct=true;
+			else
+				System.out.println("Il campo Password non può essere vuoto");
+		}
 		
-		System.out.println(" Nome utente:");
-		this.username = getInput();
-		
-		System.out.println(" Password:");
-		this.password = getInput();
 	}
 
 	/**

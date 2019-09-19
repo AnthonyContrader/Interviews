@@ -44,8 +44,16 @@ public class UserReadView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		System.out.println("Inserisci l'ID dell'utente:");
-		id = Integer.parseInt(getInput());
+		boolean correct=false;
+		while(!correct) {
+			System.out.println("Inserisci id dell'utente:");
+			try {
+				id = Integer.parseInt(getInput());
+				correct=true;
+			} catch (NumberFormatException e) {
+				System.out.println("L'id deve essere un numero");
+			}
+		}
 	}
 
 	/**

@@ -110,7 +110,7 @@ public class UserController implements Controller {
 			List<UserDTO> usersDTO = userService.getAll();
 			//Impacchetta la request con la lista degi user
 			request.put("users", usersDTO);
-			MainDispatcher.getInstance().callView("User", request);
+			MainDispatcher.getInstance().callView(sub_package + "UserAll", request);
 			break;
 			
 		//Esegue uno switch sulla base del comando inserito dall'utente e reindirizza tramite il Dispatcher alla View specifica per ogni operazione
@@ -120,6 +120,10 @@ public class UserController implements Controller {
 					//toUpperCase() mette in maiuscolo la scelta
 			switch (choice.toUpperCase()) {
 			
+			case "T":
+				MainDispatcher.getInstance().callView(sub_package + "UserAll", null);
+				break;
+				
 			case "L":
 				MainDispatcher.getInstance().callView(sub_package + "UserRead", null);
 				break;

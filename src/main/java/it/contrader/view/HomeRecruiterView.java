@@ -20,24 +20,35 @@ public class HomeRecruiterView extends AbstractView{
 
 	@Override
 	public void showOptions() {
-		System.out.println("-------------MENU------------\n");
-		System.out.println(" Seleziona cosa vuoi gestire:");
-		System.out.println("[D]omande [E]logout");
-        choice = this.getInput();
+		boolean correct = false;
+		while (!correct) {
+			System.out.println("-------------MENU------------\n");
+			System.out.println(" Seleziona cosa vuoi gestire:");
+			System.out.println("[D]omande [E]logout");
+	        choice = this.getInput().toUpperCase();
+	        switch (choice) {
+	        case "D":
+	        case "E":
+	        	correct = true;
+	        	break;
+        	default:
+        		System.out.println("Comando Sconosciuto");
+	        }
+		}
 	}
 
 	@Override
 	public void submit() {
 
-		switch (choice) {
+		switch (choice.toUpperCase()) {
 		
-		case "d":
+		case "D":
 			Request request=new Request();
 			request.put("usertype", usertype);
 			MainDispatcher.getInstance().callView("Question", request);
         	break;
 
-		case "e":
+		case "E":
 			MainDispatcher.getInstance().callAction("Start", "doControl", null);
 			break;
 

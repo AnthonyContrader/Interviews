@@ -1,9 +1,6 @@
 package it.contrader.view;
 
-import java.util.List;
-
 import it.contrader.controller.Request;
-import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 
 
@@ -27,17 +24,6 @@ public class UserView extends AbstractView {
 	 */
 	@Override
 	public void showResults(Request request) {
-		if (request != null) {
-			System.out.println("\n------------------- Gestione utenti ----------------\n");
-			System.out.println("ID\tUsername\tPassword\tTipo Utente");
-			System.out.println("----------------------------------------------------\n");
-			
-			@SuppressWarnings("unchecked")
-			List<UserDTO> users = (List<UserDTO>) request.get("users");
-			for (UserDTO u: users)
-				System.out.println(u);
-			System.out.println();
-		}
 	}
 
 	/**
@@ -46,12 +32,25 @@ public class UserView extends AbstractView {
 	 */
 	@Override
 	public void showOptions() {
-		System.out.println("          Scegli l'operazione da effettuare:");
-		System.out.println("[L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]sci");
-
-		this.choice = getInput();
-
-		
+		boolean correct=false;
+		while(!correct) {
+			System.out.println("          Scegli l'operazione da effettuare:");
+			System.out.println("[T]utto [L]eggi [I]nserisci [M]odifica [C]ancella [B]ack [E]logout");
+			this.choice = getInput().toUpperCase();
+			switch (choice) {
+		        case "T":
+		        case "L":
+		        case "I":
+		        case "M":
+		        case "C":
+		        case "B":
+		        case "E":
+		        	correct = true;
+		        	break;
+	      	default:
+	      		System.out.println("Comando Sconosciuto");
+			}
+		}
 	}
 	
 	/**
