@@ -1,10 +1,6 @@
 package it.contrader.view;
 
-import java.util.List;
-
 import it.contrader.controller.Request;
-import it.contrader.dto.QuestionDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 
 

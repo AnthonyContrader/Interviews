@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.QuestionDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.model.Question;
-import it.contrader.model.User;
 
 /**
  * 

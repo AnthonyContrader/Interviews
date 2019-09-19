@@ -38,11 +38,11 @@ public class HomeRecruiterView extends AbstractView{
         	break;
 
 		case "e":
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			MainDispatcher.getInstance().callAction("Start", "doControl", null);
 			break;
 
 		default:
-			MainDispatcher.getInstance().callAction("Login", "doControl", null);
+			MainDispatcher.getInstance().callAction("Start", "doControl", null);
 		}
 	}
 

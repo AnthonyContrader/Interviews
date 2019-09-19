@@ -71,8 +71,12 @@ public class UserController implements Controller {
 			UserDTO usertoinsert = new UserDTO(username, password, usertype);
 			//invoca il service
 			userService.insert(usertoinsert);
+			boolean register=request.getParameters().containsKey("register");
 			request = new Request();
 			request.put("mode", "mode");
+			if(register) {
+				request.put("register", "register");
+			}
 			//Rimanda alla view con la risposta
 			MainDispatcher.getInstance().callView(sub_package + "UserInsert", request);
 			break;
@@ -133,7 +137,7 @@ public class UserController implements Controller {
 				break;
 				
 			case "E":
-				MainDispatcher.getInstance().callView("Login", null);
+				MainDispatcher.getInstance().callView("Start", null);
 				break;
 
 			case "B":
@@ -141,11 +145,11 @@ public class UserController implements Controller {
 				break;
 				
 			default:
-				MainDispatcher.getInstance().callView("Login", null);
+				MainDispatcher.getInstance().callView("User", null);
 			}
 			
 		default:
-			MainDispatcher.getInstance().callView("Login", null);
+			MainDispatcher.getInstance().callView("User", null);
 		}
 	}
 }

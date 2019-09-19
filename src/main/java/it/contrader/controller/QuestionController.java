@@ -3,10 +3,8 @@ package it.contrader.controller;
 import java.util.List;
 
 import it.contrader.dto.QuestionDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.main.MainDispatcher;
 import it.contrader.service.QuestionService;
-import it.contrader.service.UserService;
 
 /**
  * 
@@ -143,7 +141,7 @@ public class QuestionController implements Controller {
 				break;
 				
 			case "E":
-				MainDispatcher.getInstance().callView("Login", null);
+				MainDispatcher.getInstance().callView("Start", null);
 				break;
 
 			case "B":
@@ -158,11 +156,11 @@ public class QuestionController implements Controller {
 				break;
 				
 			default:
-				MainDispatcher.getInstance().callView("Login", null);
+				MainDispatcher.getInstance().callView("Question", request);
 			}
 			
 		default:
-			MainDispatcher.getInstance().callView("Login", null);
+			MainDispatcher.getInstance().callView("Question", request);
 		}
 	}
 }

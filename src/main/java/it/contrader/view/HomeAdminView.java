@@ -60,17 +60,18 @@ public class HomeAdminView extends AbstractView {
         	break;
         	
         case "d":
+        	request.put("mode", "mode");
         	request.put("usertype", usertype);
-        	MainDispatcher.getInstance().callView("Question", request);
+        	MainDispatcher.getInstance().callAction("Question", "doControl", request);
         	break;
         	
         case "e":
-        	MainDispatcher.getInstance().callAction("Login", "doControl", null);
+        	MainDispatcher.getInstance().callAction("Start", "doControl", null);
         	break;
         default:
         	
             request.put("choice", choice);
-        	MainDispatcher.getInstance().callAction("Login", "doControl", request);
+        	MainDispatcher.getInstance().callAction("Start", "doControl", request);
         }
     }
 }

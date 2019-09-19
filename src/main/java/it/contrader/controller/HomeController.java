@@ -42,11 +42,11 @@ public class HomeController implements Controller {
 				break;
 			
 			default:
-				 MainDispatcher.getInstance().callView("Login", null);
+				 MainDispatcher.getInstance().callView("Start", null);
 				 break;
 			}
 		}
-		else MainDispatcher.getInstance().callView("Login", null);
+		else MainDispatcher.getInstance().callView("Start", null);
 
 	}
 }

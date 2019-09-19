@@ -6,7 +6,7 @@ import it.contrader.view.AbstractView;
 
 public class UserInsertView extends AbstractView{
 	private Request request;
-
+	private String register;
 	private String username;
 	private String password;
 	private String usertype;
@@ -22,8 +22,16 @@ public class UserInsertView extends AbstractView{
 	@Override
 	public void showResults(Request request) {
 		if (request!=null) {
-			System.out.println("Inserimento andato a buon fine.\n");
-			MainDispatcher.getInstance().callView("User", null);
+			if (request.getParameters().containsKey("register")) {
+				register="register";
+			}
+			if (request.getParameters().containsKey("mode")) {
+				System.out.println("Inserimento andato a buon fine.\n");
+				if(request.getParameters().containsKey("register"))
+					MainDispatcher.getInstance().callView("Start", null);
+				else
+					MainDispatcher.getInstance().callView("User", null);
+			}
 		}
 	}
 
@@ -36,8 +44,16 @@ public class UserInsertView extends AbstractView{
 			username = getInput();
 			System.out.println("Inserisci password dell'utente:");
 			password = getInput();
-			System.out.println("Inserisci tipo dell'utente:");
-			usertype = getInput();
+			System.out.println("Inserisci l'usertype:");
+			System.out.println("[R]ecruiter [C]lient");
+			switch (getInput().toUpperCase()) {
+				case "R":
+					usertype="RECRUITER";
+					break;
+				case "C":
+					usertype="CLIENT";
+					break;
+			}
 	}
 
 	/**
@@ -46,6 +62,8 @@ public class UserInsertView extends AbstractView{
 	@Override
 	public void submit() {
 		request = new Request();
+		if(register!=null)
+			request.put("register", "register");
 		request.put("username", username);
 		request.put("password", password);
 		request.put("usertype", usertype);
