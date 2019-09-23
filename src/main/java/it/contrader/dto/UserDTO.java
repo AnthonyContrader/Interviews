@@ -4,7 +4,7 @@ package it.contrader.dto;
  * 
  * @author Vittorio
  *
- *Il DTO è simile al Model ma può contenere meno attributi (ad esempio d dati sensibili
+ *Il DTO ï¿½ simile al Model ma puï¿½ contenere meno attributi (ad esempio d dati sensibili
  *che non devono arrivare alla View). GLi oggetti vengono trasformati da oggetti del Model
  *a oggetti del DTO tramite i Converter (chiamati dai Service). 
  *Per la descrizione della classe far riferimento al Model "User".
@@ -18,23 +18,48 @@ public class UserDTO {
 	private String password;
 	
 	private String usertype;
+	
+	private int companyid;
+		
+	private String company;
 
 	
 	public UserDTO() {
 		
 	}
 
-	public UserDTO (String username, String password, String usertype) {
+	public UserDTO (String username, String password, String usertype, int companyid) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
+		this.company = "";
+		this.companyid = companyid;
+	}
+	
+	public UserDTO (String username, String password, String usertype, String company) {
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.company = company;
+		this.companyid = 0;
 	}
 
-	public UserDTO (int id, String username, String password, String usertype) {
+	public UserDTO (int id, String username, String password, String usertype, String company) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
+		this.company = company;
+		this.companyid = 0;
+	}
+	
+	public UserDTO (int id, String username, String password, String usertype, int companyid) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.company = "";
+		this.companyid = companyid;
 	}
 
 	public int getId() {
@@ -67,6 +92,22 @@ public class UserDTO {
 
 	public String getUsername() {
 		return username;
+	}
+	
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+	
+	public void setCompanyid(int companyid) {
+		this.companyid = companyid;
+	}
+
+	public int getCompanyid() {
+		return companyid;
 	}
 
 	@Override

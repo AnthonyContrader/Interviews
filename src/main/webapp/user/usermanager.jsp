@@ -28,6 +28,7 @@
 			<th>Username</th>
 			<th>Password</th>
 			<th>Usertype</th>
+			<th>Company</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -40,6 +41,7 @@
 			</a></td>
 			<td><%=u.getPassword()%></td>
 			<td><%=u.getUsertype()%></td>
+			<td><%=u.getCompany()%></td>
 			<td><a href=UserServlet?mode=read&update=true&id=<%=u.getId()%>>Edit</a>
 			</td>
 			<td><a href=UserServlet?mode=delete&id=<%=u.getId()%>>Delete</a>
@@ -78,7 +80,7 @@
  			<select id="type" name="usertype">
   				<option value="ADMIN">ADMIN</option>
   				<option value="USER">USER</option>
- 
+ 				
 			</select>
     	</div>
   </div>

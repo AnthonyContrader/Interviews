@@ -10,7 +10,7 @@ import it.contrader.model.User;
  * 
  * @author Vittorio
  * 
- * Implementando questa l'interfaccia converter la classe UserConverter è OBBLIGATA ad implementarne i metodi
+ * Implementando questa l'interfaccia converter la classe UserConverter ï¿½ OBBLIGATA ad implementarne i metodi
  *
  */
 public class UserConverter {
@@ -26,6 +26,7 @@ public class UserConverter {
 			userDTO.setUsername(user.getUsername());
 			userDTO.setPassword(user.getPassword());
 			userDTO.setUsertype(user.getUsertype());
+			userDTO.setCompany(user.getCompany());
 		}
 		return userDTO;
 	}
@@ -41,6 +42,7 @@ public class UserConverter {
 			user.setUsername(userDTO.getUsername());
 			user.setPassword(userDTO.getPassword());
 			user.setUsertype(userDTO.getUsertype());
+			user.setCompanyid(userDTO.getCompanyid());
 		}
 		return user;
 	}

@@ -14,6 +14,10 @@ public class User {
 	private String password;
 	
 	private String usertype;
+	
+	private String company;
+	
+	private int companyid;
 
 	/**
 	 * Definisco i due costruttori, uno vuoto e uno con tre parametri per costrire oggetti di tipo User
@@ -22,10 +26,18 @@ public class User {
 		
 	}
 
-	public User (String username, String password, String usertype) {
+	public User (String username, String password, String usertype, int companyid) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
+		this.companyid = companyid;
+	}
+	
+	public User (String username, String password, String usertype, String company) {
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.company = company;
 	}
 
 	public User (int id, String username, String password, String usertype) {
@@ -69,6 +81,22 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
+	
+	public void setCompanyid(int companyid) {
+		this.companyid = companyid;
+	}
+
+	public int getCompanyid() {
+		return companyid;
+	}
+	
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getCompany() {
+		return company;
+	}
 
 	//Trasforma un oggetto in una stringa
 	@Override
@@ -102,6 +130,11 @@ public class User {
 			if (other.usertype != null)
 				return false;
 		} else if (!usertype.equals(other.usertype))
+			return false;
+		if (companyid == 0) {
+			if (other.companyid != 0)
+				return false;
+		} else if (companyid!=other.companyid)
 			return false;
 		return true;
 	}

@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 				String username = request.getParameter("username").toString();
 				String password = request.getParameter("password").toString();
 				String usertype = request.getParameter("usertype").toString();
-				dto = new UserDTO (username,password,usertype);
+				dto = new UserDTO (username,password,usertype,0);
 				ans = service.insert(dto);
 				request.setAttribute("ans", ans);
 				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);

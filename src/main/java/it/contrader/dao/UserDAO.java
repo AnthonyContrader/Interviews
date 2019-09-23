@@ -15,10 +15,10 @@ import it.contrader.model.User;
  */
 public class UserDAO implements DAO<User> {
 
-	private final String QUERY_ALL = "SELECT * FROM user";
-	private final String QUERY_CREATE = "INSERT INTO user (username, password, usertype) VALUES (?,?,?)";
-	private final String QUERY_READ = "SELECT * FROM user WHERE id=?";
-	private final String QUERY_UPDATE = "UPDATE user SET username=?, password=?, usertype=? WHERE id=?";
+	private final String QUERY_ALL = "SELECT u.id, u.username, u.password, u.usertype, c.name AS company FROM user AS u LEFT JOIN company AS c ON u.companyid=c.id";
+	private final String QUERY_CREATE = "INSERT INTO user (username, password, usertype, companyid) VALUES (?,?,?,?)";
+	private final String QUERY_READ = "SELECT u.id, u.username, u.password, u.usertype, c.name AS company FROM user AS u LEFT JOIN company AS c ON u.companyid=c.id WHERE u.id=?";
+	private final String QUERY_UPDATE = "UPDATE user SET username=?, password=?, usertype=?, companyid=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM user WHERE id=?";
 
 	public UserDAO() {
@@ -37,7 +37,8 @@ public class UserDAO implements DAO<User> {
 				String username = resultSet.getString("username");
 				String password = resultSet.getString("password");
 				String usertype = resultSet.getString("usertype");
-				user = new User(username, password, usertype);
+				String company = resultSet.getString("company");
+				user = new User(username, password, usertype, company);
 				user.setId(id);
 				usersList.add(user);
 			}
@@ -54,6 +55,10 @@ public class UserDAO implements DAO<User> {
 			preparedStatement.setString(1, userToInsert.getUsername());
 			preparedStatement.setString(2, userToInsert.getPassword());
 			preparedStatement.setString(3, userToInsert.getUsertype());
+			if(userToInsert.getCompanyid()==0)
+				preparedStatement.setNull(4, Types.INTEGER);
+			else
+				preparedStatement.setInt(4, userToInsert.getCompanyid());
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -66,17 +71,17 @@ public class UserDAO implements DAO<User> {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
 
-
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
 			preparedStatement.setInt(1, userId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			String username, password, usertype;
+			
+			String username = resultSet.getString("username");
+			String password = resultSet.getString("password");
+			String usertype = resultSet.getString("usertype");
+			String company = resultSet.getString("company");
 
-			username = resultSet.getString("username");
-			password = resultSet.getString("password");
-			usertype = resultSet.getString("usertype");
-			User user = new User(username, password, usertype);
+			User user = new User(username, password, usertype, company);
 			user.setId(resultSet.getInt("id"));
 
 			return user;
@@ -108,13 +113,18 @@ public class UserDAO implements DAO<User> {
 				if (userToUpdate.getUsertype() == null || userToUpdate.getUsertype().equals("")) {
 					userToUpdate.setUsertype(userRead.getUsertype());
 				}
+				
+				if (userToUpdate.getCompanyid() == 0) {
+					userToUpdate.setCompanyid(userRead.getCompanyid());
+				}
 
 				// Update the user
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
 				preparedStatement.setString(1, userToUpdate.getUsername());
 				preparedStatement.setString(2, userToUpdate.getPassword());
 				preparedStatement.setString(3, userToUpdate.getUsertype());
-				preparedStatement.setInt(4, userToUpdate.getId());
+				preparedStatement.setInt(4, userToUpdate.getCompanyid());
+				preparedStatement.setInt(5, userToUpdate.getId());
 				int a = preparedStatement.executeUpdate();
 				if (a > 0)
 					return true;
