@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Admin</title>
+<title>Home User </title>
 <link href="css/vittoriostyle.css" rel="stylesheet">
 </head>
 <body>
@@ -13,10 +13,8 @@
 
 
 <div class="navbar">
-  <a class="active" href="homeadmin.jsp">Home</a>
-  <a href="UserServlet?mode=userlist">Users</a>
- <a href="CompanyServlet?mode=userlist">Companies</a>
- <a href="QuestionServlet?mode=userlist">Questions</a>
+  <a class="active" href="homeuser.jsp">Home</a>
+ <a href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 

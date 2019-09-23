@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="java.util.List"
-	import="it.contrader.dto.UserDTO"%>
+	import="it.contrader.dto.RecruiterDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Admin</title>
+<title>Home Recruiter </title>
 <link href="css/vittoriostyle.css" rel="stylesheet">
 </head>
 <body>
@@ -13,10 +13,8 @@
 
 
 <div class="navbar">
-  <a class="active" href="homeadmin.jsp">Home</a>
-  <a href="UserServlet?mode=userlist">Users</a>
- <a href="CompanyServlet?mode=userlist">Companies</a>
- <a href="QuestionServlet?mode=userlist">Questions</a>
+  <a class="active" href="homerecruiter.jsp">Home</a>
+  <a href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 
