@@ -14,7 +14,6 @@ import it.contrader.dto.UserDTO;
 public class UserService {
 	
 	private UserConverter userConverter;
-
 	private UserDAO userDAO;
 
 	/**

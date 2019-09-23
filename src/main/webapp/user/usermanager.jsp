@@ -14,6 +14,8 @@
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
   <a class="active" href="UserServlet?mode=userlist">Users</a>
+  <a href="CompanyServlet?mode=companylist">Companies</a>
+  <a href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -64,6 +66,7 @@
       <input type="text" id="user" name="username" placeholder="inserisci username">
     </div>
   </div>
+  
   <div class="row">
     <div class="col-25">
      <label for="pass">Password</label>
@@ -73,6 +76,7 @@
     </div>
   </div>
   <div class="row">
+  
     <div class="col-25">
       <label for="type">Usertype</label>
     </div>
@@ -80,8 +84,11 @@
  			<select id="type" name="usertype">
   				<option value="ADMIN">ADMIN</option>
   				<option value="USER">USER</option>
-  				<option value="RECRUITER">USER</option>
-  				<div class="row">
+  				<option value="RECRUITER">RECRUITER</option>
+  			</select>
+ 		 </div>
+   </div>
+   <div class="row">		
     <div class="col-25">
      <label for="companyid">Companyid</label>
     </div>
@@ -89,11 +96,7 @@
       <input type="text" id="companyid" name="companyid" placeholder="inserisci l'id dell'azienda"> 
     </div>
   </div>
- 
-			</select>
-    	</div>
-  </div>
-      <button type="submit" >Insert</button>
+  <button type="submit" >Insert</button>
 </form>
 
 </div>

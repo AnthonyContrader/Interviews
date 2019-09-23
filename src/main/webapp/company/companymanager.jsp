@@ -13,7 +13,9 @@
 
 <div class="navbar">
   <a  href="homeadmin.jsp">Home</a>
+  <a href="UserServlet?mode=userlist">Users</a>
   <a class="active" href="CompanyServlet?mode=companylist">Companies</a>
+  <a href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <div class="main">
@@ -77,12 +79,8 @@
       <div class="col-75">
        <input type="text" id="city" name="city" placeholder="inserisci la città"> 
       </div>
-   		 
- 
-			</select>
-    	</div>
-  </div>
-      <button type="submit" >Insert</button>
+   </div>
+   <button type="submit" >Insert</button>
 </form>
 
 </div>
