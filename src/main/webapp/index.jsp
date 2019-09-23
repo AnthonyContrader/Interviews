@@ -19,7 +19,7 @@
 						
 			<button type="submit" value="Login" name="pulsante">Login</button>
 			
-			<a id="signin" href="RegisterServlet" >Sign In</a> 
+			<a id="signup" href="RegisterServlet" >Sign Up</a> 
 		</form>
 
 	

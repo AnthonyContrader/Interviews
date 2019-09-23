@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
-	<form class="registerform" action="UserServlet?mode=insert" method="post">
+	<form class="registerform" action="RegisterServlet?register" method="post">
 		<div class="row">
 			<div class="col-25">
 				<label for="user">Username</label>
@@ -34,8 +34,7 @@
 				</select>
 			</div>
 		</div>
-		<input type="hidden" name="register" value="register">
-		<button type="submit" >Sign In</button>
+		<button type="submit" >Sign Up</button>
 	</form>
 
 	
