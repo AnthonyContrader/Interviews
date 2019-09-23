@@ -1,35 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="it.contrader.dto.UserDTO"%>
+    pageEncoding="ISO-8859-1" import="it.contrader.dto.CompanyDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <link href="../css/vittoriostyle.css" rel="stylesheet">
-<title>Read User</title>
+<title>Read Company</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
 <div class="navbar">
   <a href="homeadmin.jsp">Home</a>
-  <a class="active"  href="UserServlet?mode=userlist">Users</a>
+  <a class="active"  href="CompanyServlet?mode=companylist">Companies</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>
 <br>
 
 <div class="main">
-<%UserDTO u = (UserDTO) request.getAttribute("dto");%>
+<% CompanyDTO u = (CompanyDTO) request.getAttribute("dto");%>
 
 
 <table>
 	<tr> 
-		<th>Username</th>
-		<th>Password</th>
-		<th>Usertype</th>
+		<th>Name</th>
+		<th>Address</th>
+		<th>City</th>
 	</tr>
 	<tr>
-		<td><%=u.getUsername()%></td>
-		<td> <%=u.getPassword()%></td>
-		<td> <%=u.getUsertype()%></td>
+		<td><%=u.getName()%></td>
+		<td> <%=u.getAddress()%></td>
+		<td> <%=u.getCity()%></td>
 	</tr>	
 </table>
 

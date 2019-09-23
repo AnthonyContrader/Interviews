@@ -80,7 +80,16 @@
  			<select id="type" name="usertype">
   				<option value="ADMIN">ADMIN</option>
   				<option value="USER">USER</option>
- 				
+  				<option value="RECRUITER">USER</option>
+  				<div class="row">
+    <div class="col-25">
+     <label for="companyid">Companyid</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="companyid" name="companyid" placeholder="inserisci l'id dell'azienda"> 
+    </div>
+  </div>
+ 
 			</select>
     	</div>
   </div>
