@@ -65,6 +65,16 @@ h2 {
 
 	
 }
+.registerform{
+	position:fixed;
+	heigth:50%;
+	width:20%;
+	margin-left:35.6%;
+	margin-right:44.4%;
+	margin-top:1%;
+	margin-bottom:auto;
+	z-index:1;
+}
 .login{
 	position:fixed;
 	heigth:50%;
@@ -91,6 +101,8 @@ h2 {
 	width:100%;
 	text-align: center;
 }
+
+
 
 /* Anchors */
 a {
@@ -264,6 +276,14 @@ button:hover {
 
 
 /*IDs*/
+#signin {
+	float: left;
+	clear: left;
+	width:100%;
+	text-align: center;
+	color: #00ccad;
+}
+
 #logout {
 	float: right;
 	color: #ffffff;

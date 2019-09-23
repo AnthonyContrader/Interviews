@@ -63,7 +63,10 @@ public class UserServlet extends HttpServlet {
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
+			if(request.getParameter("register")!=null)
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+			else
+				getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 			
 		case "UPDATE":

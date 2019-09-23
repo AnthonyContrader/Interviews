@@ -21,7 +21,7 @@ public class ConnectionSingleton {
                 String driver="com.mysql.cj.jdbc.Driver";
                 String host="127.0.0.1";
                 String port="3306";
-                String dbName="sampledb";
+                String dbName="interviews";
                 String username="root";
                 String password ="root";
                 String jdbcAdditionalParams="useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useLegacyDatetimeCode=false";
