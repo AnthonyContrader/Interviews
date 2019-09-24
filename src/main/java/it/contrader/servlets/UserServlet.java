@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.contrader.dto.UserDTO;
+import it.contrader.dto.CompanyDTO;
 import it.contrader.service.UserService;
+import it.contrader.service.CompanyService;
 
 /*
  * Per dettagli vedi Guida sez Servlet
@@ -25,7 +27,13 @@ public class UserServlet extends HttpServlet {
 		List<UserDTO>listDTO = service.getAll();
 		request.setAttribute("list", listDTO);
 	}
-
+	
+	public void updateCompanyList(HttpServletRequest request) {
+		CompanyService service = new CompanyService();
+		List<CompanyDTO> companyListDTO = service.getAll();
+		request.setAttribute("companyList", companyListDTO);
+	}
+	
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserService service = new UserService();
@@ -38,12 +46,14 @@ public class UserServlet extends HttpServlet {
 
 		case "USERLIST":
 			updateList(request);
+			updateCompanyList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 
 		case "READ":
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = service.read(id);
+			updateCompanyList(request);
 			request.setAttribute("dto", dto);
 			
 			if (request.getParameter("update") == null) {
@@ -64,6 +74,7 @@ public class UserServlet extends HttpServlet {
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
+			updateCompanyList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 			
@@ -76,6 +87,7 @@ public class UserServlet extends HttpServlet {
 			dto = new UserDTO (id, username, password, usertype, companyid);
 			ans = service.update(dto);
 			updateList(request);
+			updateCompanyList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 
@@ -84,6 +96,7 @@ public class UserServlet extends HttpServlet {
 			ans = service.delete(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
+			updateCompanyList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 		}
