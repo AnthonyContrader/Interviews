@@ -47,18 +47,18 @@
       <label for="type">Usertype</label>
     </div>
    		 <div class="col-75">
- 			<select id="type" name="usertype">
+ 			<select id="type" name="usertype" onchange="changedCompany()">
   				<option value="ADMIN" <%if(u.getUsertype().equals("ADMIN")) {%>selected<%}%>>ADMIN</option>
   				<option value="RECRUITER" <%if(u.getUsertype().equals("RECRUITER")) {%>selected<%}%>>RECRUITER</option>
   				<option value="USER" <%if(u.getUsertype().equals("USER")) {%>selected<%}%>>USER</option>
 			</select>
     	</div>
   </div>
-   <div class="row">		
+   <div class="row" id="selcompany">		
     <div class="col-25">
      <label for="company">Company</label>
     </div>
-    <div class="col-75">
+    <div class="col-75" ">
 	    <select id="company" name="company">
 	    	<option value=0>NO COMPANY</option>
 	      	<%
@@ -79,4 +79,23 @@
 <br>
 <%@ include file="../css/footer.jsp" %>	
 </body>
+<script>  
+var e = document.getElementById("type");
+var str = e.options[e.selectedIndex].value;
+if ( str != "RECRUITER" && str != "ADMIN"){
+	document.getElementById("selcompany").style.display = "none";
+	document.getElementById("company").selectedIndex = 0;
+}
+function changedCompany(){	
+	var e = document.getElementById("type");
+	var str = e.options[e.selectedIndex].value;
+	if ( str == "RECRUITER" || str == "ADMIN"){
+		document.getElementById("selcompany").style.display = "";
+	}
+	else{
+		document.getElementById("selcompany").style.display = "none";
+		document.getElementById("company").selectedIndex = 0;
+	}
+}
+</script>
 </html>
