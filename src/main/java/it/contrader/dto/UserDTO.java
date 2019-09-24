@@ -12,15 +12,10 @@ package it.contrader.dto;
 public class UserDTO {
 	
 	private int id;
-
 	private String username;
-	
 	private String password;
-	
 	private String usertype;
-	
-	private int companyid;
-		
+	private int companyid;	
 	private String company;
 
 	
@@ -28,37 +23,20 @@ public class UserDTO {
 		
 	}
 
-	public UserDTO (String username, String password, String usertype, int companyid) {
+	public UserDTO (String username, String password, String usertype, int companyid, String company) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
-		this.company = "";
+		this.company = company;
 		this.companyid = companyid;
 	}
 	
-	public UserDTO (String username, String password, String usertype, String company) {
-		this.username = username;
-		this.password = password;
-		this.usertype = usertype;
-		this.company = company;
-		this.companyid = 0;
-	}
-
-	public UserDTO (int id, String username, String password, String usertype, String company) {
+	public UserDTO (int id, String username, String password, String usertype, int companyid, String company) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.company = company;
-		this.companyid = 0;
-	}
-	
-	public UserDTO (int id, String username, String password, String usertype, int companyid) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.usertype = usertype;
-		this.company = "";
 		this.companyid = companyid;
 	}
 

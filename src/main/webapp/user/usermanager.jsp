@@ -84,17 +84,17 @@
   			</select>
  		 </div>
    </div>
-   <div class="row" id="selcompany" style="display: none;">		
+   <div class="row" id="selcompany">		
     <div class="col-25">
      <label for="company">Company</label>
     </div>
     <div class="col-75">
 	    <select id="company" name="company">
-	    	<option value=0>NO COMPANY</option>
+	    	<option value="0:null">NO COMPANY</option>
 	      	<%
-				for (CompanyDTO u : companyList) {
+				for (CompanyDTO c : companyList) {
 			%>
-			<option value=<%=u.getId()%>><%=u.getName() %></option>
+			<option value=<%=c.getId() + ":" + c.getName()%>><%=c.getName() %></option>
 			<%
 				}
 			%>
@@ -109,6 +109,12 @@
 <%@ include file="../css/footer.jsp" %>
 </body>
 <script>  
+var e = document.getElementById("type");
+var str = e.options[e.selectedIndex].value;
+if ( str != "RECRUITER" && str != "ADMIN"){
+	document.getElementById("selcompany").style.display = "none";
+	document.getElementById("company").selectedIndex = 0;
+}
 function changedCompany(){	
 	var e = document.getElementById("type");
 	var str = e.options[e.selectedIndex].value;

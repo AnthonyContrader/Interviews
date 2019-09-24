@@ -35,9 +35,9 @@ public class QuestionDAO implements DAO<Question> {
 				int id = resultSet.getInt("id");
 				String questionText = resultSet.getString("question");
 				String sector = resultSet.getString("sector");
-				int recruiterid = resultSet.getInt("recruiterid");
-				int companyid = resultSet.getInt("companyid");
-				question = new Question(questionText, sector, recruiterid, companyid);
+				String recruiter = resultSet.getString("recruiter");
+				String company = resultSet.getString("company");
+				question = new Question(questionText, sector, recruiter, company);
 				question.setId(id);
 				questionsList.add(question);
 			}
@@ -73,14 +73,14 @@ public class QuestionDAO implements DAO<Question> {
 			
 			String questionText;
 			String sector;
-			int recruiterid;
-			int companyid;
+			String recruiter;
+			String company;
 
 			questionText = resultSet.getString("question");
 			sector = resultSet.getString("sector");
-			recruiterid = resultSet.getInt("recruiterid");
-			companyid = resultSet.getInt("companyid");
-			Question question = new Question(questionText, sector, recruiterid, companyid);
+			recruiter = resultSet.getString("recruiter");
+			company = resultSet.getString("company");
+			Question question = new Question(questionText, sector, recruiter, company);
 			question.setId(resultSet.getInt("id"));
 
 			return question;
@@ -109,7 +109,7 @@ public class QuestionDAO implements DAO<Question> {
 					questionToUpdate.setSector(questionRead.getSector());
 				}
 
-				if (questionToUpdate.getCompanyid() == 0) {
+				if (questionToUpdate.getCompany() == null || questionToUpdate.getCompany().equals("")) {
 					questionToUpdate.setCompanyid(questionRead.getCompanyid());
 				}
 

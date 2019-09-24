@@ -26,18 +26,12 @@ public class User {
 		
 	}
 
-	public User (String username, String password, String usertype, int companyid) {
-		this.username = username;
-		this.password = password;
-		this.usertype = usertype;
-		this.companyid = companyid;
-	}
-	
-	public User (String username, String password, String usertype, String company) {
+	public User (String username, String password, String usertype, int companyid, String company) {
 		this.username = username;
 		this.password = password;
 		this.usertype = usertype;
 		this.company = company;
+		this.companyid = companyid;
 	}
 
 	public User (int id, String username, String password, String usertype) {
@@ -130,6 +124,11 @@ public class User {
 			if (other.usertype != null)
 				return false;
 		} else if (!usertype.equals(other.usertype))
+			return false;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
 			return false;
 		if (companyid == 0) {
 			if (other.companyid != 0)

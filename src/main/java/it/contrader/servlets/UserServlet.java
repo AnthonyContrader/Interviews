@@ -69,8 +69,10 @@ public class UserServlet extends HttpServlet {
 			String username = request.getParameter("username").toString();
 			String password = request.getParameter("password").toString();
 			String usertype = request.getParameter("usertype").toString();
-			int companyid = Integer.parseInt(request.getParameter("companyid").toString());
-			dto = new UserDTO (username,password,usertype,companyid);
+			String[] res = request.getParameter("company").toString().split(":");
+			int companyid = Integer.parseInt(res[0]);
+			String company = res[1];
+			dto = new UserDTO (username,password,usertype,companyid, company);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -82,9 +84,11 @@ public class UserServlet extends HttpServlet {
 			username = request.getParameter("username");
 			password = request.getParameter("password");
 			usertype = request.getParameter("usertype");
-			companyid = Integer.parseInt(request.getParameter("companyid").toString());
+			res = request.getParameter("company").toString().split(":");
+			companyid = Integer.parseInt(res[0]);
+			company = res[1];
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = new UserDTO (id, username, password, usertype, companyid);
+			dto = new UserDTO (id, username, password, usertype, companyid, company);
 			ans = service.update(dto);
 			updateList(request);
 			updateCompanyList(request);

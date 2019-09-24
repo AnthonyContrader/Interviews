@@ -26,6 +26,7 @@ public class UserConverter {
 			userDTO.setUsername(user.getUsername());
 			userDTO.setPassword(user.getPassword());
 			userDTO.setUsertype(user.getUsertype());
+			userDTO.setCompanyid(user.getCompanyid());
 			userDTO.setCompany(user.getCompany());
 		}
 		return userDTO;
@@ -43,6 +44,7 @@ public class UserConverter {
 			user.setPassword(userDTO.getPassword());
 			user.setUsertype(userDTO.getUsertype());
 			user.setCompanyid(userDTO.getCompanyid());
+			user.setCompany(userDTO.getCompany());
 		}
 		return user;
 	}

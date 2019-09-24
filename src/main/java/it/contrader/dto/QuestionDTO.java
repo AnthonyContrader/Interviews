@@ -14,6 +14,8 @@ public class QuestionDTO {
 	private int id;
 	private String question;
 	private String sector;
+	private String recruiter;
+	private String company;
 	private int recruiterid;
 	private int companyid;
 
@@ -34,7 +36,13 @@ public class QuestionDTO {
 		this.sector = sector;
 		this.recruiterid = recruiterid;
 		this.companyid = companyid;
-		this.companyid = companyid;
+	}
+	
+	public QuestionDTO (String question, String sector, String recruiter, String company) {
+		this.question = question;
+		this.sector = sector;
+		this.recruiter = recruiter;
+		this.company = company;
 	}
 
 	public int getId() {
@@ -64,9 +72,25 @@ public class QuestionDTO {
 	public void setRecruiterid(int recruiterid) {
 		this.recruiterid = recruiterid;
 	}
-
+	
 	public int getRecruiterid() {
 		return recruiterid;
+	}
+
+	public String getRecruiter() {
+		return this.recruiter;
+	}
+
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public String getCompany() {
+		return this.company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 	
 	public void setCompanyid(int companyid) {

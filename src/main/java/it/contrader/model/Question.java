@@ -10,6 +10,8 @@ public class Question {
 	private int id;
 	private String question;
 	private String sector;
+	private String recruiter;
+	private String company;
 	private int recruiterid;
 	private int companyid;
 
@@ -33,6 +35,13 @@ public class Question {
 		this.sector = sector;
 		this.recruiterid = recruiterid;
 		this.companyid = companyid;
+	}
+	
+	public Question (String question, String sector, String recruiter, String company) {
+		this.question = question;
+		this.sector = sector;
+		this.recruiter = recruiter;
+		this.company = company;
 	}
 
 	/**
@@ -61,7 +70,23 @@ public class Question {
 	public void setSector(String sector) {
 		this.sector = sector;
 	}
+	
+	public String getRecruiter() {
+		return this.recruiter;
+	}
 
+	public void setRecruiter(String recruiter) {
+		this.recruiter = recruiter;
+	}
+
+	public String getCompany() {
+		return this.company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
 	public void setRecruiterid(int recruiterid) {
 		this.recruiterid = recruiterid;
 	}

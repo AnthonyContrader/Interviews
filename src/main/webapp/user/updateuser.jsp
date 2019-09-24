@@ -60,11 +60,11 @@
     </div>
     <div class="col-75">
 	    <select id="company" name="company">
-	    	<option value=0>NO COMPANY</option>
+	    	<option value="0:null">NO COMPANY</option>
 	      	<%
 				for (CompanyDTO c : companyList) {
 			%>
-			<option value=<%=c.getId()%> <%if(c.getName().equals(u.getCompany())) {%>selected<%}%>> <%=c.getName() %></option>
+			<option value=<%=c.getId() + ":" + c.getName()%> <%if(c.getName().equals(u.getCompany())) {%>selected<%}%>> <%=c.getName() %></option>
 			<%
 				}
 			%>
