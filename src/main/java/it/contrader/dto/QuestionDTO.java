@@ -12,11 +12,9 @@ package it.contrader.dto;
 public class QuestionDTO {
 	
 	private int id;
-
 	private String question;
-	
 	private String sector;
-	
+	private int recruiterid;
 	private int companyid;
 
 	
@@ -24,16 +22,18 @@ public class QuestionDTO {
 		
 	}
 
-	public QuestionDTO (String question, String sector, int companyid) {
+	public QuestionDTO (String question, String sector, int recruiterid, int companyid) {
 		this.question = question;
 		this.sector = sector;
+		this.recruiterid = recruiterid;
 		this.companyid = companyid;
 	}
 
-	public QuestionDTO (int id, String question, String sector, int companyid) {
-		this.id = id;
+	public QuestionDTO (int id, String question, String sector, int recruiterid, int companyid) {
 		this.question = question;
 		this.sector = sector;
+		this.recruiterid = recruiterid;
+		this.companyid = companyid;
 		this.companyid = companyid;
 	}
 
@@ -61,6 +61,14 @@ public class QuestionDTO {
 		this.sector = sector;
 	}
 
+	public void setRecruiterid(int recruiterid) {
+		this.recruiterid = recruiterid;
+	}
+
+	public int getRecruiterid() {
+		return recruiterid;
+	}
+	
 	public void setCompanyid(int companyid) {
 		this.companyid = companyid;
 	}
@@ -71,6 +79,6 @@ public class QuestionDTO {
 
 	@Override
 	public String toString() {
-		return  id + "\t"  + question +"\t\t" +   sector + "\t\t" + companyid;
+		return  id + "\t"  + question +"\t\t" +   sector + "\t\t" + recruiterid + "\t\t" + companyid;
 	}
 }

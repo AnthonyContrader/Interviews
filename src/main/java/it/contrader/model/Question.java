@@ -8,11 +8,9 @@ public class Question {
 	 * Qui sotto definisco gli attributi di User. 
 	 */
 	private int id;
-
 	private String question;
-	
 	private String sector;
-	
+	private int recruiterid;
 	private int companyid;
 
 	/**
@@ -22,16 +20,18 @@ public class Question {
 		
 	}
 
-	public Question (String question, String sector, int companyid) {
+	public Question (String question, String sector, int recruiterid, int companyid) {
 		this.question = question;
 		this.sector = sector;
+		this.recruiterid = recruiterid;
 		this.companyid = companyid;
 	}
 
-	public Question (int id, String question, String sector, int companyid) {
+	public Question (int id, String question, String sector, int recruiterid, int companyid) {
 		this.id = id;
 		this.question = question;
 		this.sector = sector;
+		this.recruiterid = recruiterid;
 		this.companyid = companyid;
 	}
 
@@ -62,6 +62,14 @@ public class Question {
 		this.sector = sector;
 	}
 
+	public void setRecruiterid(int recruiterid) {
+		this.recruiterid = recruiterid;
+	}
+
+	public int getRecruiterid() {
+		return recruiterid;
+	}
+	
 	public void setCompanyid(int companyid) {
 		this.companyid = companyid;
 	}
@@ -73,7 +81,7 @@ public class Question {
 	//Trasforma un oggetto in una stringa
 	@Override
 	public String toString() {
-		return  id + "\t"  + question +"\t\t" +   sector + "\t\t" + companyid;
+		return  id + "\t"  + question +"\t\t" +   sector + "\t\t" + recruiterid + "\t\t" + companyid;
 	}
 
 	//Metodo per il confronto degli oggetti
@@ -97,6 +105,11 @@ public class Question {
 			if (other.sector != null)
 				return false;
 		} else if (!sector.equals(other.sector))
+			return false;
+		if (recruiterid == 0) {
+			if (other.recruiterid != 0)
+				return false;
+		} else if (recruiterid != other.recruiterid)
 			return false;
 		if (companyid == 0) {
 			if (other.companyid != 0)

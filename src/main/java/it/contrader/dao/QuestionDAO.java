@@ -14,10 +14,10 @@ import it.contrader.model.Question;
  */
 public class QuestionDAO implements DAO<Question> {
 
-	private final String QUERY_ALL = "SELECT * FROM question";
-	private final String QUERY_CREATE = "INSERT INTO question (question, sector, companyid) VALUES (?,?,?)";
-	private final String QUERY_READ = "SELECT * FROM question WHERE id=?";
-	private final String QUERY_UPDATE = "UPDATE question SET question=?, sector=?, companyid=? WHERE id=?";
+	private final String QUERY_ALL = "SELECT q.id, q.question, q.sector, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id";
+	private final String QUERY_CREATE = "INSERT INTO question (question, sector, recruiterid, companyid) VALUES (?,?,?,?)";
+	private final String QUERY_READ = "SELECT q.id, q.question, q.sector, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id WHERE id=?";
+	private final String QUERY_UPDATE = "UPDATE question SET question=?, sector=?, recruiterid=?, companyid=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM question WHERE id=?";
 
 	public QuestionDAO() {
@@ -35,8 +35,9 @@ public class QuestionDAO implements DAO<Question> {
 				int id = resultSet.getInt("id");
 				String questionText = resultSet.getString("question");
 				String sector = resultSet.getString("sector");
+				int recruiterid = resultSet.getInt("recruiterid");
 				int companyid = resultSet.getInt("companyid");
-				question = new Question(questionText, sector, companyid);
+				question = new Question(questionText, sector, recruiterid, companyid);
 				question.setId(id);
 				questionsList.add(question);
 			}
@@ -52,7 +53,8 @@ public class QuestionDAO implements DAO<Question> {
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_CREATE);
 			preparedStatement.setString(1, questionToInsert.getQuestion());
 			preparedStatement.setString(2, questionToInsert.getSector());
-			preparedStatement.setInt(3, questionToInsert.getCompanyid());
+			preparedStatement.setInt(3, questionToInsert.getRecruiterid());
+			preparedStatement.setInt(4, questionToInsert.getCompanyid());
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -64,19 +66,21 @@ public class QuestionDAO implements DAO<Question> {
 	public Question read(int questionId) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-
-
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
 			preparedStatement.setInt(1, questionId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			String questionText, sector;
+			
+			String questionText;
+			String sector;
+			int recruiterid;
 			int companyid;
 
 			questionText = resultSet.getString("question");
 			sector = resultSet.getString("sector");
+			recruiterid = resultSet.getInt("recruiterid");
 			companyid = resultSet.getInt("companyid");
-			Question question = new Question(questionText, sector, companyid);
+			Question question = new Question(questionText, sector, recruiterid, companyid);
 			question.setId(resultSet.getInt("id"));
 
 			return question;
@@ -113,8 +117,9 @@ public class QuestionDAO implements DAO<Question> {
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
 				preparedStatement.setString(1, questionToUpdate.getQuestion());
 				preparedStatement.setString(2, questionToUpdate.getSector());
-				preparedStatement.setInt(3, questionToUpdate.getCompanyid());
-				preparedStatement.setInt(4, questionToUpdate.getId());
+				preparedStatement.setInt(3, questionToUpdate.getRecruiterid());
+				preparedStatement.setInt(4, questionToUpdate.getCompanyid());
+				preparedStatement.setInt(5, questionToUpdate.getId());
 				int a = preparedStatement.executeUpdate();
 				if (a > 0)
 					return true;

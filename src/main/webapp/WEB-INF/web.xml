@@ -52,4 +52,14 @@
   	<servlet-name>CompanyServlet</servlet-name>
   	<url-pattern>/CompanyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<description>Question Servlet</description>
+  	<display-name>QuestionServlet</display-name>
+  	<servlet-name>QuestionServlet</servlet-name>
+  	<servlet-class>it.contrader.servlets.QuestionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>QuestionServlet</servlet-name>
+  	<url-pattern>/QuestionServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -27,6 +27,7 @@ public class QuestionConverter {
 			questionDTO.setId(question.getId());
 			questionDTO.setQuestion(question.getQuestion());
 			questionDTO.setSector(question.getSector());
+			questionDTO.setRecruiterid(question.getRecruiterid());
 			questionDTO.setCompanyid(question.getCompanyid());
 		}
 		return questionDTO;
@@ -43,6 +44,7 @@ public class QuestionConverter {
 			question.setId(questionDTO.getId());
 			question.setQuestion(questionDTO.getQuestion());
 			question.setSector(questionDTO.getSector());
+			question.setRecruiterid(questionDTO.getRecruiterid());
 			question.setCompanyid(questionDTO.getCompanyid());
 		}
 		return question;
