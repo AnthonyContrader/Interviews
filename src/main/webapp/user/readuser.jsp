@@ -9,11 +9,8 @@
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
-<div class="navbar">
-  <a href="homeadmin.jsp">Home</a>
-  <a class="active"  href="UserServlet?mode=userlist">Users</a>
-  <a href="LogoutServlet" id="logout">Logout</a>
-</div>
+<%@ include file="../css/adminmenu.jsp"%>
+<script>document.getElementById("userlink").classList.add("active");</script>
 <br>
 
 <div class="main">

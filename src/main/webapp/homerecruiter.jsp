@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.List"
-	import="it.contrader.dto.RecruiterDTO"%>
+	pageEncoding="ISO-8859-1" import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +9,8 @@
 </head>
 <body>
 <%@include file="css/header.jsp"%>
-
-
-<div class="navbar">
-  <a class="active" href="homerecruiter.jsp">Home</a>
-  <a href="QuestionServlet?mode=questionlist">Questions</a>
-  <a href="LogoutServlet" id="logout">Logout</a>
-</div>
+<%@include file="css/usermenu.jsp"%>
+<script>document.getElementById("homelink").classList.add("active");</script>
 
 <div class="main">
 <h1>Welcome ${user.getUsername()}</h1>

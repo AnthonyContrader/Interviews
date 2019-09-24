@@ -10,14 +10,8 @@
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>
-
-<div class="navbar">
-  <a  href="homeadmin.jsp">Home</a>
-  <a class="active" href="UserServlet?mode=userlist">Users</a>
-  <a href="CompanyServlet?mode=companylist">Companies</a>
-  <a href="QuestionServlet?mode=questionlist">Questions</a>
-  <a href="LogoutServlet" id="logout">Logout</a>
-</div>
+<%@ include file="../css/adminmenu.jsp"%>
+<script>document.getElementById("userlink").classList.add("active");</script>
 <div class="main">
 	<%
 		List<UserDTO> list = (List<UserDTO>) request.getAttribute("list");
