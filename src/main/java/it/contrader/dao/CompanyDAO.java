@@ -65,8 +65,6 @@ public class CompanyDAO implements DAO<Company> {
 	public Company read(int companyId) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {
-
-
 			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_READ);
 			preparedStatement.setInt(1, companyId);
 			ResultSet resultSet = preparedStatement.executeQuery();
