@@ -58,7 +58,7 @@
     <div class="col-25">
      <label for="company">Company</label>
     </div>
-    <div class="col-75" ">
+    <div class="col-75">
 	    <select id="company" name="company">
 	    	<option value=0>NO COMPANY</option>
 	      	<%
