@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import it.contrader.utils.ConnectionSingleton;
 import it.contrader.model.Company;
-import it.contrader.model.User;
 
 /**
  * 
@@ -16,9 +15,9 @@ import it.contrader.model.User;
 public class CompanyDAO implements DAO<Company> {
 
 	private final String QUERY_ALL = "SELECT * FROM company";
-	private final String QUERY_CREATE = "INSERT INTO company (name, address, city) VALUES (?,?,?)";
+	private final String QUERY_CREATE = "INSERT INTO company (name, address, city, sector) VALUES (?,?,?,?)";
 	private final String QUERY_READ = "SELECT * FROM company WHERE id=?";
-	private final String QUERY_UPDATE = "UPDATE company SET name=?, address=?, city=? WHERE id=?";
+	private final String QUERY_UPDATE = "UPDATE company SET name=?, address=?, city=?, sector=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM company WHERE id=?";
 
 	public CompanyDAO() {
@@ -37,7 +36,8 @@ public class CompanyDAO implements DAO<Company> {
 				String name = resultSet.getString("name");
 				String address = resultSet.getString("address");
 				String city = resultSet.getString("city");
-				company = new Company(name, address, city);
+				String sector = resultSet.getString("sector");
+				company = new Company(name, address, city, sector);
 				company.setId(id);
 				usersList.add(company);
 			}
@@ -54,6 +54,7 @@ public class CompanyDAO implements DAO<Company> {
 			preparedStatement.setString(1, userToInsert.getName());
 			preparedStatement.setString(2, userToInsert.getAddress());
 			preparedStatement.setString(3, userToInsert.getCity());
+			preparedStatement.setString(4, userToInsert.getSector());
 			preparedStatement.execute();
 			return true;
 		} catch (SQLException e) {
@@ -69,12 +70,13 @@ public class CompanyDAO implements DAO<Company> {
 			preparedStatement.setInt(1, companyId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			String name, address, city;
+			String name, address, city, sector;
 
 			name = resultSet.getString("name");
 			address = resultSet.getString("address");
 			city = resultSet.getString("city");
-			Company company = new Company(name, address, city);
+			sector = resultSet.getString("sector");
+			Company company = new Company(name, address, city, sector);
 			company.setId(resultSet.getInt("id"));
 
 			return company;
@@ -98,13 +100,14 @@ public class CompanyDAO implements DAO<Company> {
 				if (companyToUpdate.getName() == null || companyToUpdate.getName().equals("")) {
 					companyToUpdate.setName(companyRead.getName());
 				}
-
 				if (companyToUpdate.getAddress() == null || companyToUpdate.getAddress().equals("")) {
 					companyToUpdate.setAddress(companyRead.getAddress());
 				}
-
 				if (companyToUpdate.getCity() == null || companyToUpdate.getCity().equals("")) {
 					companyToUpdate.setCity(companyRead.getCity());
+				}
+				if (companyToUpdate.getSector() == null || companyToUpdate.getSector().equals("")) {
+					companyToUpdate.setSector(companyRead.getSector());
 				}
 
 				// Update the company
@@ -112,7 +115,8 @@ public class CompanyDAO implements DAO<Company> {
 				preparedStatement.setString(1, companyToUpdate.getName());
 				preparedStatement.setString(2, companyToUpdate.getAddress());
 				preparedStatement.setString(3, companyToUpdate.getCity());
-				preparedStatement.setInt(4, companyToUpdate.getId());
+				preparedStatement.setString(4, companyToUpdate.getSector());
+				preparedStatement.setInt(5, companyToUpdate.getId());
 				int a = preparedStatement.executeUpdate();
 				if (a > 0)
 					return true;

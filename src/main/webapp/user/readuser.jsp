@@ -22,11 +22,13 @@
 		<th>Username</th>
 		<th>Password</th>
 		<th>Usertype</th>
+		<th>Company</th>
 	</tr>
 	<tr>
 		<td><%=u.getUsername()%></td>
-		<td> <%=u.getPassword()%></td>
-		<td> <%=u.getUsertype()%></td>
+		<td><%=u.getPassword()%></td>
+		<td><%=u.getUsertype()%></td>
+		<td><%=u.getCompany()%></td>
 	</tr>	
 </table>
 

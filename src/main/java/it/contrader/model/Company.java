@@ -7,12 +7,10 @@ public class Company {
 	 * Qui sotto definisco gli attributi di Company. 
 	 */
 	private int id;
-
 	private String name;
-	
 	private String address;
-	
 	private String city;
+	private String sector;
 
 	/**
 	 * Definisco i due costruttori, uno vuoto e uno con tre parametri per costrire oggetti di tipo Company
@@ -21,17 +19,19 @@ public class Company {
 		
 	}
 
-	public Company (String name, String address, String city) {
+	public Company (String name, String address, String city, String sector) {
 		this.name = name;
 		this.address = address;
 		this.city = city;
+		this.sector = sector;
 	}
 
-	public Company (int id, String name, String address, String city) {
+	public Company (int id, String name, String address, String city, String sector) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.city = city;
+		this.sector = sector;
 	}
 
 	/**
@@ -52,7 +52,6 @@ public class Company {
 		this.name = name;
 	}
 
-
 	public String getAddress() {
 		return this.address;
 	}
@@ -68,11 +67,18 @@ public class Company {
 	public String getCity() {
 		return city;
 	}
+	
+	public String getSector() {
+		return this.sector;
+	}
 
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
 	//Trasforma un oggetto in una stringa
 	@Override
 	public String toString() {
-		return  id + "\t"  + name +"\t\t" +   address + "\t\t" + city;
+		return  id + "\t"  + name +"\t\t" +   address + "\t\t" + city + "\t\t" + sector;
 	}
 
 	//Metodo per il confronto degli oggetti
@@ -96,6 +102,11 @@ public class Company {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (sector == null) {
+			if (other.sector != null)
+				return false;
+		} else if (!sector.equals(other.sector))
 			return false;
 		if (city == null) {
 			if (other.city != null)

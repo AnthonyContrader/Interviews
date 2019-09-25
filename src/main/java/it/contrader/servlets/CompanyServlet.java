@@ -56,10 +56,11 @@ public class CompanyServlet extends HttpServlet {
 			break;
 
 		case "INSERT":
-			String name = request.getParameter("name").toString();
-			String address = request.getParameter("address").toString();
-			String city = request.getParameter("city").toString();
-			dto = new CompanyDTO (name,address,city);
+			String name = request.getParameter("name");
+			String address = request.getParameter("address");
+			String city = request.getParameter("city");
+			String sector = request.getParameter("sector");
+			dto = new CompanyDTO (name,address,city,sector);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
@@ -70,8 +71,9 @@ public class CompanyServlet extends HttpServlet {
 			name = request.getParameter("name");
 			address = request.getParameter("address");
 			city = request.getParameter("city");
+			sector = request.getParameter("sector");
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = new CompanyDTO (id,name, address, city);
+			dto = new CompanyDTO (id, name, address, city, sector);
 			ans = service.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/company/companymanager.jsp").forward(request, response);

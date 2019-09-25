@@ -31,6 +31,7 @@ public class CompanyConverter {
 			companyDTO.setName(company.getName());
 			companyDTO.setAddress(company.getAddress());
 			companyDTO.setCity(company.getCity());
+			companyDTO.setSector(company.getSector());
 		}
 		return companyDTO;
 	}
@@ -48,6 +49,7 @@ public class CompanyConverter {
 			company.setName(companyDTO.getName());
 			company.setAddress(companyDTO.getAddress());
 			company.setCity(companyDTO.getCity());
+			company.setSector(companyDTO.getSector());
 		}
 		return company;
 	}

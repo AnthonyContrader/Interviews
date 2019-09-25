@@ -12,29 +12,29 @@ package it.contrader.dto;
 public class CompanyDTO {
 	
 	private int id;
-
 	private String name;
-	
 	private String address;
-	
 	private String city;
+	private String sector;
 
 	
 	public CompanyDTO() {
 		
 	}
 
-	public CompanyDTO (String name, String address, String city) {
+	public CompanyDTO (String name, String address, String city, String sector) {
 		this.name = name;
 		this.address = address;
 		this.city = city;
+		this.sector = sector;
 	}
 
-	public CompanyDTO (int id, String name, String address, String city) {
+	public CompanyDTO (int id, String name, String address, String city, String sector) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.city = city;
+		this.sector = sector;
 	}
 
 	public int getId() {
@@ -69,8 +69,16 @@ public class CompanyDTO {
 		return city;
 	}
 
+	public String getSector() {
+		return this.sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+	
 	@Override
 	public String toString() {
-		return  id + "\t"  + name +"\t\t" +   address + "\t\t" + city;
+		return  id + "\t"  + name +"\t\t" +   address + "\t\t" + city + "\t\t" + sector;
 	}
 }

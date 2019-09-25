@@ -77,7 +77,7 @@
       <label for="type">Usertype</label>
     </div>
    		 <div class="col-75">
- 			<select id="type" name="usertype" onchange="changedCompany()">
+ 			<select id="type" name="usertype" onchange="changedUsertype()">
   				<option value="ADMIN">ADMIN</option>
   				<option value="USER">USER</option>
   				<option value="RECRUITER">RECRUITER</option>
@@ -109,13 +109,7 @@
 <%@ include file="../css/footer.jsp" %>
 </body>
 <script>  
-var e = document.getElementById("type");
-var str = e.options[e.selectedIndex].value;
-if ( str != "RECRUITER" && str != "ADMIN"){
-	document.getElementById("selcompany").style.display = "none";
-	document.getElementById("company").selectedIndex = 0;
-}
-function changedCompany(){	
+function changedUsertype(){	
 	var e = document.getElementById("type");
 	var str = e.options[e.selectedIndex].value;
 	if ( str == "RECRUITER" || str == "ADMIN"){
