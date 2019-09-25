@@ -14,16 +14,16 @@
 <br>
 <div class="main">
 
-<% CompanyDTO u = (CompanyDTO) request.getAttribute("dto");%>
+<% CompanyDTO c = (CompanyDTO) request.getAttribute("dto");%>
 
 
-<form id="floatleft" action="CompanyServlet?mode=update&id=<%=u.getId()%>" method="post">
+<form id="floatleft" action="CompanyServlet?mode=update&id=<%=c.getId()%>" method="post">
 	<div class="row">
 		<div class="col-25">
 			<label for="company">Name</label>
 		</div>
     	<div class="col-75">
-     		<input type="text" id="company" name="Name" value=<%=u.getName()%>>
+     		<input type="text" id="company" name="Name" value=<%=c.getName()%>>
     	</div>
 	</div>
 	<div class="row">
@@ -31,7 +31,7 @@
      		<label for="address">Address</label>
     	</div>
     	<div class="col-75">
-			<input type="text" id="address" name="address" value=<%=u.getAddress()%>> 
+			<input type="text" id="address" name="address" value=<%=c.getAddress()%>> 
 		</div>
 	</div>
 	<div class="row">
@@ -39,7 +39,7 @@
       		<label for="city">City</label>
    		</div>
 		<div class="col-75">
-      		<input type="text" id="city" name="city" value=<%=u.getCity()%>> 
+      		<input type="text" id="city" name="city" value=<%=c.getCity()%>> 
 		</div>
    </div>
    <div class="row">
@@ -47,7 +47,11 @@
       		<label for="sector">Sector</label>
    		</div>
 		<div class="col-75">
-      		<input type="text" id="sector" name="sector" value=<%=u.getSector()%>> 
+      		<select id="sector" name="sector">
+      			<option value="Informatica"<%if (c.getSector().equals("Informatica")) {%>selected<%} %>>Informatica</option>
+      			<option value="Economia"<%if(c.getSector().equals("Economia")) { %>selected<%} %>>Economia</option>
+      			<option value="Altro"<%if(c.getSector().equals("Altro")) { %>selected<%} %>>Altro</option>
+      		</select> 
 		</div>
    </div>
       <button type="submit" >Edit</button>

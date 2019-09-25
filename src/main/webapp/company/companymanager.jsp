@@ -54,7 +54,7 @@
 <form id="floatright" action="CompanyServlet?mode=insert" method="post">
   <div class="row">
     <div class="col-25">
-      <label for="user">Name</label>
+      <label for="company">Name</label>
     </div>
     <div class="col-75">
       <input type="text" id="company" name="name" placeholder="inserisci il nome">
@@ -62,7 +62,7 @@
   </div>
   <div class="row">
     <div class="col-25">
-     <label for="pass">Address</label>
+     <label for="address">Address</label>
     </div>
     <div class="col-75">
       <input type="text" id="address" name="address" placeholder="inserisci l'indirizzo"> 
@@ -70,7 +70,7 @@
   </div>
   <div class="row">
     <div class="col-25">
-      <label for="type">City</label>
+      <label for="city">City</label>
     </div>
       <div class="col-75">
        <input type="text" id="city" name="city" placeholder="inserisci la città"> 
@@ -78,10 +78,14 @@
   </div>
    <div class="row">
     <div class="col-25">
-      <label for="type">Sector</label>
+      <label for="sector">Sector</label>
     </div>
       <div class="col-75">
-        <input type="text" id="sector" name="sector" placeholder="inserisci il settore"> 
+		<select id="sector" name="sector">
+			<option value="Informatica">Informatica</option>
+			<option value="Economia">Economia</option>
+			<option value="Altro">Altro</option>
+		</select>
       </div>
    </div>
    <button type="submit" >Insert</button>
