@@ -24,6 +24,7 @@
 			<th>Name</th>
 			<th>Address</th>
 			<th>City</th>
+			<th>Sector</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -36,6 +37,7 @@
 			</a></td>
 			<td><%=u.getAddress()%></td>
 			<td><%=u.getCity()%></td>
+			<td><%=u.getSector()%></td>
 			<td><a href=CompanyServlet?mode=read&update=true&id=<%=u.getId()%>>Edit</a>
 			</td>
 			<td><a href=CompanyServlet?mode=delete&id=<%=u.getId()%>>Delete</a>
@@ -72,6 +74,14 @@
     </div>
       <div class="col-75">
        <input type="text" id="city" name="city" placeholder="inserisci la città"> 
+      </div>
+  </div>
+   <div class="row">
+    <div class="col-25">
+      <label for="type">Sector</label>
+    </div>
+      <div class="col-75">
+        <input type="text" id="sector" name="sector" placeholder="inserisci il settore"> 
       </div>
    </div>
    <button type="submit" >Insert</button>
