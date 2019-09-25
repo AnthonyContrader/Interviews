@@ -22,11 +22,13 @@ public class Question {
 		
 	}
 
-	public Question (String question, String sector, int recruiterid, int companyid) {
+	public Question (String question, String sector, int recruiterid, int companyid,String recruiter, String company) {
 		this.question = question;
 		this.sector = sector;
 		this.recruiterid = recruiterid;
 		this.companyid = companyid;
+		this.recruiter = recruiter;
+		this.company = company;
 	}
 
 	public Question (int id, String question, String sector, int recruiterid, int companyid) {
@@ -37,12 +39,7 @@ public class Question {
 		this.companyid = companyid;
 	}
 	
-	public Question (String question, String sector, String recruiter, String company) {
-		this.question = question;
-		this.sector = sector;
-		this.recruiter = recruiter;
-		this.company = company;
-	}
+	
 
 	/**
 	 * Getter e Setter: servono alle altre classi a recuperare e modificare gli attributi di User
@@ -130,6 +127,16 @@ public class Question {
 			if (other.sector != null)
 				return false;
 		} else if (!sector.equals(other.sector))
+			return false;
+		if (company == null) {
+			if (other.company != null)
+				return false;
+		} else if (!company.equals(other.company))
+			return false;
+		if (recruiter == null) {
+			if (other.recruiter != null)
+				return false;
+		} else if (!recruiter.equals(other.recruiter))
 			return false;
 		if (recruiterid == 0) {
 			if (other.recruiterid != 0)

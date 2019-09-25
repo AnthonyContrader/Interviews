@@ -9,7 +9,7 @@
 <body>
 
 <div class="navbar">
-  <a id="homelink" href="homeadmin.jsp">Home</a>
+  <a id="homelink" href="homeuser.jsp">Home</a>
   <a id="questionlink" href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
 </div>

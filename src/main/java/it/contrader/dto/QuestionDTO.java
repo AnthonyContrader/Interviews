@@ -24,26 +24,25 @@ public class QuestionDTO {
 		
 	}
 
-	public QuestionDTO (String question, String sector, int recruiterid, int companyid) {
+	public QuestionDTO (String question, String sector, String recruiter, String company,int recruiterid, int companyid) {
 		this.question = question;
 		this.sector = sector;
+		this.recruiter= recruiter;
+		this.company= company;
 		this.recruiterid = recruiterid;
 		this.companyid = companyid;
 	}
 
-	public QuestionDTO (int id, String question, String sector, int recruiterid, int companyid) {
+	public QuestionDTO (int id, String question, String sector,String recruiter, String company, int recruiterid, int companyid) {
+		this.id = id;
 		this.question = question;
 		this.sector = sector;
+		this.recruiter= recruiter;
+		this.company= company;
 		this.recruiterid = recruiterid;
 		this.companyid = companyid;
 	}
 	
-	public QuestionDTO (String question, String sector, String recruiter, String company) {
-		this.question = question;
-		this.sector = sector;
-		this.recruiter = recruiter;
-		this.company = company;
-	}
 
 	public int getId() {
 		return this.id;

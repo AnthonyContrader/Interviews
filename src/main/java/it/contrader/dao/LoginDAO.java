@@ -37,7 +37,8 @@ public class LoginDAO {
 				resultSet.next();
 				String usertype = resultSet.getString("usertype");
 				int id = resultSet.getInt("id");
-				User user = new User(id, username, password, usertype);
+				int companyid = resultSet.getInt("companyid");
+				User user = new User(id, username, password, usertype, companyid);
 				
 				return user;
 			}

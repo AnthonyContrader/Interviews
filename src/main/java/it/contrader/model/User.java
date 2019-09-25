@@ -40,6 +40,14 @@ public class User {
 		this.password = password;
 		this.usertype = usertype;
 	}
+	
+	public User (int id, String username, String password, String usertype, int companyid) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.usertype = usertype;
+		this.companyid = companyid;
+	}
 
 	/**
 	 * Getter e Setter: servono alle altre classi a recuperare e modificare gli attributi di User

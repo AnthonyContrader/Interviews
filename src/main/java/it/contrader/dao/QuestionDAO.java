@@ -14,9 +14,9 @@ import it.contrader.model.Question;
  */
 public class QuestionDAO implements DAO<Question> {
 
-	private final String QUERY_ALL = "SELECT q.id, q.question, q.sector, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id";
+	private final String QUERY_ALL = "SELECT q.id, q.question, q.sector,q.recruiterid,q.companyid, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id";
 	private final String QUERY_CREATE = "INSERT INTO question (question, sector, recruiterid, companyid) VALUES (?,?,?,?)";
-	private final String QUERY_READ = "SELECT q.id, q.question, q.sector, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id WHERE id=?";
+	private final String QUERY_READ = "SELECT q.id, q.question, q.sector,q.recruiterid,q.companyid, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id WHERE q.id=?";
 	private final String QUERY_UPDATE = "UPDATE question SET question=?, sector=?, recruiterid=?, companyid=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM question WHERE id=?";
 
@@ -37,7 +37,9 @@ public class QuestionDAO implements DAO<Question> {
 				String sector = resultSet.getString("sector");
 				String recruiter = resultSet.getString("recruiter");
 				String company = resultSet.getString("company");
-				question = new Question(questionText, sector, recruiter, company);
+				int recruiterid = resultSet.getInt("recruiterid");
+				int companyid = resultSet.getInt("companyid");
+				question = new Question(questionText, sector,recruiterid, companyid, recruiter, company);
 				question.setId(id);
 				questionsList.add(question);
 			}
@@ -75,14 +77,16 @@ public class QuestionDAO implements DAO<Question> {
 			String sector;
 			String recruiter;
 			String company;
-
+			int recruiterid;
+			int companyid;
 			questionText = resultSet.getString("question");
 			sector = resultSet.getString("sector");
 			recruiter = resultSet.getString("recruiter");
 			company = resultSet.getString("company");
-			Question question = new Question(questionText, sector, recruiter, company);
+			recruiterid = resultSet.getInt ("recruiterid");
+			companyid = resultSet.getInt ("companyid");
+			Question question = new Question(questionText, sector, recruiterid, companyid, recruiter, company);
 			question.setId(resultSet.getInt("id"));
-
 			return question;
 		} catch (SQLException e) {
 			return null;
@@ -105,13 +109,13 @@ public class QuestionDAO implements DAO<Question> {
 					questionToUpdate.setQuestion(questionRead.getQuestion());
 				}
 
-				if (questionToUpdate.getSector() == null || questionToUpdate.getSector().equals("")) {
+				/*if (questionToUpdate.getSector() == null || questionToUpdate.getSector().equals("")) {
 					questionToUpdate.setSector(questionRead.getSector());
 				}
 
 				if (questionToUpdate.getCompany() == null || questionToUpdate.getCompany().equals("")) {
 					questionToUpdate.setCompanyid(questionRead.getCompanyid());
-				}
+				}*/
 
 				// Update the user
 				PreparedStatement preparedStatement = (PreparedStatement) connection.prepareStatement(QUERY_UPDATE);
@@ -130,7 +134,6 @@ public class QuestionDAO implements DAO<Question> {
 				return false;
 			}
 		}
-
 		return false;
 
 	}

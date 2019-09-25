@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.CompanyDTO;
 import it.contrader.dto.QuestionDTO;
+import it.contrader.dto.UserDTO;
+import it.contrader.service.CompanyService;
 import it.contrader.service.QuestionService;
 
 /*
@@ -25,6 +28,12 @@ public class QuestionServlet extends HttpServlet {
 		List<QuestionDTO> listDTO = service.getAll();
 		request.setAttribute("list", listDTO);
 	}
+	
+	public void getCompany(HttpServletRequest request, int id) {
+		CompanyService service = new CompanyService();
+		CompanyDTO company = service.read(id);
+		request.setAttribute("company", company);
+	}
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,11 +42,13 @@ public class QuestionServlet extends HttpServlet {
 		QuestionDTO dto;
 		int id;
 		boolean ans;
-
+		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
+		int userid = user.getId();
 		switch (mode.toUpperCase()) {
 
 		case "QUESTIONLIST":
-			updateList(request);
+			updateList(request);			
+			getCompany(request,userid);
 			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
 			break;
 
@@ -45,7 +56,6 @@ public class QuestionServlet extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = service.read(id);
 			request.setAttribute("dto", dto);
-			
 			if (request.getParameter("update") == null)
 				 getServletContext().getRequestDispatcher("/question/readquestion.jsp").forward(request, response);
 			else 
@@ -55,25 +65,31 @@ public class QuestionServlet extends HttpServlet {
 
 		case "INSERT":
 			String question = request.getParameter("question");
-			String sector = request.getParameter("sector").toString();
+			String sector = request.getParameter("sector");
+			String recruiter = request.getParameter("recruiter");
+			String company = request.getParameter("company");
 			int recruiterid = Integer.parseInt (request.getParameter("recruiterid"));
 			int companyid = Integer.parseInt (request.getParameter("companyid"));
-			dto = new QuestionDTO (question,sector,recruiterid,companyid);
+			dto = new QuestionDTO (question,sector,recruiter, company, recruiterid,companyid);
 			ans = service.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
+			getCompany(request,userid);
 			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
 			break;
 			
 		case "UPDATE":
 			question = request.getParameter("question");
 			sector = request.getParameter("sector");
+			recruiter = request.getParameter("recruiter");
+			company = request.getParameter("company");
 			recruiterid = Integer.parseInt(request.getParameter("recruiterid"));
 			companyid = Integer.parseInt(request.getParameter("companyid"));
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = new QuestionDTO (id,question, sector, recruiterid, companyid);
+			dto = new QuestionDTO (id,question, sector,recruiter, company, recruiterid, companyid);
 			ans = service.update(dto);
 			updateList(request);
+			getCompany(request,userid);
 			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
 			break;
 
@@ -82,6 +98,7 @@ public class QuestionServlet extends HttpServlet {
 			ans = service.delete(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
+			getCompany(request,userid);
 			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
 			break;
 		}
