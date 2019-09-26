@@ -12,6 +12,7 @@
   <a id="homelink" href="homeuser.jsp">Home</a>
   <a id="questionlink" href="QuestionServlet?mode=questionlist">Questions</a>
   <a href="LogoutServlet" id="logout">Logout</a>
+  <label id="usernamelabel">${user.getUsername()}</label>
 </div>
 
 </body>

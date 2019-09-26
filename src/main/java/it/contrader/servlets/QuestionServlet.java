@@ -42,13 +42,24 @@ public class QuestionServlet extends HttpServlet {
 		QuestionDTO dto;
 		int id;
 		boolean ans;
+		
+		if(request.getSession().getAttribute("user")==null) {
+			request.getSession().invalidate();
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		
 		UserDTO user = (UserDTO) request.getSession().getAttribute("user");
-		int userid = user.getId();
+		int usercompanyid = user.getCompanyid();
+		String usertype = user.getUsertype();
+		
+		String question, sector, recruiter, company;
+		int recruiterid, companyid;
+		
 		switch (mode.toUpperCase()) {
-
 		case "QUESTIONLIST":
 			updateList(request);			
-			getCompany(request,userid);
+			getCompany(request,usercompanyid);
 			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
 			break;
 
@@ -64,43 +75,70 @@ public class QuestionServlet extends HttpServlet {
 			break;
 
 		case "INSERT":
-			String question = request.getParameter("question");
-			String sector = request.getParameter("sector");
-			String recruiter = request.getParameter("recruiter");
-			String company = request.getParameter("company");
-			int recruiterid = Integer.parseInt (request.getParameter("recruiterid"));
-			int companyid = Integer.parseInt (request.getParameter("companyid"));
-			dto = new QuestionDTO (question,sector,recruiter, company, recruiterid,companyid);
-			ans = service.insert(dto);
-			request.setAttribute("ans", ans);
-			updateList(request);
-			getCompany(request,userid);
-			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
-			break;
+			if(!usertype.equals("USER")) {
+				question = request.getParameter("question");
+				sector = request.getParameter("sector");
+				recruiter = request.getParameter("recruiter");
+				company = request.getParameter("company");
+				recruiterid = Integer.parseInt (request.getParameter("recruiterid"));
+				companyid = Integer.parseInt (request.getParameter("companyid"));
+				dto = new QuestionDTO (question, sector, recruiter, company, recruiterid, companyid);
+				ans = service.insert(dto);
+				request.setAttribute("ans", ans);
+				updateList(request);
+				getCompany(request,usercompanyid);
+				getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
+				break;
+			}else {
+				response.sendError(403,"NON AUTORIZZATO");
+				return;
+			}
 			
 		case "UPDATE":
-			question = request.getParameter("question");
-			sector = request.getParameter("sector");
-			recruiter = request.getParameter("recruiter");
-			company = request.getParameter("company");
-			recruiterid = Integer.parseInt(request.getParameter("recruiterid"));
-			companyid = Integer.parseInt(request.getParameter("companyid"));
-			id = Integer.parseInt(request.getParameter("id"));
-			dto = new QuestionDTO (id,question, sector,recruiter, company, recruiterid, companyid);
-			ans = service.update(dto);
-			updateList(request);
-			getCompany(request,userid);
-			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
-			break;
+			if(!usertype.equals("USER")) {
+				id = Integer.parseInt(request.getParameter("id"));
+				dto = service.read(id);
+				if (dto.getRecruiterid()==user.getId()||usertype.equals("ADMIN")) {
+					question = request.getParameter("question");
+					sector = dto.getSector();
+					recruiter = dto.getRecruiter();
+					company = dto.getCompany();
+					recruiterid = dto.getRecruiterid();
+					companyid = dto.getCompanyid();
+					dto = new QuestionDTO (id, question, sector, recruiter, company, recruiterid, companyid);
+					ans = service.update(dto);
+					updateList(request);
+					getCompany(request,usercompanyid);
+					getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
+					break;
+				}else {
+					response.sendError(403,"NON AUTORIZZATO");
+					return;
+				}
+			}else {
+				response.sendError(403,"NON AUTORIZZATO");
+				return;
+			}
 
 		case "DELETE":
-			id = Integer.parseInt(request.getParameter("id"));
-			ans = service.delete(id);
-			request.setAttribute("ans", ans);
-			updateList(request);
-			getCompany(request,userid);
-			getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
-			break;
+			if(!usertype.equals("USER")) {				
+				id = Integer.parseInt(request.getParameter("id"));
+				dto = service.read(id);
+				if (dto.getRecruiterid()==user.getId()||usertype.equals("ADMIN")) {
+					ans = service.delete(id);
+					request.setAttribute("ans", ans);
+					updateList(request);
+					getCompany(request,usercompanyid);
+					getServletContext().getRequestDispatcher("/question/questionmanager.jsp").forward(request, response);
+					break;
+				}else {
+					response.sendError(403,"NON AUTORIZZATO");
+					return;
+				}
+			}else {
+				response.sendError(403,"NON AUTORIZZATO");
+				return;
+			}
 		}
 	}
 }

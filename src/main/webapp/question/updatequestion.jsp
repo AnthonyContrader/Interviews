@@ -28,7 +28,7 @@ else {%>
 
 
 
-<form id="floatleft" action="QuestionServlet?mode=update&id=<%=q.getId()%>&recruiterid=<%=q.getRecruiterid()%>&companyid=<%=q.getCompanyid()%>" method="post">
+<form id="floatleft" action="QuestionServlet?mode=update&id=<%=q.getId()%>" method="post">
 	<div class="row">
 		<div class="col-25">
 			<label for="question">Question</label>

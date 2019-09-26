@@ -41,7 +41,17 @@ public class UserServlet extends HttpServlet {
 		UserDTO dto;
 		int id;
 		boolean ans;
-
+		
+		if(request.getSession().getAttribute("user")==null) {
+			request.getSession().invalidate();
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		if(!((UserDTO)request.getSession().getAttribute("user")).getUsertype().equals("ADMIN")){
+			response.sendError(403,"NON AUTORIZZATO");
+			return;
+		}
+		
 		switch (mode.toUpperCase()) {
 
 		case "USERLIST":

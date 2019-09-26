@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.UserDTO;
 import it.contrader.service.CompanyService;
 
 /*
@@ -33,6 +34,16 @@ public class CompanyServlet extends HttpServlet {
 		CompanyDTO dto;
 		int id;
 		boolean ans;
+		
+		if(request.getSession().getAttribute("user")==null) {
+			request.getSession().invalidate();
+			response.sendRedirect("index.jsp");
+			return;
+		}
+		if(!((UserDTO)request.getSession().getAttribute("user")).getUsertype().equals("ADMIN")){
+			response.sendError(403,"NON AUTORIZZATO");
+			return;
+		}
 
 		switch (mode.toUpperCase()) {
 

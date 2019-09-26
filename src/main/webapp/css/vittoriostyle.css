@@ -204,6 +204,12 @@ input {
 input:hover {
   background-color:  #00ccad;
 }
+input:-moz-read-only {
+  background-color: #ccc;
+}
+input:read-only{
+  background-color: #ccc;
+}
 
 
 res {
@@ -282,6 +288,26 @@ button:hover {
 	width:100%;
 	text-align: center;
 	color: #00ccad;
+}
+
+#error {
+	float: left;
+	clear: left;
+	width:100%;
+	margin-top: 10px;
+	text-align: center;
+	color: #ef2929;
+}
+
+#usernamelabel{
+	float: right;
+	display: block;
+	color: #ffffff;
+	text-align: center;
+	padding: 1% 2%;
+	text-decoration: none;
+	font-size: 17px;
+	border-radius: 7px;
 }
 
 #logout {
