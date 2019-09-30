@@ -1,6 +1,7 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.contrader.dto.CompanyNameDTO;
 import it.contrader.dto.UserDTO;
-import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.UserTypeDistinctDTO;
 import it.contrader.service.UserService;
 import it.contrader.service.CompanyService;
 
@@ -24,22 +26,27 @@ public class UserServlet extends HttpServlet {
 	
 	public void updateList(HttpServletRequest request) {
 		UserService service = new UserService();
-		List<UserDTO>listDTO = service.getAll();
-		request.setAttribute("list", listDTO);
+		request.setAttribute("list", service.getAll());
 	}
 	
-	public void updateCompanyList(HttpServletRequest request) {
+	public void updateCompanyAllList(HttpServletRequest request) {
 		CompanyService service = new CompanyService();
-		List<CompanyDTO> companyListDTO = service.getAll();
-		request.setAttribute("companyList", companyListDTO);
+		request.setAttribute("companyAllList", service.getCompanyAll());
+	}
+	
+	public void updateUsertypeList(HttpServletRequest request) {
+		UserService service = new UserService();
+		request.setAttribute("usertypeDistinctAllList", service.getUsertypeDistinctAll());
 	}
 	
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UserService service = new UserService();
+		UserService userService = new UserService();
+		CompanyService companyService = new CompanyService();
 		String mode = request.getParameter("mode");
 		UserDTO dto;
 		int id;
+		String username, password, usertype, companyidString;
 		boolean ans;
 		
 		if(request.getSession().getAttribute("user")==null) {
@@ -56,37 +63,56 @@ public class UserServlet extends HttpServlet {
 
 		case "USERLIST":
 			updateList(request);
-			updateCompanyList(request);
+			updateCompanyAllList(request);
+			updateUsertypeList(request);
+			request.setAttribute("companyAllList", companyService.getCompanyAll());
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 
+		case "SEARCH":
+			List<UserDTO> userListDTO = new ArrayList<> ();
+			List<UserTypeDistinctDTO> usertypeDistinctAllList = userService.getUsertypeDistinctAll();
+			List<CompanyNameDTO> companyAllList = companyService.getCompanyAll();
+			if (request.getParameter("search") != null) {
+				username = "%" + request.getParameter("username") + "%";
+				password = "%" + request.getParameter("password") + "%";
+				usertype = "%" + request.getParameter("usertype") + "%";
+				companyidString = request.getParameter("companyid");
+				userListDTO = userService.search(username, password, usertype, companyidString);			
+				updateCompanyAllList(request);
+			}
+				request.setAttribute("userResultList", userListDTO);
+				request.setAttribute("usertypeDistinctAllList", usertypeDistinctAllList);
+				request.setAttribute("companyAllList", companyAllList);
+				getServletContext().getRequestDispatcher("/user/searchuser.jsp").forward(request,  response);
+			break;
+			
 		case "READ":
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = service.read(id);
-			updateCompanyList(request);
+			dto = userService.read(id);
 			request.setAttribute("dto", dto);
-			
 			if (request.getParameter("update") == null) {
-				 getServletContext().getRequestDispatcher("/user/readuser.jsp").forward(request, response);
-				
+				 getServletContext().getRequestDispatcher("/user/readuser.jsp").forward(request, response);	
+			} else {
+				updateCompanyAllList(request);
+				updateUsertypeList(request);
+				getServletContext().getRequestDispatcher("/user/updateuser.jsp").forward(request, response);
 			}
-			
-			else getServletContext().getRequestDispatcher("/user/updateuser.jsp").forward(request, response);
-			
 			break;
 
 		case "INSERT":
-			String username = request.getParameter("username").toString();
-			String password = request.getParameter("password").toString();
-			String usertype = request.getParameter("usertype").toString();
+			username = request.getParameter("username").toString();
+			password = request.getParameter("password").toString();
+			usertype = request.getParameter("usertype").toString();
 			String[] res = request.getParameter("company").toString().split(":");
 			int companyid = Integer.parseInt(res[0]);
 			String company = res[1];
 			dto = new UserDTO (username,password,usertype,companyid, company);
-			ans = service.insert(dto);
+			ans = userService.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			updateCompanyList(request);
+			updateCompanyAllList(request);
+			updateUsertypeList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 			
@@ -99,18 +125,20 @@ public class UserServlet extends HttpServlet {
 			company = res[1];
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = new UserDTO (id, username, password, usertype, companyid, company);
-			ans = service.update(dto);
+			ans = userService.update(dto);
 			updateList(request);
-			updateCompanyList(request);
+			updateCompanyAllList(request);
+			updateUsertypeList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 
 		case "DELETE":
 			id = Integer.parseInt(request.getParameter("id"));
-			ans = service.delete(id);
+			ans = userService.delete(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
-			updateCompanyList(request);
+			updateCompanyAllList(request);
+			updateUsertypeList(request);
 			getServletContext().getRequestDispatcher("/user/usermanager.jsp").forward(request, response);
 			break;
 		}

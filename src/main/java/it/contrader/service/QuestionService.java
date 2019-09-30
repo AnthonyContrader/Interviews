@@ -29,6 +29,10 @@ public class QuestionService {
 	public List<QuestionDTO> getAll() {
 		return this.questionConverter.toDTOList(this.questionDAO.getAll());
 	}
+	
+	public List<QuestionDTO> search(String questionText, String sector, String recruiterid, String companyid) {
+		return this.questionConverter.toDTOList(this.questionDAO.search(questionText, sector, recruiterid, companyid));
+	}
 
 	// chiama il metodo del DAO che restituisce uno question in base al suo id
 	public QuestionDTO read(int id) {

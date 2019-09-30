@@ -1,6 +1,7 @@
 package it.contrader.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.CompanySectorDistinctDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.service.CompanyService;
 
@@ -22,16 +24,16 @@ public class CompanyServlet extends HttpServlet {
 	}
 	
 	public void updateList(HttpServletRequest request) {
-		CompanyService service = new CompanyService();
-		List<CompanyDTO>listDTO = service.getAll();
-		request.setAttribute("list", listDTO);
+		CompanyService companyService = new CompanyService();
+		request.setAttribute("list", companyService.getAll());
 	}
-
+	
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CompanyService service = new CompanyService();
+		CompanyService companyService = new CompanyService();
 		String mode = request.getParameter("mode");
 		CompanyDTO dto;
+		String name, address, city, sector;
 		int id;
 		boolean ans;
 		
@@ -52,27 +54,39 @@ public class CompanyServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/company/companymanager.jsp").forward(request, response);
 			break;
 
+		case "SEARCH":
+			List<CompanyDTO> listDTO = new ArrayList<> ();
+			List<CompanySectorDistinctDTO> sectorDistinctAllList = companyService.getSectorDistinctAll();
+			if (request.getParameter("search") != null) {
+				name = "%" + request.getParameter("name") + "%";
+				address = "%" + request.getParameter("address") + "%";
+				city = "%" + request.getParameter("city") + "%";
+				sector = request.getParameter("sector");
+				listDTO = companyService.search(name, address, city, sector);			
+			}
+				request.setAttribute("companyResultList", listDTO);
+				request.setAttribute("sectorDistinctAllList", sectorDistinctAllList);
+				getServletContext().getRequestDispatcher("/company/searchcompany.jsp").forward(request,  response);
+			break;
+			
 		case "READ":
 			id = Integer.parseInt(request.getParameter("id"));
-			dto = service.read(id);
+			dto = companyService.read(id);
 			request.setAttribute("dto", dto);
 			
-			if (request.getParameter("update") == null) {
+			if (request.getParameter("update") == null) 
 				 getServletContext().getRequestDispatcher("/company/readcompany.jsp").forward(request, response);
-				
-			}
-			
-			else getServletContext().getRequestDispatcher("/company/updatecompany.jsp").forward(request, response);
-			
+			else
+				getServletContext().getRequestDispatcher("/company/updatecompany.jsp").forward(request, response);
 			break;
 
 		case "INSERT":
-			String name = request.getParameter("name");
-			String address = request.getParameter("address");
-			String city = request.getParameter("city");
-			String sector = request.getParameter("sector");
+			name = request.getParameter("name");
+			address = request.getParameter("address");
+			city = request.getParameter("city");
+			sector = request.getParameter("sector");
 			dto = new CompanyDTO (name,address,city,sector);
-			ans = service.insert(dto);
+			ans = companyService.insert(dto);
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/company/companymanager.jsp").forward(request, response);
@@ -85,14 +99,14 @@ public class CompanyServlet extends HttpServlet {
 			sector = request.getParameter("sector");
 			id = Integer.parseInt(request.getParameter("id"));
 			dto = new CompanyDTO (id, name, address, city, sector);
-			ans = service.update(dto);
+			ans = companyService.update(dto);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/company/companymanager.jsp").forward(request, response);
 			break;
 
 		case "DELETE":
 			id = Integer.parseInt(request.getParameter("id"));
-			ans = service.delete(id);
+			ans = companyService.delete(id);
 			request.setAttribute("ans", ans);
 			updateList(request);
 			getServletContext().getRequestDispatcher("/company/companymanager.jsp").forward(request, response);

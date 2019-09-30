@@ -3,7 +3,7 @@
 <head>
 <link href="css/vittoriostyle.css" rel="stylesheet">
 
-<title>Login SAMPLE</title>
+<title>Login</title>
 </head>
 <body>
 <%@ include file="../css/header.jsp" %>

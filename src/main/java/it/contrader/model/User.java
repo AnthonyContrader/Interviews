@@ -8,15 +8,10 @@ public class User {
 	 * Qui sotto definisco gli attributi di User. 
 	 */
 	private int id;
-
 	private String username;
-	
 	private String password;
-	
 	private String usertype;
-	
 	private String company;
-	
 	private int companyid;
 
 	/**

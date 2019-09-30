@@ -23,7 +23,7 @@
 			<label for="company">Name</label>
 		</div>
     	<div class="col-75">
-     		<input type="text" id="company" name="Name" value=<%=c.getName()%>>
+     		<input type="text" id="company" name="Name" value="<%=c.getName()%>">
     	</div>
 	</div>
 	<div class="row">
@@ -31,7 +31,7 @@
      		<label for="address">Address</label>
     	</div>
     	<div class="col-75">
-			<input type="text" id="address" name="address" value=<%=c.getAddress()%>> 
+			<input type="text" id="address" name="address" value="<%=c.getAddress()%>"> 
 		</div>
 	</div>
 	<div class="row">
@@ -39,7 +39,7 @@
       		<label for="city">City</label>
    		</div>
 		<div class="col-75">
-      		<input type="text" id="city" name="city" value=<%=c.getCity()%>> 
+      		<input type="text" id="city" name="city" value="<%=c.getCity()%>"> 
 		</div>
    </div>
    <div class="row">

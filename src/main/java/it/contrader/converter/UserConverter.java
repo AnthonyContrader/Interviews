@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.UserDTO;
+import it.contrader.dto.UserRecruiterDTO;
+import it.contrader.dto.UserTypeDistinctDTO;
 import it.contrader.model.User;
+import it.contrader.model.UserRecruiter;
+import it.contrader.model.UserTypeDistinct;
 
 /**
  * 
@@ -14,11 +18,10 @@ import it.contrader.model.User;
  *
  */
 public class UserConverter {
-	
-	/**
-	 * Crea un oggetto di tipo UserDTO e lo riempie con i campi del parametro user di tipo User.
-	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
-	 */
+	public UserConverter () {
+		
+	}
+
 	public UserDTO toDTO(User user) {
 		UserDTO userDTO = new UserDTO();
 		if (user != null) {
@@ -32,10 +35,6 @@ public class UserConverter {
 		return userDTO;
 	}
 
-	/**
-	 * Crea un oggetto di tipo User e lo riempie con i campi del parametro user di tipo UserDTO.
-	 * Notare l'uso del metodo get() per ottenere il valore dell'attributo-
-	 */
 	public User toEntity(UserDTO userDTO) {
 		User user = new User();
 		if (userDTO != null) {
@@ -49,10 +48,27 @@ public class UserConverter {
 		return user;
 	}
 
+	public List<UserRecruiterDTO> recruiterToDTOList(List<UserRecruiter> UserRecruiterList) {
+		List<UserRecruiterDTO> userRecruiterDTOList = new ArrayList<UserRecruiterDTO>();
+		for (UserRecruiter userRecruiter : UserRecruiterList) {
+			UserRecruiterDTO userRecruiterDTO = new UserRecruiterDTO();
+			userRecruiterDTO.setId(userRecruiter.getId());
+			userRecruiterDTO.setName(userRecruiter.getName());
+			userRecruiterDTOList.add(userRecruiterDTO);
+		}
+		return userRecruiterDTOList;
+	}
 	
-	/**
-	 * Metodo per convertire le liste di User.
-	 */
+	public List<UserTypeDistinctDTO> userTypeDistinctToDTOList(List<UserTypeDistinct> userTypeDistinctList) {
+		List<UserTypeDistinctDTO> userTypeDistinctDTOList = new ArrayList<>();
+		for (UserTypeDistinct userTypeDistinct : userTypeDistinctList) {
+			UserTypeDistinctDTO userTypeDistinctDTO = new UserTypeDistinctDTO();
+			userTypeDistinctDTO.setUsertype(userTypeDistinct.getUsertype());
+			userTypeDistinctDTOList.add(userTypeDistinctDTO);
+		}
+		return userTypeDistinctDTOList;
+	}
+	
 	public List<UserDTO> toDTOList(List<User> userList) {
 		//Crea una lista vuota.
 		List<UserDTO> userDTOList = new ArrayList<UserDTO>();

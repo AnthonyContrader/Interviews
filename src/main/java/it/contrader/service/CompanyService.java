@@ -1,10 +1,13 @@
 package it.contrader.service;
 
 import java.util.List;
-
 import it.contrader.converter.CompanyConverter;
 import it.contrader.dao.CompanyDAO;
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.CompanyNameDTO;
+import it.contrader.dto.CompanySectorDistinctDTO;
+
+
 
 /**
  * 
@@ -26,6 +29,10 @@ public class CompanyService {
 	public List<CompanyDTO> getAll() {
 		return this.companyConverter.toDTOList(this.companyDAO.getAll());
 	}
+	
+	public List<CompanyDTO> search(String name, String address, String city, String sector) {
+		return this.companyConverter.toDTOList(this.companyDAO.search(name, address, city, sector));
+	}
 
 	// chiama il metodo del DAO che restituisce uno company in base al suo id
 	public CompanyDTO read(int id) {
@@ -45,5 +52,13 @@ public class CompanyService {
 	// chiama il metodo del DAO che modifica un utente
 	public boolean update(CompanyDTO companyDTO) {
 		return companyDAO.update(companyConverter.toEntity(companyDTO));
+	}
+	
+	public List<CompanySectorDistinctDTO> getSectorDistinctAll () {
+		return companyConverter.sectorDistinctToDTOList(companyDAO.getSectorDistinctAll());
+	}
+	
+	public List<CompanyNameDTO> getCompanyAll (){
+		return companyConverter.nameToDTOList(companyDAO.getCompanyAll());
 	}
 }

@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"
     import="java.util.List"
     import="it.contrader.dto.UserDTO"
-    import="it.contrader.dto.CompanyDTO"
+    import="it.contrader.dto.CompanyNameDTO"
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
 
 <%
 	UserDTO u = (UserDTO) request.getAttribute("dto");
-	List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("companyList");
+	List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
 %>
 
 
@@ -30,7 +30,7 @@
       <label for="user">Username</label>
     </div>
     <div class="col-75">
-      <input type="text" id="user" name="username" value=<%=u.getUsername()%>>
+      <input type="text" id="user" name="username" value="<%=u.getUsername()%>">
     </div>
   </div>
   <div class="row">
@@ -39,7 +39,7 @@
     </div>
     <div class="col-75">
       <input
-			type="text" id="pass" name="password" value=<%=u.getPassword()%>> 
+			type="text" id="pass" name="password" value="<%=u.getPassword()%>"> 
     </div>
   </div>
   <div class="row">
@@ -62,7 +62,7 @@
 	    <select id="company" name="company">
 	    	<option value="0:null">NO COMPANY</option>
 	      	<%
-				for (CompanyDTO c : companyList) {
+				for (CompanyNameDTO c : companyAllList) {
 			%>
 			<option value=<%=c.getId() + ":" + c.getName()%> <%if(c.getName().equals(u.getCompany())) {%>selected<%}%>> <%=c.getName() %></option>
 			<%

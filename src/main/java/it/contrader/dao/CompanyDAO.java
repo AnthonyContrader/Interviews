@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import it.contrader.utils.ConnectionSingleton;
 import it.contrader.model.Company;
+import it.contrader.model.CompanySectorDistinct;
+import it.contrader.model.CompanyName;
 
 /**
  * 
@@ -15,11 +17,15 @@ import it.contrader.model.Company;
 public class CompanyDAO implements DAO<Company> {
 
 	private final String QUERY_ALL = "SELECT * FROM company";
+	private final String QUERY_SEARCH = "SELECT * FROM company WHERE name LIKE ? AND address LIKE ? AND city LIKE ? AND sector LIKE ?";
 	private final String QUERY_CREATE = "INSERT INTO company (name, address, city, sector) VALUES (?,?,?,?)";
 	private final String QUERY_READ = "SELECT * FROM company WHERE id=?";
 	private final String QUERY_UPDATE = "UPDATE company SET name=?, address=?, city=?, sector=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM company WHERE id=?";
-
+	private final String QUERY_SECTOR_ALL_DISTINCT = "SELECT DISTINCT sector FROM company ORDER BY sector ASC";
+	private final String QUERY_NAME_ALL = "SELECT id, name FROM company ORDER BY name ASC";
+	
+	
 	public CompanyDAO() {
 
 	}
@@ -45,6 +51,33 @@ public class CompanyDAO implements DAO<Company> {
 			e.printStackTrace();
 		}
 		return usersList;
+	}
+	
+	public List<Company> search (String name, String address, String city, String sector) {
+		List<Company> companiesList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SEARCH);
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, address);
+			preparedStatement.setString(3, city);
+			preparedStatement.setString(4, sector);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			Company company;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				name = resultSet.getString("name");
+				address = resultSet.getString("address");
+				city = resultSet.getString("city");
+				sector = resultSet.getString("sector");
+				company = new Company(name, address, city, sector);
+				company.setId(id);
+				companiesList.add(company);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return companiesList;
 	}
 
 	public boolean insert(Company userToInsert) {
@@ -146,5 +179,38 @@ public class CompanyDAO implements DAO<Company> {
 		return false;
 	}
 
-
+	public List<CompanySectorDistinct> getSectorDistinctAll () {
+		List<CompanySectorDistinct> sectorDistincAlltList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_SECTOR_ALL_DISTINCT);
+			while (resultSet.next()) {
+				CompanySectorDistinct sector = new CompanySectorDistinct();
+				sector.setSector(resultSet.getString("sector"));
+				sectorDistincAlltList.add(sector);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return sectorDistincAlltList;
+	}
+	
+	public List<CompanyName> getCompanyAll () {
+		List<CompanyName> companyAllList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_NAME_ALL);
+			while (resultSet.next()) {
+				CompanyName company = new CompanyName();
+				company.setId(Integer.parseInt(resultSet.getString("id")));
+				company.setName(resultSet.getString("name"));
+				companyAllList.add(company);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return companyAllList;
+	}
 }

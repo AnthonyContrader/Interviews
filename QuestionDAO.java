@@ -15,7 +15,6 @@ import it.contrader.model.Question;
 public class QuestionDAO implements DAO<Question> {
 
 	private final String QUERY_ALL = "SELECT q.id, q.question, q.sector,q.recruiterid,q.companyid, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id";
-	private final String QUERY_SEARCH = "SELECT q.id, q.question, q.sector,q.recruiterid,q.companyid, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id WHERE q.question LIKE ? AND q.sector LIKE ? AND q.recruiterid LIKE ? AND q.companyid LIKE ?"; 
 	private final String QUERY_CREATE = "INSERT INTO question (question, sector, recruiterid, companyid) VALUES (?,?,?,?)";
 	private final String QUERY_READ = "SELECT q.id, q.question, q.sector,q.recruiterid,q.companyid, u.username As recruiter , c.name AS company FROM question AS q LEFT JOIN user AS u ON q.recruiterid=u.id LEFT JOIN company AS c ON q.companyid=c.id WHERE q.id=?"; 
 	private final String QUERY_UPDATE = "UPDATE question SET question=?, sector=?, recruiterid=?, companyid=? WHERE id=?";
@@ -41,37 +40,6 @@ public class QuestionDAO implements DAO<Question> {
 				int recruiterid = resultSet.getInt("recruiterid");
 				int companyid = resultSet.getInt("companyid");
 				question = new Question(questionText, sector,recruiterid, companyid, recruiter, company);
-				question.setId(id);
-				questionsList.add(question);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return questionsList;
-	}
-	
-	public List<Question> search (String questionText, String sector, String recruiteridString, String companyidString) {
-		List<Question> questionsList = new ArrayList<>();
-		Connection connection = ConnectionSingleton.getInstance();
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SEARCH);
-			preparedStatement.setString(1, questionText);
-			preparedStatement.setString(2, sector);
-			preparedStatement.setString(3, recruiteridString);
-			preparedStatement.setString(4, companyidString);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			Question question;
-			int recruiterid, companyid;
-			String recruiter, company;
-			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
-				questionText = resultSet.getString("question");
-				sector = resultSet.getString("sector");
-				recruiter = resultSet.getString("recruiter");
-				company = resultSet.getString("company");
-				recruiterid = resultSet.getInt("recruiterid");
-				companyid = resultSet.getInt("companyid");
-				question = new Question(questionText, sector, recruiterid, companyid, recruiter, company);
 				question.setId(id);
 				questionsList.add(question);
 			}

@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.CompanyNameDTO;
+import it.contrader.dto.CompanySectorDistinctDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.model.Company;
+import it.contrader.model.CompanyName;
+import it.contrader.model.CompanySectorDistinct;
 import it.contrader.model.User;
+
 
 /**
  * 
@@ -17,13 +22,10 @@ import it.contrader.model.User;
  *
  */
 public class CompanyConverter {
-
-	/**
-	 * Crea un oggetto di tipo CompanyDTO e lo riempie con i campi del parametro company
-	 * di tipo Company. Notare l'uso del metodo get() per ottenere il valore
-	 * dell'attributo-
-	 */
-
+	public CompanyConverter () {
+		
+	}
+	
 	public CompanyDTO toDTO(Company company) {
 		CompanyDTO companyDTO = new CompanyDTO();
 		if (company != null) {
@@ -35,13 +37,6 @@ public class CompanyConverter {
 		}
 		return companyDTO;
 	}
-
-	/**
-	 * Crea un oggetto di tipo Company e lo riempie con i campi del parametro company di
-	 * tipo CompanyDTO. Notare l'uso del metodo get() per ottenere il valore
-	 * dell'attributo-
-	 */
-
 	public Company toEntity(CompanyDTO companyDTO) {
 		Company company = new Company();
 		if (companyDTO != null) {
@@ -54,10 +49,27 @@ public class CompanyConverter {
 		return company;
 	}
 
-	/**
-	 * Metodo per convertire le liste di Company.
-	 */
+	public List<CompanyNameDTO> nameToDTOList(List<CompanyName> companyNameList) {
+		List<CompanyNameDTO> companyNameDTOList = new ArrayList<CompanyNameDTO>();
+		for (CompanyName companyName : companyNameList) {
+			CompanyNameDTO companyNameDTO = new CompanyNameDTO();
+			companyNameDTO.setId(companyName.getId());
+			companyNameDTO.setName(companyName.getName());
+			companyNameDTOList.add(companyNameDTO);
+		}
+		return companyNameDTOList;
+	}
 
+	public List<CompanySectorDistinctDTO> sectorDistinctToDTOList(List<CompanySectorDistinct> companySectorDistinctList) {
+		List<CompanySectorDistinctDTO> companySectorDistinctDTOList = new ArrayList<CompanySectorDistinctDTO>();
+		for (CompanySectorDistinct companySectorDistinct : companySectorDistinctList) {
+			CompanySectorDistinctDTO companySectorDistinctDTO = new CompanySectorDistinctDTO();
+			companySectorDistinctDTO.setSector(companySectorDistinct.getSector());
+			companySectorDistinctDTOList.add(companySectorDistinctDTO);
+		}
+		return companySectorDistinctDTOList;
+	}
+	
 	public List<CompanyDTO> toDTOList(List<Company> companyList) {
 		// Crea una lista vuota.
 		List<CompanyDTO> companyDTOList = new ArrayList<CompanyDTO>();

@@ -5,7 +5,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import it.contrader.utils.ConnectionSingleton;
+import it.contrader.model.CompanySectorDistinct;
+import it.contrader.model.Question;
 import it.contrader.model.User;
+import it.contrader.model.UserTypeDistinct;
+import it.contrader.model.UserRecruiter;
+
 
 /**
  * 
@@ -16,11 +21,15 @@ import it.contrader.model.User;
 public class UserDAO implements DAO<User> {
 
 	private final String QUERY_ALL = "SELECT u.id, u.username, u.password, u.usertype, u.companyid, c.name AS company FROM user AS u LEFT JOIN company AS c ON u.companyid=c.id";
+	private final String QUERY_SEARCH = "SELECT u.id, u.username, u.password, u.usertype, u.companyid, c.name AS company FROM user AS u LEFT JOIN company AS c ON u.companyid=c.id WHERE u.username LIKE ? AND u.usertype LIKE ? AND u.companyid LIKE ?"; 
 	private final String QUERY_CREATE = "INSERT INTO user (username, password, usertype, companyid) VALUES (?,?,?,?)";
 	private final String QUERY_READ = "SELECT u.id, u.username, u.password, u.usertype, u.companyid, c.name AS company FROM user AS u LEFT JOIN company AS c ON u.companyid=c.id WHERE u.id=?";
 	private final String QUERY_UPDATE = "UPDATE user SET username=?, password=?, usertype=?, companyid=? WHERE id=?";
 	private final String QUERY_DELETE = "DELETE FROM user WHERE id=?";
-
+	private final String QUERY_USERTYPE_ALL_DISTINCT = "SELECT DISTINCT usertype FROM user ORDER BY usertype ASC";
+	private final String QUERY_RECRUITER_NAME_ALL = "SELECT id, username FROM user WHERE usertype=\"RECRUITER\" UNION SELECT id, username FROM user WHERE usertype=\"ADMIN\" ORDER BY username ASC";
+	
+	
 	public UserDAO() {
 
 	}
@@ -49,6 +58,35 @@ public class UserDAO implements DAO<User> {
 		return usersList;
 	}
 
+	public List<User> search (String username, String password, String usertype, String companyidString) {
+		List<User> usersList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(QUERY_SEARCH);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, usertype);
+			preparedStatement.setString(3, companyidString);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			User user;
+			int companyid;
+			String company;
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				username = resultSet.getString("username");
+				password = resultSet.getString("password");
+				usertype = resultSet.getString("usertype");
+				company = resultSet.getString("company");
+				companyid = resultSet.getInt("companyid");
+				user = new User(username, password, usertype, companyid, company);
+				user.setId(id);
+				usersList.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return usersList;
+	}
+	
 	public boolean insert(User userToInsert) {
 		Connection connection = ConnectionSingleton.getInstance();
 		try {	
@@ -154,6 +192,39 @@ public class UserDAO implements DAO<User> {
 		}
 		return false;
 	}
+	
+	public List<UserTypeDistinct> getUserTypeDistinctAll () {
+		List<UserTypeDistinct> userTypeDistinctAlltList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_USERTYPE_ALL_DISTINCT);
+			while (resultSet.next()) {
+				UserTypeDistinct usertype = new UserTypeDistinct();
+				usertype.setUsertype(resultSet.getString("usertype"));
+				userTypeDistinctAlltList.add(usertype);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return userTypeDistinctAlltList;
+	}
 
-
+	public List<UserRecruiter> getRecruiterAll () {
+		List<UserRecruiter> recruiterAllList = new ArrayList<>();
+		Connection connection = ConnectionSingleton.getInstance();
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(QUERY_RECRUITER_NAME_ALL);
+			while (resultSet.next()) {
+				UserRecruiter recruiter = new UserRecruiter();
+				recruiter.setId(Integer.parseInt(resultSet.getString("id")));
+				recruiter.setName(resultSet.getString("username"));
+				recruiterAllList.add(recruiter);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return recruiterAllList;
+	}
 }

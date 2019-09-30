@@ -1,10 +1,11 @@
 package it.contrader.service;
 
 import java.util.List;
-
 import it.contrader.converter.UserConverter;
 import it.contrader.dao.UserDAO;
 import it.contrader.dto.UserDTO;
+import it.contrader.dto.UserRecruiterDTO;
+import it.contrader.dto.UserTypeDistinctDTO;
 
 /**
  * 
@@ -30,6 +31,10 @@ public class UserService {
 		return this.userConverter.toDTOList(this.userDAO.getAll());
 	}
 
+	public List<UserDTO> search(String username, String password, String usertype, String companyid) {
+		return this.userConverter.toDTOList(this.userDAO.search(username, password, usertype, companyid));
+	}
+	
 	// chiama il metodo del DAO che restituisce uno user in base al suo id
 	public UserDTO read(int id) {
 		return this.userConverter.toDTO(this.userDAO.read(id));
@@ -48,5 +53,13 @@ public class UserService {
 	// chiama il metodo del DAO che modifica un utente
 	public boolean update(UserDTO userDTO) {
 		return userDAO.update(userConverter.toEntity(userDTO));
+	}
+	
+	public List<UserRecruiterDTO> getRecruiterAll (){
+		return userConverter.recruiterToDTOList(userDAO.getRecruiterAll());
+	}
+	
+	public List<UserTypeDistinctDTO> getUsertypeDistinctAll (){
+		return userConverter.userTypeDistinctToDTOList(userDAO.getUserTypeDistinctAll());
 	}
 }
