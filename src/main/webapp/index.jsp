@@ -6,16 +6,16 @@
 <title>Login SAMPLE</title>
 </head>
 <body>
-
+<%@ include file="../css/header.jsp" %>
 		<form class="login" action="LoginServlet" method="post">
 
 				<label for="user">Username: </label>
 			
-				<input type="text" id="user" name="username" placeholder="Insert username">
+				<input type="text" id="user" name="username" placeholder="Insert username" required>
 		
 				<label for="pass">Password: </label>
 			
-				<input type="password" id="pass" name="password" placeholder="Insert password">
+				<input type="password" id="pass" name="password" placeholder="Insert password" required>
 						
 			<button type="submit" value="Login" name="pulsante">Login</button>
 			
