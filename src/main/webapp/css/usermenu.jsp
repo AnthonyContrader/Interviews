@@ -12,7 +12,7 @@
 	    <div class="dropdown-content">
 	      <label>Username:</label><label class="username">${user.getUsername()}</label>
 	      <label>Usertype:</label><label class="usertype">${user.getUserType()}</label>
-	      <a class="logout" href="LogoutServlet">Logout</a>
+	      <a class="logout" href="/Home/logout">Logout</a>
 	    </div>	  	
 	  </li>
 	</ul>

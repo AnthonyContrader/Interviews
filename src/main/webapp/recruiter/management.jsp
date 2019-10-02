@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="java.util.List"
-	import="it.contrader.dto.RecruiterDTO"  
+	import="it.contrader.dto.RecruiterDTO"
+	import="it.contrader.dto.CompanyDTO"
 %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,7 @@
 			<!-- RECRUITERLIST -->
 			
 			<%List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
+			  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
 			%>
 			<br>
 			<table class="greenTable">
@@ -74,7 +76,11 @@
 						<label for="company">Company</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="company" name="company" placeholder="inserisci azienda" required> 
+						<select id="company" name="company">
+							<%for (CompanyDTO c : companyList) {%>
+								<option value=<%=c.getId()%>><%=c.getName()%></option>
+							<%}%>
+						</select>
 					</div>
 				</div>
 		  		<button type="submit" >Insert</button>

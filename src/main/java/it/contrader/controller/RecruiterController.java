@@ -24,7 +24,6 @@ import java.util.List;
 public class RecruiterController {
 	private final RecruiterService recruiterService;
 	private final CompanyService companyService;
-	private HttpSession session;
 	
 	@Autowired
 	public RecruiterController (RecruiterService recruiterService, CompanyService companyService) {
@@ -37,9 +36,15 @@ public class RecruiterController {
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
+	private void getCompanies(HttpServletRequest request) {
+		List<CompanyDTO> allCompany = companyService.getListCompanyDTO();
+		request.setAttribute("allCompanyDTO", allCompany);
+	}
+	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualRecruiter(request);
+		getCompanies(request);
 		return "recruiter/management";		
 	}
 	
@@ -57,6 +62,7 @@ public class RecruiterController {
 	//	request.setAttribute("id", id);
 		this.recruiterService.deleteRecruiterById(id);
 		visualRecruiter(request);
+		getCompanies(request);
 		return "recruiter/management";
 	}
 	
@@ -64,6 +70,7 @@ public class RecruiterController {
 	public String search_get(HttpServletRequest request) {
 		List<RecruiterDTO> recruiterDTOList = new ArrayList<>();
 		request.setAttribute("allRecruiterDTO", recruiterDTOList);
+		getCompanies(request);
 		return "recruiter/search";
 	}
 	
@@ -73,6 +80,7 @@ public class RecruiterController {
 		String companyId = request.getParameter("company");
 		List<RecruiterDTO> allRecruiter = recruiterService.getAllByAll("%"+name+"%", companyId);
 		request.setAttribute("allRecruiterDTO", allRecruiter);
+		getCompanies(request);
 		return "recruiter/search";
 	}
 
@@ -81,6 +89,7 @@ public class RecruiterController {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(id);
 		request.setAttribute("recruiterDTO", recruiterDTO);
+		getCompanies(request);
 		return "recruiter/update";
 	}
 	
@@ -93,6 +102,7 @@ public class RecruiterController {
 		RecruiterDTO recruiterDTO = new RecruiterDTO(id,name,company);
 		recruiterService.updateRecruiter(recruiterDTO);
 		visualRecruiter(request);
+		getCompanies(request);
 		return "recruiter/management";
 	}
 	
@@ -104,6 +114,7 @@ public class RecruiterController {
 		RecruiterDTO recruiter = new RecruiterDTO(0, name, company);
 		recruiterService.insertRecruiter(recruiter);
 		visualRecruiter(request);
+		getCompanies(request);
 		return "recruiter/management";
 	}
 }

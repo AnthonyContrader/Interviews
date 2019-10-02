@@ -58,7 +58,7 @@
 			    	<label for="recruiter">Recruiter</label>
 			    </div>
 			    <div class="col-75">
-					<select id="recruiter" name="recruiter" onChange="getCompany()">
+					<select id="recruiter" name="recruiter">
 			    		<%for (RecruiterDTO r : listRecruiter) {
 			    		    if(r.getId()==q.getRecruiter().getId()){%>
 			    				<option value=<%=r.getId()%> selected><%=r.getName()%></option>	

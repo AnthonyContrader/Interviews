@@ -49,6 +49,11 @@ public class QuestionController {
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
+	private void getCompanies(HttpServletRequest request) {
+		List<CompanyDTO> allCompany = companyService.getListCompanyDTO();
+		request.setAttribute("allCompanyDTO", allCompany);
+	}
+	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualQuestion(request);
@@ -87,6 +92,8 @@ public class QuestionController {
 	public String search_get(HttpServletRequest request) {
 		List<QuestionDTO> questions = new ArrayList<QuestionDTO>();
 		request.setAttribute("questionResultList", questions);
+		getRecruiters(request);
+		getCompanies(request);
 		return "question/search";
 	}
 	
@@ -99,6 +106,8 @@ public class QuestionController {
 		String companyId = request.getParameter("companyId");
 		List<QuestionDTO> questions = this.questionService.getAllByAll("%"+question+"%", "%"+argument+"%", sector, recruiterId, companyId);
 		request.setAttribute("questionResultList", questions);
+		getRecruiters(request);
+		getCompanies(request);
 		return "question/search";
 	}
 	

@@ -4,6 +4,7 @@
     import="it.contrader.dto.QuestionDTO"
     import="it.contrader.dto.CompanyDTO"
 	import="it.contrader.dto.UserDTO"
+	import="it.contrader.dto.RecruiterDTO"
 %>
 <!DOCTYPE html>
 <html>
@@ -35,9 +36,10 @@
 		<div class="mainleft">
 			<!-- QUESTIONLIST -->
 	
-			<% 
-			   List<QuestionDTO> questionResultList = (List<QuestionDTO>) request.getAttribute("questionResultList");
-			   /*List<CompanySectorDistinctDTO> sectorDistinctAllList = (List<CompanySectorDistinctDTO>) request.getAttribute("sectorDistinctAllList");
+			<%List<QuestionDTO> questionResultList = (List<QuestionDTO>) request.getAttribute("questionResultList");
+			  List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
+			  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
+			  /*List<CompanySectorDistinctDTO> sectorDistinctAllList = (List<CompanySectorDistinctDTO>) request.getAttribute("sectorDistinctAllList");
 			   List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
 			   List<UserRecruiterDTO> recruiterAllList = (List<UserRecruiterDTO>) request.getAttribute("recruiterAllList");		   
 			   CompanyDTO company = (CompanyDTO) request.getAttribute("company");*/
@@ -116,9 +118,9 @@
 				    <div class="col-75">
 				    	<select id="recruiter" name="recruiterId">
 				    		<option value="%">TUTTI</option>
-				    		<%/*for (UserRecruiterDTO recruiter : recruiterAllList) {%>
+				    		<%for (RecruiterDTO recruiter : recruiterList) {%>
 				    			<option value="<%=recruiter.getId()%>"><%=recruiter.getName()%></option>	
-				    		<%}*/%>
+				    		<%}%>
 				    	</select>
 				    </div>
 				</div>
@@ -129,10 +131,9 @@
 				    <div class="col-75">
 				    	<select id="company" name="companyId">
 				    		<option value="%">TUTTE</option>
-				    		<%/*for (CompanyNameDTO company : companyAllList) {
-				    		%>
+				    		<%for (CompanyDTO company : companyList) {%>
 				    			<option value="<%=company.getId()%>"><%=company.getName()%></option>	
-				    		<%}*/%>
+				    		<%}%>
 				    	</select>
 				    </div>
 				</div>
