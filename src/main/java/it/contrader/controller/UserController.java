@@ -107,23 +107,4 @@ public class UserController {
 		visualUser(request);
 		return "user/management";
 	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginControl(HttpServletRequest request) {
-
-		session = request.getSession();
-		final String username = request.getParameter("username");
-		final String password = request.getParameter("password");
-		final UserDTO userDTO = userService.getByUsernameAndPassword(username, password);
-		final String userType = userDTO.getUserType();
-		if (!StringUtils.isEmpty(userType)) {
-			session.setAttribute("user", userDTO);
-			if (userType.equals("ADMIN")) {
-				return "homeadmin";
-			} else if (userType.equals("USER")) {
-				return "homeuser";
-			}
-		}
-		return "index";
-	}
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="/css/header.jsp" %>
-		<form class="login" action="/User/login" method="post">
+		<form class="login" action="/Home/login" method="post">
 
 				<label for="user">Username: </label>
 			

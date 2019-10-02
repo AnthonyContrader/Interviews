@@ -5,7 +5,7 @@
 <body>
 <div class="menu">
 	<ul>
-	  <li><a id="homelink" href="/homeadmin">Home</a></li>
+	  <li><a id="homelink" href="/Home/homeadmin">Home</a></li>
 	  <li><a id="userlink" href="/User/management">Users</a></li>
 	  <li><a id="recruiterlink" href="/Recruiter/management">Recruiters</a></li>
 	  <li><a id="companylink" href="/Company/management">Companies</a></li>

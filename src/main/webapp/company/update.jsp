@@ -50,15 +50,11 @@
 		<div class="col-75">
       		<input type="text" id="sector" name="sector" value="<%=c.getSector()%>"> 
 		</div>
-   </div>
-   
-   </div>
-      <button type="submit" >Edit</button>
-</form>
-
-	
-</div>
-<br>
-<%@ include file="../css/footer.jsp" %>	
-</body>
-</html>
+	</div>
+	   <button type="submit" >Edit</button>   
+	</form>
+	</div>
+	<br>
+	<%@ include file="../css/footer.jsp" %>	
+	</body>
+	</html>

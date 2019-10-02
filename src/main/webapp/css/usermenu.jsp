@@ -5,7 +5,7 @@
 <body>
 <div class="menu">
 	<ul>
-	  <li><a id="homelink" href="/homeuser">Home</a></li>
+	  <li><a id="homelink" href="/Home/homeuser">Home</a></li>
 	  <li><a id="questionlink" href="/Question/management">Questions</a></li>
 	  <li class="userdropdown">
 	    <a class="userdropbtn"><i class="user-icon" aria-hidden="true"></i></a>
