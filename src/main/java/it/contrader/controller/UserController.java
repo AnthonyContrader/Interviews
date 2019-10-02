@@ -52,20 +52,16 @@ public class UserController {
 		this.userService.deleteUserById(id);
 		visualUser(request);
 		return "user/management";
-		
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(HttpServletRequest request) {
-
 		final Integer content = Integer.parseInt(request.getParameter("userId"));
-
 		UserDTO user = this.userService.getUserDTOById(content);
 		request.setAttribute("allUserDTO", user);
-
 		return "user/search";
-
 	}
+	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update_get(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
@@ -89,21 +85,14 @@ public class UserController {
 		
 	}
 	
-	
-	
-	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String userType = request.getParameter("userType");
 		String email = request.getParameter("email");
-		
-	UserDTO userObj = new UserDTO(0, username, password, userType, email);
+		UserDTO userObj = new UserDTO(0, username, password, userType, email);
 		userService.insertUser(userObj);
-		
-
 		visualUser(request);
 		return "user/management";
 	}
