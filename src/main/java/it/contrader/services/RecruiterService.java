@@ -28,8 +28,8 @@ public class RecruiterService {
 		return RecruiterConverter.toDTO(recruiterRepository.findById(id).get());
 	}
 	
-	public List<RecruiterDTO> getAllByAll (String name, Integer companyId) {
-		return RecruiterConverter.toListDTO(recruiterRepository.findByNameAndCompanyId(name, companyId));
+	public List<RecruiterDTO> getAllByAll (String name, String companyId) {
+		return RecruiterConverter.toListDTO(recruiterRepository.findByAll(name, companyId));
 	}
 	
 	public boolean insertRecruiter (RecruiterDTO recruiterDTO) {

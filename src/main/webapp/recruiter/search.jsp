@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<link href="css/vittoriostyle.css" rel="stylesheet">
+	<link href="../css/vittoriostyle.css" rel="stylesheet">
 	<title>Search page</title>
 </head>
 <body>
@@ -54,7 +54,7 @@
 		
 			<!-- SEARCH FORM -->
 		
-			<form id="floatright" action="/Recruiter/search?search=true" method="get">
+			<form id="floatright" action="/Recruiter/search?search=true" method="post">
 				<div class="row">
 				    <div class="col-25">
 				    	<label for="name">Name</label>

@@ -43,18 +43,12 @@ public class QuestionService {
 	}
 	
 	public List<QuestionDTO> getAllByAll(String question, String argument, String sector, String recruiterId, String companyId) {
-		
 		final List<Question> list = questionRepository.findByAll(question, argument, sector, recruiterId, companyId);
-		final List<QuestionDTO> questionDTOs = new ArrayList<>();
-		list.forEach(i -> questionDTOs.add(QuestionConverter.toDTO(i)));
-		return questionDTOs;
+//		list.forEach(i -> questionDTOs.add(QuestionConverter.toDTO(i))); espressione gamba
+		return QuestionConverter.toListDTO(list);
 	}
 	
     public List<QuestionDTO> getAllByArgument(String argument) {
-		
-		final List<Question> list = questionRepository.findByArgument(argument);
-		final List<QuestionDTO> questionDTOs = new ArrayList<>();
-		list.forEach(i -> questionDTOs.add(QuestionConverter.toDTO(i)));
-		return questionDTOs;
+		return QuestionConverter.toListDTO(questionRepository.findByArgument(argument));
 	}
 }

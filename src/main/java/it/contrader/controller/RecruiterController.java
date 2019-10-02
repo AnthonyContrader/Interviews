@@ -16,6 +16,7 @@ import it.contrader.model.Company;
 import it.contrader.services.CompanyService;
 import it.contrader.services.RecruiterService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -60,14 +61,21 @@ public class RecruiterController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request) {
-		String name = request.getParameter("name");
-		Integer companyId = Integer.parseInt(request.getParameter("company"));
-		List<RecruiterDTO> allRecruiter = recruiterService.getAllByAll(name, companyId);
-		request.setAttribute("allRecruiterDTO", allRecruiter);
+	public String search_get(HttpServletRequest request) {
+		List<RecruiterDTO> recruiterDTOList = new ArrayList<>();
+		request.setAttribute("allRecruiterDTO", recruiterDTOList);
 		return "recruiter/search";
 	}
 	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search_post(HttpServletRequest request) {
+		String name = request.getParameter("name");
+		String companyId = request.getParameter("company");
+		List<RecruiterDTO> allRecruiter = recruiterService.getAllByAll("%"+name+"%", companyId);
+		request.setAttribute("allRecruiterDTO", allRecruiter);
+		return "recruiter/search";
+	}
+
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update_get(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
