@@ -19,6 +19,7 @@ import it.contrader.services.CompanyService;
 import it.contrader.services.QuestionService;
 import it.contrader.services.RecruiterService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,10 +44,69 @@ public class QuestionController {
 		request.setAttribute("allQuestionDTO", allQuestion);
 	}
 	
+	private void getRecruiters(HttpServletRequest request){
+		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterDTO();
+		request.setAttribute("allRecruiterDTO", allRecruiter);
+	}
+	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualQuestion(request);
-		return "questionManagement";		
+		getRecruiters(request);
+		return "question/management";		
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String update_get(HttpServletRequest request) {
+		QuestionDTO question = this.questionService.getQuestionDTOById(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("questionDTO", question);
+		getRecruiters(request);
+		return "question/update";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update_post(HttpServletRequest request) {
+		QuestionDTO question = this.questionService.getQuestionDTOById(Integer.parseInt(request.getParameter("id")));
+		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiter")));
+		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);
+		Company company = recruiter.getCompany();
+		String sector = company.getSector();
+		question.setQuestion(request.getParameter("question"));
+		question.setArgument(request.getParameter("argument"));
+		question.setSector(sector);
+		question.setRecruiter(recruiter);
+		question.setCompany(company);
+		
+		this.questionService.updateQuestion(question);
+		visualQuestion(request);
+		getRecruiters(request);
+		return "question/management";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search_get(HttpServletRequest request) {
+		List<QuestionDTO> questions = new ArrayList<QuestionDTO>();
+		request.setAttribute("questionResultList", questions);
+		return "question/search";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search_post(HttpServletRequest request) {
+		String question = request.getParameter("text");
+		String argument = request.getParameter("argument");
+		String sector = request.getParameter("sector");
+		String recruiterId = request.getParameter("recruiterId");
+		String companyId = request.getParameter("companyId");
+		List<QuestionDTO> questions = this.questionService.getAllByAll("%"+question+"%", "%"+argument+"%", sector, recruiterId, companyId);
+		request.setAttribute("questionResultList", questions);
+		return "question/search";
+	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(HttpServletRequest request) {
+		QuestionDTO question = this.questionService.getQuestionDTOById(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("questionDTO", question);
+		return "question/read";		
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -54,10 +114,11 @@ public class QuestionController {
 		int id = Integer.parseInt(request.getParameter("id"));
 		this.questionService.deleteQuestionById(id);
 		visualQuestion(request);
-		return "questionManagement";		
+		getRecruiters(request);
+		return "question/management";		
 	}
 		
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search(HttpServletRequest request) {
 
 		final String question = request.getParameter("word");
@@ -69,25 +130,23 @@ public class QuestionController {
 		List<QuestionDTO> allQuestion = this.questionService.getAllByAll(question, argument, sector, recruiterId, companyId);
 		request.setAttribute("allQuestionDTO", allQuestion);
 
-		return "questionSearch";
+		return "question/search";
 
-	}
+	}*/
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		String argument = request.getParameter("argument");
-		String sector = request.getParameter("sector");
-		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiterId")));
-		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);
-		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("companyId")));
-		Company company = CompanyConverter.toEntity(companyDTO);
+		String argument = request.getParameter("argument");		
+		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiter")));
+		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);			
+		Company company = recruiter.getCompany();
+		String sector = company.getSector();
 		
-		QuestionDTO questionObj = new QuestionDTO(0, question, argument, sector, recruiter, company);
-		
+		QuestionDTO questionObj = new QuestionDTO(0, question, argument, sector, recruiter, company);		
 		questionService.insertQuestion(questionObj);
-
 		visualQuestion(request);
-		return "questionManagement";
+		getRecruiters(request);
+		return "question/management";
 	}
 }

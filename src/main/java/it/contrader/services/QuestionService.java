@@ -42,9 +42,9 @@ public class QuestionService {
 		questionRepository.deleteById(id);
 	}
 	
-	public List<QuestionDTO> getAllByAll(String question, String argument, String sector, Integer recruiterId, Integer companyId) {
+	public List<QuestionDTO> getAllByAll(String question, String argument, String sector, String recruiterId, String companyId) {
 		
-		final List<Question> list = questionRepository.findByQuestionAndArgumentAndSectorAndRecruiterIdAndCompanyId(question, argument, sector, recruiterId, companyId);
+		final List<Question> list = questionRepository.findByAll(question, argument, sector, recruiterId, companyId);
 		final List<QuestionDTO> questionDTOs = new ArrayList<>();
 		list.forEach(i -> questionDTOs.add(QuestionConverter.toDTO(i)));
 		return questionDTOs;
