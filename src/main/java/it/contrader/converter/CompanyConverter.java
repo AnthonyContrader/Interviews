@@ -13,7 +13,7 @@ public class CompanyConverter {
 			CompanyDTO companyDTO=null;
 			if (company!= null) {
 				companyDTO= new CompanyDTO ();
-				companyDTO.setIdCompany(company.getId());
+				companyDTO.setId(company.getId());
 				companyDTO.setName(company.getName());
 				companyDTO.setAddress(company.getAddress());
 				companyDTO.setCity(company.getCity());
@@ -27,7 +27,7 @@ public class CompanyConverter {
 		Company company=null;
 		if (companyDTO != null) {
 			company=new Company ();
-			company.setId(companyDTO.getIdCompany());
+			company.setId(companyDTO.getId());
 			company.setName(companyDTO.getName());
 			company.setAddress(companyDTO.getAddress());
 			company.setCity(companyDTO.getCity());

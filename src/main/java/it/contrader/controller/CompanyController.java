@@ -34,7 +34,27 @@ public class CompanyController {
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualCompany(request);
-		return "companyManagement";		
+		return "company/management";		
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String update_get(HttpServletRequest request) {
+		Integer id=Integer.parseInt(request.getParameter("id"));
+		CompanyDTO companyDTO= companyService.getCompanyDTOById(id);
+		request.setAttribute("companyDTO", companyDTO);
+		return "company/update";
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update_post(HttpServletRequest request) {
+		Integer id=Integer.parseInt(request.getParameter("id"));
+		String name=request.getParameter("name");
+		String address=request.getParameter("address");
+		String city=request.getParameter("city");
+		String sector=request.getParameter("sector");
+		CompanyDTO companyDTO= new CompanyDTO (id,name,address,city,sector);
+		companyService.updateCompany(companyDTO);
+		visualCompany(request);
+		return "company/management";	
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
@@ -43,7 +63,15 @@ public class CompanyController {
 //		request.setAttribute("id", id);
 		this.companyService.deleteCompanyById(id);
 		visualCompany(request);
-		return "companyManagement";
+		return "company/management";
+	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public String read(HttpServletRequest request) {
+		Integer id= Integer.parseInt(request.getParameter("id"));
+		CompanyDTO companyDTO= companyService.getCompanyDTOById(id);
+		request.setAttribute("companyDTO",companyDTO);
+		return "company/read";		
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -54,7 +82,7 @@ public class CompanyController {
 		final String sector = request.getParameter("sector");
 		List<CompanyDTO> allCompany = this.companyService.getAllByAll(name, address, city, sector);
 		request.setAttribute("allCompanyDTO", allCompany);
-		return "companySearch";
+		return "company/search";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -66,7 +94,7 @@ public class CompanyController {
 		CompanyDTO companyObj = new CompanyDTO(0, name, address, city,sector);
 		companyService.insertCompany(companyObj);
 		visualCompany(request);
-		return "companyManagement";
+		return "company/management";
 	}
 	
 	
