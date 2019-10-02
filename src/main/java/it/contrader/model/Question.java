@@ -39,15 +39,13 @@ public class Question {
 	private String sector;
 
 	@Nullable
-	@Column(name = "recruiterId")
 	@ManyToOne
-	@JoinColumn(name = "id", table = "recruiter")
-	private Integer recruiterId;
+	@JoinColumn(name = "recruiterId", referencedColumnName = "id")
+	private Recruiter recruiter;
 	
 	@Nullable
-	@Column(name = "companyId")
 	@ManyToOne
-	@JoinColumn(name = "id", table = "company")
-	private Integer companyId;
+	@JoinColumn(name = "companyId", referencedColumnName = "id")
+	private Company company;
 
 }

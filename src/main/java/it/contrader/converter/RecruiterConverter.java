@@ -12,7 +12,7 @@ public class RecruiterConverter {
 		if (recruiter != null) {
 			recruiterDTO.setId(recruiter.getId());
 			recruiterDTO.setName(recruiter.getName());
-			recruiterDTO.setCompanyId(recruiter.getCompanyId());
+			recruiterDTO.setCompany(recruiter.getCompany());
 		}
 		return recruiterDTO;
 	}
@@ -22,7 +22,7 @@ public class RecruiterConverter {
 		if (recruiterDTO != null) {
 			recruiter.setId(recruiterDTO.getId());
 			recruiter.setName(recruiterDTO.getName());
-			recruiter.setCompanyId(recruiterDTO.getCompanyId());
+			recruiter.setCompany(recruiterDTO.getCompany());
 		}
 		return recruiter;
 	}

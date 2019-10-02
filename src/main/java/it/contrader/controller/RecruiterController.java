@@ -9,7 +9,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.contrader.converter.CompanyConverter;
+import it.contrader.dto.CompanyDTO;
 import it.contrader.dto.RecruiterDTO;
+import it.contrader.model.Company;
+import it.contrader.services.CompanyService;
 import it.contrader.services.RecruiterService;
 
 import java.util.List;
@@ -18,11 +22,13 @@ import java.util.List;
 @RequestMapping("/Recruiter")
 public class RecruiterController {
 	private final RecruiterService recruiterService;
+	private final CompanyService companyService;
 	private HttpSession session;
 	
 	@Autowired
-	public RecruiterController (RecruiterService recruiterService) {
+	public RecruiterController (RecruiterService recruiterService, CompanyService companyService) {
 		this.recruiterService = recruiterService;
+		this.companyService = companyService;
 	}
 	
 	private void visualRecruiter(HttpServletRequest request){
@@ -59,8 +65,9 @@ public class RecruiterController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
 		String name = request.getParameter("name");
-		Integer companyId = Integer.parseInt(request.getParameter("companyId"));
-		RecruiterDTO recruiter = new RecruiterDTO(0, name, companyId);
+		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("companyId")));
+		Company company = CompanyConverter.toEntity(companyDTO);
+		RecruiterDTO recruiter = new RecruiterDTO(0, name, company);
 		recruiterService.insertRecruiter(recruiter);
 		visualRecruiter(request);
 		return "recruiterManagement";

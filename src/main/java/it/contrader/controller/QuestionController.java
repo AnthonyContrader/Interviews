@@ -8,8 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.contrader.converter.CompanyConverter;
+import it.contrader.converter.RecruiterConverter;
+import it.contrader.dto.CompanyDTO;
 import it.contrader.dto.QuestionDTO;
+import it.contrader.dto.RecruiterDTO;
+import it.contrader.model.Company;
+import it.contrader.model.Recruiter;
+import it.contrader.services.CompanyService;
 import it.contrader.services.QuestionService;
+import it.contrader.services.RecruiterService;
 
 import java.util.List;
 
@@ -19,11 +27,15 @@ import java.util.List;
 public class QuestionController {
 
 	private final QuestionService questionService;
+	private final CompanyService companyService;
+	private final RecruiterService recruiterService;
 	private HttpSession session;
 	
 	@Autowired
-	public QuestionController(QuestionService questionService) {
+	public QuestionController(QuestionService questionService, CompanyService companyService, RecruiterService recruiterService) {
 		this.questionService = questionService;
+		this.companyService = companyService;
+		this.recruiterService = recruiterService;
 	}
 
 	private void visualQuestion(HttpServletRequest request){
@@ -66,11 +78,12 @@ public class QuestionController {
 		String question = request.getParameter("question");
 		String argument = request.getParameter("argument");
 		String sector = request.getParameter("sector");
-		Integer recruiterId = Integer.parseInt(request.getParameter("recruiterId"));
-		Integer companyId = Integer.parseInt(request.getParameter("companyId"));
+		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiterId")));
+		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);
+		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("companyId")));
+		Company company = CompanyConverter.toEntity(companyDTO);
 		
-
-		QuestionDTO questionObj = new QuestionDTO(0, question, argument, sector, recruiterId, companyId);
+		QuestionDTO questionObj = new QuestionDTO(0, question, argument, sector, recruiter, company);
 		
 		questionService.insertQuestion(questionObj);
 

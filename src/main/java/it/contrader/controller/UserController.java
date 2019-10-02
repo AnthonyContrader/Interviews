@@ -32,54 +32,46 @@ public class UserController {
 		request.setAttribute("allUserDTO", allUser);
 	}
 	
-	@RequestMapping(value = "/userManagement", method = RequestMethod.GET)
-	public String userManagement(HttpServletRequest request) {
+	@RequestMapping(value = "/management", method = RequestMethod.GET)
+	public String management(HttpServletRequest request) {
 		visualUser(request);
-		return "homeUser";		
+		return "userManagement";		
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		request.setAttribute("id", id);
 		this.userService.deleteUserById(id);
 		visualUser(request);
-		return "homeUser";
+		return "userManagement";
 		
 	}
 	
-	@RequestMapping(value = "/crea", method = RequestMethod.GET)
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(HttpServletRequest request) {
+
+		final Integer content = Integer.parseInt(request.getParameter("userId"));
+
+		UserDTO user = this.userService.getUserDTOById(content);
+		request.setAttribute("userDTO", user);
+
+		return "userSearch";
+
+	}
+	
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		visualUser(request);
-		request.setAttribute("option", "insert");
-		return "creaUser";
-		
-	}
-	
-	@RequestMapping(value = "/cercaUser", method = RequestMethod.GET)
-	public String cercaUser(HttpServletRequest request) {
-
-		final String content = request.getParameter("search");
-
-		List<UserDTO> allUser = this.userService.findUserDTOByUsername(content);
-		request.setAttribute("allUserDTO", allUser);
-
-		return "homeUser";
-
-	}
-	
-	@RequestMapping(value = "/creaUser", method = RequestMethod.POST)
-	public String insertUser(HttpServletRequest request) {
 		String username = request.getParameter("username").toString();
 		String password = request.getParameter("password").toString();
-		String ruolo = request.getParameter("ruolo").toString();
-
-		UserDTO userObj = new UserDTO(0, username, password, ruolo,"");
+		String userType = request.getParameter("userType").toString();
+		String email = request.getParameter("email").toString();
 		
+		UserDTO userObj = new UserDTO(0, username, password, userType, email);
 		userService.insertUser(userObj);
+		
 
 		visualUser(request);
-		return "homeUser";
+		return "userManagement";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -89,13 +81,13 @@ public class UserController {
 		final String username = request.getParameter("username");
 		final String password = request.getParameter("password");
 		final UserDTO userDTO = userService.getByUsernameAndPassword(username, password);
-		final String ruolo = userDTO.getRuolo();
-		if (!StringUtils.isEmpty(ruolo)) {
-			session.setAttribute("utenteCollegato", userDTO);
-			if (ruolo.equals("ADMIN")) {
-				return "home";
-			} else if (ruolo.equals("CHATMASTER")) {
-				return "home";
+		final String userType = userDTO.getUserType();
+		if (!StringUtils.isEmpty(userType)) {
+			session.setAttribute("user", userDTO);
+			if (userType.equals("ADMIN")) {
+				return "homeadmin";
+			} else if (userType.equals("USER")) {
+				return "homeUser";
 			}
 		}
 		return "index";

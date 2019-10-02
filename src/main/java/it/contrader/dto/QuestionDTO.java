@@ -1,5 +1,7 @@
 package it.contrader.dto;
 
+import it.contrader.model.Company;
+import it.contrader.model.Recruiter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,7 @@ public class QuestionDTO {
 
 	private String sector;
 	
-	private Integer recruiterId;
+	private Recruiter recruiter;
 	
-	private Integer companyId;
+	private Company company;
 }

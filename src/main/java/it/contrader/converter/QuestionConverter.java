@@ -16,8 +16,8 @@ public class QuestionConverter {
 			questionDTO.setQuestion(question.getQuestion());
 			questionDTO.setArgument(question.getArgument());
 			questionDTO.setSector(question.getSector());
-			questionDTO.setRecruiterId(question.getRecruiterId());
-			questionDTO.setCompanyId(question.getCompanyId());
+			questionDTO.setRecruiter(question.getRecruiter());
+			questionDTO.setCompany(question.getCompany());
 		}
 		return questionDTO;
 	}
@@ -30,8 +30,8 @@ public class QuestionConverter {
 			question.setQuestion(questionDTO.getQuestion());
 			question.setArgument(questionDTO.getArgument());
 			question.setSector(questionDTO.getSector());
-			question.setRecruiterId(questionDTO.getRecruiterId());
-			question.setCompanyId(questionDTO.getCompanyId());
+			question.setRecruiter(questionDTO.getRecruiter());
+			question.setCompany(questionDTO.getCompany());
 		}
 		return question;
 	}

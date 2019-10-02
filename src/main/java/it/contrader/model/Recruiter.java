@@ -28,9 +28,8 @@ public class Recruiter {
 	@Column(name = "name")
 	@NotNull
 	private String name;
-	
-	@Column(name = "companyId")
+
 	@ManyToOne
-	@JoinColumn(name = "id", table = "company")
-	private Integer companyId;
+	@JoinColumn(name = "companyId", referencedColumnName = "id")
+	private Company company;
 }

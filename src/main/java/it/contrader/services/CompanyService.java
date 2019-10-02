@@ -1,18 +1,14 @@
 package it.contrader.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.contrader.converter.CompanyConverter;
-import it.contrader.converter.ConverterUser;
 import it.contrader.dao.CompanyRepository;
 import it.contrader.dto.CompanyDTO;
-import it.contrader.dto.UserDTO;
 import it.contrader.model.Company;
-import it.contrader.model.User;
 
 @Service
 public class CompanyService {
