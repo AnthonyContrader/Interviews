@@ -5,5 +5,5 @@ import it.contrader.model.Recruiter;
 import java.util.List;
 
 public interface RecruiterRepository extends CrudRepository<Recruiter,Integer> {
-	public List<Recruiter> findAllByAll (String name, Integer companyId);
+	public List<Recruiter> findByNameAndCompanyId (String name, Integer companyId);
 }

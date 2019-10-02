@@ -29,7 +29,7 @@ public class RecruiterService {
 	}
 	
 	public List<RecruiterDTO> getAllByAll (String name, Integer companyId) {
-		return RecruiterConverter.toListDTO(recruiterRepository.findAllByAll(name, companyId));
+		return RecruiterConverter.toListDTO(recruiterRepository.findByNameAndCompanyId(name, companyId));
 	}
 	
 	public boolean insertRecruiter (RecruiterDTO recruiterDTO) {

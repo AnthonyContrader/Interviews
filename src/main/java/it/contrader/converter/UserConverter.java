@@ -11,13 +11,13 @@ public class UserConverter {
 	public static UserDTO toDTO(User user) {
 		UserDTO userDTO = null;
 		if (user!=null) {
-		userDTO = new UserDTO();
-		userDTO.setId(user.getId());
-		userDTO.setUsername(user.getUsername());
-		userDTO.setPassword(user.getPassword());
-		userDTO.setUserType(user.getUserType());
-		userDTO.setEmail(user.getEmail());
-	}
+			userDTO = new UserDTO();
+			userDTO.setId(user.getId());
+			userDTO.setUsername(user.getUsername());
+			userDTO.setPassword(user.getPassword());
+			userDTO.setUserType(user.getUserType());
+			userDTO.setEmail(user.getEmail());
+		}
 		return userDTO;
 	}
 
@@ -28,22 +28,21 @@ public class UserConverter {
 	    	user.setId(userDTO.getId());
 	    	user.setUsername(userDTO.getUsername());
 	    	user.setPassword(userDTO.getPassword());
+	    	user.setUserType(userDTO.getUserType());
 	    	user.setEmail(userDTO.getEmail());
-	   }
-	    return user;	
-		
-	}
-public static List<UserDTO> toListDTO(List<User>list){
-	List<UserDTO> listUserDTO = new ArrayList<>();
-	if(!list.isEmpty()) {
-		for(User user : list) {
-			listUserDTO.add(UserConverter.toDTO(user));
-		}
-		
+	    }
+	    return user;		
 	}
 	
-	return listUserDTO;
-    }
+	public static List<UserDTO> toListDTO(List<User>list){
+		List<UserDTO> listUserDTO = new ArrayList<>();
+		if(!list.isEmpty()) {
+			for(User user : list) {
+				listUserDTO.add(UserConverter.toDTO(user));
+			}			
+		}		
+		return listUserDTO;
+	}
 }
 
 

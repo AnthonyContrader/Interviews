@@ -29,7 +29,7 @@ public class CompanyService {
 	}
 	
 	public List<CompanyDTO> getAllByAll (String name,String address,String city,String sector){
-		return CompanyConverter.toListDTO(companyRepository.findAllByAll(name, address, city, sector));
+		return CompanyConverter.toListDTO(companyRepository.findByNameAndAddressAndCityAndSector(name, address, city, sector));
 	}
 	
 	public boolean insertCompany(CompanyDTO companyDTO) {

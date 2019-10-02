@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
-	public List<Question> findAllByAll(String question, String argument, String sector, Integer recruiterId, Integer companyId);
+	public List<Question> findByQuestionAndArgumentAndSectorAndRecruiterIdAndCompanyId(String question, String argument, String sector, Integer recruiterId, Integer companyId);
 	
-	public List<Question> findAllByArgument(String argument);
+	public List<Question> findByArgument(String argument);
 }

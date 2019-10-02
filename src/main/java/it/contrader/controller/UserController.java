@@ -87,7 +87,7 @@ public class UserController {
 			if (userType.equals("ADMIN")) {
 				return "homeadmin";
 			} else if (userType.equals("USER")) {
-				return "homeUser";
+				return "homeuser";
 			}
 		}
 		return "index";
