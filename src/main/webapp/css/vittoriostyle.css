@@ -109,14 +109,10 @@ h2 {
 }
 
 .registerform{
-	position: absolute;
+	position: relative;
 	width:20em;
-	margin: auto auto;
-	left: 50%;
-    top: 50%;
-    -webkit-transform: translate3d(-50%, -50%, 0);
-    -moz-transform: translate3d(-50%, -50%, 0);
-    transform: translate3d(-50%, -50%, 0);
+	margin: 5% auto;
+	overflow: hidden;
 	z-index:1;
 	-webkit-box-shadow: 5px 5px 10px 3px #00a990; 
 	box-shadow: 5px 5px 10px 3px #00a990;
