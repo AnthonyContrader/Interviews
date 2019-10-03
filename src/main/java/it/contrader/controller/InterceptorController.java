@@ -23,7 +23,7 @@ public class InterceptorController extends HandlerInterceptorAdapter {
 			}
 			else {
 				UserDTO user = (UserDTO) request.getSession().getAttribute("user");
-				if(user.getUserType()=="ADMIN")
+				if(user.getUserType().equals("ADMIN"))
 					return true;
 				else {
 					switch(uri.split("/")[1]) {
