@@ -9,10 +9,12 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<link href="/css/vittoriostyle.css" rel="stylesheet">
-	<title>Recruiter Management</title>
+	<title>Recruiter Manager</title>
 </head>
 <body>
-<!-- HEADER -->
+
+
+	<!-- HEADER -->
 	
 	<%@include file="../css/header.jsp"%>
 	
@@ -22,11 +24,14 @@
 	<%@include file="../css/adminmenu.jsp"%>
 	<script>document.getElementById("recruiterlink").classList.add("active");</script>
 	
+	
 	<!-- BODY -->
 	
 	<div class="main">
 		<h1>Recruiters</h1>
 	    <div class="mainleft">
+	    
+	    
 			<!-- RECRUITERLIST -->
 			
 			<%List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
@@ -56,7 +61,7 @@
 	 		<!-- SEARCH BUTTON -->   
 		
 			<form action="/Recruiter/search" method="get">
-				<button type="submit" ><i class="searchicon"></i>Cerca</button>
+				<button type="submit" ><i class="searchicon"></i>Search</button>
 			</form>
 	
 	
@@ -68,7 +73,7 @@
 						<label for="name">Name</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="name" name="name" placeholder="inserisci nome" required>
+						<input type="text" id="name" name="name" placeholder="insert name" required>
 					</div>
 				</div>
 				<div class="row">

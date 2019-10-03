@@ -9,7 +9,7 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<link href="../css/vittoriostyle.css" rel="stylesheet">
-	<title>Update page</title>
+	<title>Edit Recruiter</title>
 </head>
 <body>
 	<!-- HEADER -->
@@ -23,9 +23,12 @@
 	<script>document.getElementById("recruiterlink").classList.add("active");</script>
 	<br>
 	
+	
 	<!-- BODY -->
 	
 	<div class="main">
+	
+	
 		<!-- RECRUITERLIST -->
 		
 		<%RecruiterDTO recruiter = (RecruiterDTO) request.getAttribute("recruiterDTO");
@@ -34,7 +37,7 @@
 		<form id="floatleft" action="/Recruiter/update?update=true&id=<%=recruiter.getId()%>" method="post">
 			<div class="row">
 				<div class="col-25">
-					<label for="name">Nome</label>
+					<label for="name">Name</label>
 				</div>
 				<div class="col-75">
 					<input type="text" id="name" name="name" value="<%=recruiter.getName()%>">
@@ -42,7 +45,7 @@
 			</div>
 			<div class="row">
 				<div class="col-25">
-					<label for="company">Azienda</label>
+					<label for="company">Company</label>
 				</div>
 				<div class="col-75">
 					<select id="company" name="company">

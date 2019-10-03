@@ -9,9 +9,11 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<link href="../css/vittoriostyle.css" rel="stylesheet">
-	<title>Search page</title>
+	<title>Search Recruiter</title>
 </head>
 <body>
+
+
 	<!-- HEADER -->
 
 	<%@ include file="../css/header.jsp" %>
@@ -26,8 +28,10 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<h1>Cerca Recruiter</h1>
+		<h1>Search Recruiter</h1>
 	    <div class="mainleft">
+	    
+	    
 			<!-- USERLIST -->
 	
 			<%List<RecruiterDTO> allRecruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
@@ -62,23 +66,23 @@
 				    	<label for="name">Name</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="name" name="name" placeholder="inserisci nome">
+				    	<input type="text" id="name" name="name" placeholder="insert name">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="company">Azienda</label>
+				    	<label for="company">Company</label>
 				    </div>
 				    <div class="col-75">
 						<select id="company" name="company">
-							<option value="%">TUTTE</option>
+							<option value="%">ALL</option>
 							<%for (CompanyDTO c : companyList) {%>
 								<option value=<%=c.getId()%>><%=c.getName()%></option>
 							<%}%>
 						</select>
 				    </div>
 				</div>
-				<button type="submit" >Cerca</button>
+				<button type="submit" >Search</button>
 			</form>
 		</div>
 	</div>

@@ -33,7 +33,9 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<!-- QUESTIONLIST -->
+	
+	
+		<!-- UPDATE FORM -->
 		
 		<% QuestionDTO q = (QuestionDTO) request.getAttribute("questionDTO");%>
 		<form id="floatleft" action="/Question/update?id=<%=q.getId()%>" method="post">
@@ -47,7 +49,7 @@
 			</div>
 			<div class="row">
 			    <div class="col-25">
-			    	<label for="argument">Argument</label>
+			    	<label for="argument">Topic</label>
 			    </div>
 			    <div class="col-75">
 			    	<input type="text" id="argument" name="argument" value="<%=q.getArgument()%>" required>
@@ -69,7 +71,7 @@
 					</select>
 				</div> 
 			</div>
-			<button type="submit" >Update</button>
+			<button type="submit" >Edit</button>
 		</form>
 	</div>
 	<br>

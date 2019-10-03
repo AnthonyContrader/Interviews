@@ -10,14 +10,24 @@
 	<title>Read page</title>
 </head>
 <body>
+
+
+	<!-- HEADER -->
+	
 	<%@ include file="../css/header.jsp" %>
+	
+	
+	<!-- NAVBAR -->
+	
 	<%@ include file="../css/adminmenu.jsp"%>
 	<script>document.getElementById("recruiterlink").classList.add("active");</script>
 	<br>
+	
+	
+	<!-- BODY -->
+	
 	<div class="main">
 		<%RecruiterDTO r = (RecruiterDTO) request.getAttribute("recruiterDTO");%>
-		
-		
 		<table>
 			<tr> 
 				<th>Name</th>
@@ -43,6 +53,10 @@
 		<br>
 		<br>
 	</div>
+	
+	
+	<!-- FOOTER -->	
+	
 	<%@ include file="../css/footer.jsp" %>
 </body>
 </html>

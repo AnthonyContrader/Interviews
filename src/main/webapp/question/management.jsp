@@ -35,13 +35,14 @@
 	<div class="main">
 		<h1>Questions</h1>
 	    <div class="mainleft">
+	    <br>
+	    
 			<!-- QUESTIONLIST -->
 			
-			<br>
 			<table class="greenTable">
 				<tr>
 					<th>Question</th>
-					<th>Argument</th>
+					<th>Topic</th>
 					<th>Sector</th>
 					<th>Recruiter</th>
 					<th>Company</th>
@@ -77,7 +78,7 @@
 			<!-- SEARCH BUTTON -->
 		
 			<form action="/Question/search" method="get">
-				<button type="submit" ><i class="searchicon"></i>Cerca</button>
+				<button type="submit" ><i class="searchicon"></i>Search</button>
 			</form>
 			
 			
@@ -89,15 +90,15 @@
 				    	<label for="question">Question</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="question" name="question" placeholder="inserisci la domanda" required>
+				    	<input type="text" id="question" name="question" placeholder="insert a question" required>
 				    </div>    
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="argument">Argument</label>
+				    	<label for="argument">Topic</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="argument" name="argument" placeholder="inserisci l'argomento" required>
+				    	<input type="text" id="argument" name="argument" placeholder="insert a topic" required>
 				    </div> 
 				</div>
 				<div class="row">

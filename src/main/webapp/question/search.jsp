@@ -32,7 +32,7 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<h1>Cerca Domanda</h1>
+		<h1>Search Question</h1>
 		<div class="mainleft">
 			<!-- QUESTIONLIST -->
 	
@@ -48,7 +48,7 @@
 			<table class="greenTable">
 				<tr>
 					<th>Question</th>
-					<th>Argument</th>
+					<th>Topic</th>
 					<th>Sector</th>
 					<th>Recruiter</th>
 					<th>Company</th>
@@ -86,27 +86,27 @@
 			<form id="floatright" action="/Question/search" method="post">
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="text">Testo</label>
+				    	<label for="text">Word</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="text" name="text" placeholder="inserisci una parola">
+				    	<input type="text" id="text" name="text" placeholder="insert a word">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="argument">Argomento</label>
+				    	<label for="argument">Topic</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="argument" name="argument" placeholder="inserisci l'argomento">
+				    	<input type="text" id="argument" name="argument" placeholder="insert a topic">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="sector">Settore</label>
+				    	<label for="sector">Sector</label>
 				    </div>
 				    <div class="col-75">
 				    	<select id="sector" name="sector">
-				    		<option value="%">TUTTI</option>
+				    		<option value="%">ALL</option>
 				    		<%for (String sector : sectorDistinctList) {%>
 				    			<option value="<%=sector%>"><%=sector%></option>
 				    		<%}%>
@@ -119,7 +119,7 @@
 				    </div>
 				    <div class="col-75">
 				    	<select id="recruiter" name="recruiterId">
-				    		<option value="%">TUTTI</option>
+				    		<option value="%">ALL</option>
 				    		<%for (RecruiterDTO recruiter : recruiterList) {%>
 				    			<option value="<%=recruiter.getId()%>"><%=recruiter.getName()%></option>	
 				    		<%}%>
@@ -128,18 +128,18 @@
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="company">Azienda</label>
+				    	<label for="company">Company</label>
 				    </div>
 				    <div class="col-75">
 				    	<select id="company" name="companyId">
-				    		<option value="%">TUTTE</option>
+				    		<option value="%">All</option>
 				    		<%for (CompanyDTO company : companyList) {%>
 				    			<option value="<%=company.getId()%>"><%=company.getName()%></option>	
 				    		<%}%>
 				    	</select>
 				    </div>
 				</div>
-				<button type="submit" >Cerca</button>
+				<button type="submit" >Search</button>
 			</form>
 		</div>
 	</div>
