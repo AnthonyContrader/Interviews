@@ -24,16 +24,16 @@ public class RecruiterService {
 		return RecruiterConverter.toListDTO((List<Recruiter>) recruiterRepository.findAll());
 	}
 	
-	public List<RecruiterDTO> getListAllRecruiterOrderByNameAsc() {
-		return RecruiterConverter.toListDTO((List<Recruiter>) recruiterRepository.findByAllOrderByNameAsc("%", "%"));
-	}
-	
 	public RecruiterDTO getRecruiterDTOById(Integer id) {
 		return RecruiterConverter.toDTO(recruiterRepository.findById(id).get());
 	}
 	
-	public List<RecruiterDTO> getAllByAllOrderByNameAsc (String name, String companyId) {
-		return RecruiterConverter.toListDTO(recruiterRepository.findByAllOrderByNameAsc(name, companyId));
+	public List<RecruiterDTO> findRecruiterByAllOrderByNameAsc (String name, String companyId) {
+		return RecruiterConverter.toListDTO(recruiterRepository.findRecruiterByAllOrderByNameAsc(name, companyId));
+	}
+	
+	public List<RecruiterDTO> getAllRecruiterOrderByNameAsc() {
+		return findRecruiterByAllOrderByNameAsc("%", "%");
 	}
 	
 	public boolean insertRecruiter (RecruiterDTO recruiterDTO) {

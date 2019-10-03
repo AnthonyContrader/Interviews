@@ -39,8 +39,8 @@
 			<%List<QuestionDTO> questionResultList = (List<QuestionDTO>) request.getAttribute("questionResultList");
 			  List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
 			  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
-			  /*List<CompanySectorDistinctDTO> sectorDistinctAllList = (List<CompanySectorDistinctDTO>) request.getAttribute("sectorDistinctAllList");
-			   List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
+			  List<String> sectorDistinctList = (List<String>) request.getAttribute("sectorDistinctList");
+			  /* List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
 			   List<UserRecruiterDTO> recruiterAllList = (List<UserRecruiterDTO>) request.getAttribute("recruiterAllList");		   
 			   CompanyDTO company = (CompanyDTO) request.getAttribute("company");*/
 			%>
@@ -63,7 +63,7 @@
 						<td><%=q.getSector()%></td>
 						<td><%=q.getRecruiter().getName()%></td>
 						<td><%=q.getCompany().getName()%></td>
-						<%if (q.getRecruiter().getId()==user.getId() || user.getUserType().equals("ADMIN")){%>
+						<%if (user.getUserType().equals("ADMIN")){%>
 							<td><a class="edit" href="/Question/update?id=<%=q.getId()%>">Edit</a>
 							</td>
 							<td><a class="delete" href="/Question/delete?id=<%=q.getId()%>">Delete</a>
@@ -79,6 +79,8 @@
 			</table>
 		</div>
 		<div class="mainright">
+		
+		
 			<!-- SEARCH FORM -->
 		
 			<form id="floatright" action="/Question/search" method="post">
@@ -105,9 +107,9 @@
 				    <div class="col-75">
 				    	<select id="sector" name="sector">
 				    		<option value="%">TUTTI</option>
-				    		<% /*for (CompanySectorDistinctDTO sector : sectorDistinctAllList) {%>
-				    			<option value="<%=sector.getSector()%>"><%=sector.getSector()%></option>
-				    		<%}*/%>
+				    		<%for (String sector : sectorDistinctList) {%>
+				    			<option value="<%=sector%>"><%=sector%></option>
+				    		<%}%>
 				    	</select>
 				    </div>
 				</div>

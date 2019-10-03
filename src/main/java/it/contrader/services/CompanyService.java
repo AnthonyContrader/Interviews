@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import it.contrader.converter.CompanyConverter;
 import it.contrader.dao.CompanyRepository;
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.RecruiterDTO;
 import it.contrader.model.Company;
 
 @Service
@@ -21,8 +22,8 @@ public class CompanyService {
 		this.companyRepository=companyRepository;
 	}
 	
-	public List<String> getDistinctSector (){
-		List<String> sectorList = companyRepository.getDistinctSector();
+	public List<String> getDistinctSectorOrderAsc (){
+		List<String> sectorList = companyRepository.getDistinctSectorOrderAsc();
 /*		List<String> sectorList = new ArrayList<> ();
 		for(Company company : companyList) {
 			sectorList.add(company.getSector());
@@ -39,8 +40,12 @@ public class CompanyService {
 		return CompanyConverter.toDTO(companyRepository.findById(id).get());
 	}
 	
-	public List<CompanyDTO> getAllByAll (String name,String address,String city,String sector){
-		return CompanyConverter.toListDTO(companyRepository.findAllByAll(name, address, city, sector));
+	public List<CompanyDTO> findCompanyByAllOrderByNameAsc (String name,String address,String city,String sector){
+		return CompanyConverter.toListDTO(companyRepository.findCompanyByAllOrderByNameAsc(name, address, city, sector));
+	}
+	
+	public List<CompanyDTO> getAllCompanyOrderByNameAsc() {
+		return findCompanyByAllOrderByNameAsc("%", "%", "%", "%");
 	}
 	
 	public boolean insertCompany(CompanyDTO companyDTO) {

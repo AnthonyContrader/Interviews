@@ -32,12 +32,12 @@ public class RecruiterController {
 	}
 	
 	private void visualRecruiter(HttpServletRequest request){
-		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterOrderByName();
+		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterDTO();
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
 	private void getCompanies(HttpServletRequest request) {
-		List<CompanyDTO> allCompany = companyService.getListCompanyDTO();
+		List<CompanyDTO> allCompany = companyService.getAllCompanyOrderByNameAsc();
 		request.setAttribute("allCompanyDTO", allCompany);
 	}
 	
@@ -78,7 +78,7 @@ public class RecruiterController {
 	public String search_post(HttpServletRequest request) {
 		String name = request.getParameter("name");
 		String companyId = request.getParameter("company");
-		List<RecruiterDTO> allRecruiter = recruiterService.getAllByAllOrderByNameAsc("%"+name+"%", companyId);
+		List<RecruiterDTO> allRecruiter = recruiterService.findRecruiterByAllOrderByNameAsc("%"+name+"%", companyId);
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 		getCompanies(request);
 		return "recruiter/search";

@@ -57,7 +57,7 @@
 						<td><%=q.getSector()%></td>
 						<td><%=q.getRecruiter().getName()%></td>
 						<td><%=q.getCompany().getName()%></td>
-						<%if (q.getRecruiter().getId()==user.getId() || user.getUserType().equals("ADMIN")){%>
+						<%if (user.getUserType().equals("ADMIN")){%>
 							<td><a class="edit" href="/Question/update?id=<%=q.getId()%>">Edit</a>
 							</td>
 							<td><a class="delete" href="/Question/delete?id=<%=q.getId()%>">Delete</a>

@@ -45,14 +45,16 @@ public class QuestionController {
 	}
 	
 	private void getRecruiters(HttpServletRequest request){
-		List<RecruiterDTO> allRecruiter = this.recruiterService.getListAllRecruiterOrderByNameAsc();
+		List<RecruiterDTO> allRecruiter = this.recruiterService.getAllRecruiterOrderByNameAsc();
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
 	private void getCompanies(HttpServletRequest request) {
-		List<CompanyDTO> allCompany = companyService.getListCompanyDTO();
+		List<CompanyDTO> allCompany = companyService.getAllCompanyOrderByNameAsc();
 		request.setAttribute("allCompanyDTO", allCompany);
 	}
+	
+	
 	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
@@ -94,6 +96,7 @@ public class QuestionController {
 		request.setAttribute("questionResultList", questions);
 		getRecruiters(request);
 		getCompanies(request);
+		request.setAttribute("sectorDistinctList", companyService.getDistinctSectorOrderAsc());
 		return "question/search";
 	}
 	
@@ -104,10 +107,11 @@ public class QuestionController {
 		String sector = request.getParameter("sector");
 		String recruiterId = request.getParameter("recruiterId");
 		String companyId = request.getParameter("companyId");
-		List<QuestionDTO> questions = this.questionService.getAllByAll("%"+question+"%", "%"+argument+"%", sector, recruiterId, companyId);
+		List<QuestionDTO> questions = this.questionService.findQuestionByAll("%"+question+"%", "%"+argument+"%", sector, recruiterId, companyId);
 		request.setAttribute("questionResultList", questions);
 		getRecruiters(request);
 		getCompanies(request);
+		request.setAttribute("sectorDistinctList", companyService.getDistinctSectorOrderAsc());
 		return "question/search";
 	}
 	

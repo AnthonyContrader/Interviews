@@ -33,7 +33,7 @@ public class CompanyController {
 	}
 	
 	private void getDistinctSector (HttpServletRequest request) {
-		List<String> sector= companyService.getDistinctSector();
+		List<String> sector= companyService.getDistinctSectorOrderAsc();
 		request.setAttribute("allDistinctSector", sector);
 	}
 	
@@ -94,7 +94,7 @@ public class CompanyController {
 		final String address = request.getParameter("address");
 		final String city = request.getParameter("city");
 		final String sector = request.getParameter("sector");
-		List<CompanyDTO> allCompany = this.companyService.getAllByAll("%"+name+"%", "%"+address+"%", "%"+city+"%", sector);
+		List<CompanyDTO> allCompany = this.companyService.findCompanyByAllOrderByNameAsc("%"+name+"%", "%"+address+"%", "%"+city+"%", sector);
 		request.setAttribute("allCompanyDTO", allCompany);
 		getDistinctSector (request);
 		return "company/search";
