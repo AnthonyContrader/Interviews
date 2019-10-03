@@ -9,9 +9,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.contrader.dto.QuestionDTO;
 import it.contrader.dto.UserDTO;
 import it.contrader.services.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,10 +57,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request) {
-		final Integer content = Integer.parseInt(request.getParameter("userId"));
-		UserDTO user = this.userService.getUserDTOById(content);
-		request.setAttribute("allUserDTO", user);
+	public String search_get(HttpServletRequest request) {
+		List<UserDTO> users = new ArrayList<UserDTO>();
+		request.setAttribute("userResultList", users);
+		return "user/search";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search_post(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String userType = request.getParameter("userType");
+		String email = request.getParameter("email");
+		List<UserDTO> users = this.userService.getAllByAll("%"+username+"%", "%"+userType+"%", "%"+email+"%");
+		request.setAttribute("userResultList", users);
 		return "user/search";
 	}
 	

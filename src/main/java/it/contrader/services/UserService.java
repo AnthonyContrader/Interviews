@@ -24,6 +24,10 @@ public class UserService {
 	public List<UserDTO> getListaUserDTO() {
 		return UserConverter.toListDTO((List<User>) userRepository.findAll());
 	}
+	
+	public List<UserDTO> getAllByAll(String username, String userType, String email) {
+		return UserConverter.toListDTO((List<User>) userRepository.findAllbyAll(username, userType, email));
+	}
 
 	public UserDTO getUserDTOById(Integer id) {
 		return UserConverter.toDTO(userRepository.findById(id).get());
