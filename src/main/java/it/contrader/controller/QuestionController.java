@@ -45,7 +45,7 @@ public class QuestionController {
 	}
 	
 	private void getRecruiters(HttpServletRequest request){
-		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterDTO();
+		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterOrderByName();
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
