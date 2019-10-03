@@ -31,22 +31,24 @@
 
 	<div class="main">
 		<% QuestionDTO q = (QuestionDTO) request.getAttribute("questionDTO");%>
-		<table>
-			<tr> 
-				<th>Question</th>
-				<th>Topic</th>
-				<th>Sector</th>
-				<th>Recruiter</th>
-				<th>Company</th>
-			</tr>
-			<tr>
-				<td><%=q.getQuestion()%></td>
-				<td> <%=q.getArgument()%></td>
-				<td> <%=q.getSector()%></td>
-				<td> <%=q.getRecruiter().getName()%></td>
-				<td> <%=q.getCompany().getName()%></td>
-			</tr>	
-		</table>
+		<div class="mainleft">
+			<table class="greenTable">
+				<tr> 
+					<th>Question</th>
+					<th>Topic</th>
+					<th>Sector</th>
+					<th>Recruiter</th>
+					<th>Company</th>
+				</tr>
+				<tr>
+					<td><%=q.getQuestion()%></td>
+					<td> <%=q.getArgument()%></td>
+					<td> <%=q.getSector()%></td>
+					<td> <%=q.getRecruiter().getName()%></td>
+					<td> <%=q.getCompany().getName()%></td>
+				</tr>	
+			</table>
+		</div>
 		<br>
 		<br>
 		<br>

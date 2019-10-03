@@ -56,7 +56,7 @@
 			<!-- SEARCH BUTTON -->
 			
 			<form action="/Company/search" method="get">
-				<button type="submit" ><i class="searchicon"></i>Cerca</button>
+				<button type="submit" ><i class="searchicon"></i>Search</button>
 			</form>
 				
 				
@@ -68,7 +68,7 @@
 						<label for="company">Name</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="company" name="name" placeholder="inserisci il nome" required>
+						<input type="text" id="company" name="name" placeholder="insert name" required>
 					</div>
 				</div>
 				<div class="row">
@@ -76,7 +76,7 @@
 						<label for="address">Address</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="address" name="address" placeholder="inserisci l'indirizzo" required> 
+						<input type="text" id="address" name="address" placeholder="insert address" required> 
 					</div>
 				</div>
 				<div class="row">
@@ -84,7 +84,7 @@
 						<label for="city">City</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="city" name="city" placeholder="inserisci la città" required> 
+						<input type="text" id="city" name="city" placeholder="insert city" required> 
 					</div>
 				</div>
 				<div class="row">
@@ -92,7 +92,7 @@
 						<label for="sector">Sector</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="sector" name="sector" placeholder="inserisci il settore" required> 
+						<input type="text" id="sector" name="sector" placeholder="insert sector" required> 
 					</div>
 				</div>
 				<button type="submit" >Insert</button>

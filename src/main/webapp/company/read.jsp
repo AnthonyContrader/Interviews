@@ -17,22 +17,22 @@
 	<div class="main">
 	<% CompanyDTO u = (CompanyDTO) request.getAttribute("allCompanyDTO");%>
 	
-	
-	<table>
-		<tr> 
-			<th>Name</th>
-			<th>Address</th>
-			<th>City</th>
-			<th>Sector</th>
-		</tr>
-		<tr>
-			<td><%=u.getName()%></td>
-			<td> <%=u.getAddress()%></td>
-			<td> <%=u.getCity()%></td>
-			<td> <%=u.getSector()%></td>
-		</tr>	
-	</table>
-	
+	<div class="mainleft">
+		<table class="greenTable">
+			<tr> 
+				<th>Name</th>
+				<th>Address</th>
+				<th>City</th>
+				<th>Sector</th>
+			</tr>
+			<tr>
+				<td><%=u.getName()%></td>
+				<td> <%=u.getAddress()%></td>
+				<td> <%=u.getCity()%></td>
+				<td> <%=u.getSector()%></td>
+			</tr>	
+		</table>
+	</div>
 	<br>
 	<br>
 	<br>

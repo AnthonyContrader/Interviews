@@ -25,7 +25,7 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<h1>Cerca Azienda</h1>
+		<h1>Search Company</h1>
 	    <div class="mainleft">
 			<!-- COMPANYLIST -->
 	
@@ -62,31 +62,31 @@
 			<form action="/Company/search" method="post">
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="name">Nome</label>
+				    	<label for="name">Name</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="name" name="name" placeholder="inserisci nome">
+				    	<input type="text" id="name" name="name" placeholder="insert name">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="address">Indirizzo</label>
+				    	<label for="address">Address</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="address" name="address" placeholder="inserisci indirizzo">
+				    	<input type="text" id="address" name="address" placeholder="insert address">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="city">Città</label>
+				    	<label for="city">City</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="city" name="city" placeholder="inserisci città">
+				    	<input type="text" id="city" name="city" placeholder="inserit city">
 				    </div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="sector">Settore</label>
+				    	<label for="sector">Sector</label>
 				    </div>
 				    <div class="col-75">
 				    <select id="sector" name="sector"> 
@@ -96,7 +96,7 @@
 						</select>
 				    </div>
 				</div>
-				<button type="submit" >Cerca</button>
+				<button type="submit" >Search</button>
 			</form>
 		</div>
 	</div>

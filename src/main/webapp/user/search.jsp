@@ -24,7 +24,7 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<h1>Cerca Utente</h1>
+		<h1>Search User</h1>
 	    <div class="mainleft">
 	    
 	    
@@ -64,7 +64,7 @@
 				    	<label for="username">Username</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="username" name="username" placeholder="inserisci username">
+				    	<input type="text" id="username" name="username" placeholder="insert username">
 				    </div>
 				</div>
 				<div class="row">
@@ -73,7 +73,7 @@
 				    </div>
 				    <div class="col-75">
 				    	<select id="userType" name="userType">
-				    		<option value="%">TUTTI</option>
+				    		<option value="%">ALL</option>
 					    	<option value="ADMIN">ADMIN</option>
 					    	<option value="USER">USER</option>
 				    	</select>
@@ -84,7 +84,7 @@
 				    	<label for="email">Email</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="email" name="email" placeholder="inserisci email">
+				    	<input type="text" id="email" name="email" placeholder="insert email">
 				    </div>
 				</div>
 				

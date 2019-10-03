@@ -54,7 +54,7 @@
 	 		<!-- SEARCH BUTTON -->   
 		
 			<form action="/User/search" method="get">
-				<button type="submit" ><i class="searchicon"></i>Cerca</button>
+				<button type="submit" ><i class="searchicon"></i>Search</button>
 			</form>
 	
 	
@@ -66,7 +66,7 @@
 						<label for="user">Username</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="user" name="username" placeholder="inserisci username" required>
+						<input type="text" id="user" name="username" placeholder="insert username" required>
 					</div>
 				</div>
 				<div class="row">
@@ -74,7 +74,7 @@
 						<label for="pass">Password</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="pass" name="password" placeholder="inserisci password" required> 
+						<input type="text" id="pass" name="password" placeholder="insert password" required> 
 					</div>
 				</div>
 					<div class="row">
@@ -93,7 +93,7 @@
 						<label for="email">Email</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="email" name="email" placeholder="inserisci email" required> 
+						<input type="email" id="email" name="email" placeholder="insert email" required> 
 					</div>
 				</div>
 				<button type="submit" >Insert</button>

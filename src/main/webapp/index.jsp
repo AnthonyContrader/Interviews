@@ -19,11 +19,11 @@
 			
 				<input type="password" id="pass" name="password" placeholder="Insert password" required>
 						
-			<button type="submit" value="Login" name="pulsante">Login</button>
+			<button type="submit">Login</button>
 			
 			<a id="signup" href="/User/register" >Sign Up</a>
 						
-			<%if (request.getAttribute("error")!=null){%><a id="error" >Errore di Login!</a><%}%>
+			<%if (request.getAttribute("error")!=null){%><a id="error" >Login Error!</a><%}%>
 		</form>
 
 	

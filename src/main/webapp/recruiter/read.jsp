@@ -28,16 +28,18 @@
 	
 	<div class="main">
 		<%RecruiterDTO r = (RecruiterDTO) request.getAttribute("recruiterDTO");%>
-		<table>
-			<tr> 
-				<th>Name</th>
-				<th>Company</th>
-			</tr>
-			<tr>
-				<td><%=r.getName()%></td>
-				<td><%=r.getCompany().getName()%></td>
-			</tr>	
-		</table>
+		<div class="mainleft">
+			<table class="greenTable">
+				<tr> 
+					<th>Name</th>
+					<th>Company</th>
+				</tr>
+				<tr>
+					<td><%=r.getName()%></td>
+					<td><%=r.getCompany().getName()%></td>
+				</tr>	
+			</table>
+		</div>
 		<br>
 		<br>
 		<br>

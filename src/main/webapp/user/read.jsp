@@ -16,23 +16,22 @@
 
 <div class="main">
 <%UserDTO u = (UserDTO) request.getAttribute("userDTO");%>
-
-
-<table>
-	<tr> 
-		<th>Username</th>
-		<th>Password</th>
-		<th>UserType</th>
-		<th>Email</th>
-	</tr>
-	<tr>
-		<td><%=u.getUsername()%></td>
-		<td><%=u.getPassword()%></td>
-		<td><%=u.getUserType()%></td>
-		<td><%=u.getEmail()%></td>
-	</tr>	
-</table>
-
+	<div class="mainleft">
+		<table class="greenTable">
+			<tr> 
+				<th>Username</th>
+				<th>Password</th>
+				<th>UserType</th>
+				<th>Email</th>
+			</tr>
+			<tr>
+				<td><%=u.getUsername()%></td>
+				<td><%=u.getPassword()%></td>
+				<td><%=u.getUserType()%></td>
+				<td><%=u.getEmail()%></td>
+			</tr>	
+		</table>
+	</div>
 <br>
 <br>
 <br>
