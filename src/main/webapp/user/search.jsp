@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link href="css/vittoriostyle.css" rel="stylesheet">
+<link href="/css/vittoriostyle.css" rel="stylesheet">
 <title>Search page</title>
 </head>
 <body>
@@ -26,9 +26,11 @@
 	<div class="main">
 		<h1>Cerca Utente</h1>
 	    <div class="mainleft">
+	    
+	    
 			<!-- USERLIST -->
 	
-			<% List<UserDTO> allUserList = (List<UserDTO>) request.getAttribute("allUserDTO");%>
+			<% List<UserDTO> allUserList = (List<UserDTO>) request.getAttribute("userResultList");%>
 			<br>
 			<table class="greenTable">
 				<tr>
@@ -52,9 +54,11 @@
 			</table>
 		</div>
 		<div class="mainright">
+		
+		
 			<!-- SEARCH FORM -->
 		
-			<form id="floatright" action="/User/search?search=true" method="get">
+			<form id="floatright" action="/User/search" method="post">
 				<div class="row">
 				    <div class="col-25">
 				    	<label for="username">Username</label>
@@ -65,18 +69,14 @@
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="password">Password</label>
-				    </div>
-				    <div class="col-75">
-				    	<input type="text" id="password" name="password" placeholder="inserisci password">
-				    </div>
-				</div>
-				<div class="row">
-				    <div class="col-25">
 				    	<label for="userType">UserType</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="userType" name="userType" placeholder="inserisci usertype">
+				    	<select id="userType" name="userType">
+				    		<option value="%">TUTTI</option>
+					    	<option value="ADMIN">ADMIN</option>
+					    	<option value="USER">USER</option>
+				    	</select>
 				    </div>
 				</div>
 				<div class="row">

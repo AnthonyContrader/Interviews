@@ -82,7 +82,10 @@
 				    	<label for="userType">UserType</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="userType" name="userType" placeholder="inserisci usertype">
+				    	<select id="userType" name="userType">
+				    		<option value="ADMIN">ADMIN</option>
+				    		<option value="USER">USER</option> 	
+				    	</select>
 				    </div>
 				</div>
 				<div class="row">
