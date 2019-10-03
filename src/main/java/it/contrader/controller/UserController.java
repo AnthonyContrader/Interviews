@@ -76,9 +76,8 @@ public class UserController {
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update_get(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
-		
-				UserDTO userDTO = userService.getUserDTOById(id);
-				request.setAttribute("userDTO", userDTO);
+		UserDTO userDTO = userService.getUserDTOById(id);
+		request.setAttribute("userDTO", userDTO);
 		return "user/update";
 	}
 	
@@ -106,5 +105,22 @@ public class UserController {
 		userService.insertUser(userObj);
 		visualUser(request);
 		return "user/management";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register_get(HttpServletRequest request) {
+		return "user/register";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String register_post(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String userType = "USER";
+		String email = request.getParameter("email");
+		UserDTO userObj = new UserDTO(0, username, password, userType, email);
+		userService.insertUser(userObj);
+		visualUser(request);
+		return "index";
 	}
 }

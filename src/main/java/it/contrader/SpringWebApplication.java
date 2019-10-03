@@ -1,14 +1,16 @@
-
 package it.contrader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.boot.SpringApplication;
 
+import it.contrader.controller.InterceptorController;
 import it.contrader.services.UserService;
 
 @SpringBootApplication
-public class SpringWebApplication {
+public class SpringWebApplication implements WebMvcConfigurer{
 
 	static UserService userService;
 
@@ -19,5 +21,10 @@ public class SpringWebApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringWebApplication.class, args);
+	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+	    registry.addInterceptor(new InterceptorController());
 	}
 }

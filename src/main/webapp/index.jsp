@@ -21,9 +21,9 @@
 						
 			<button type="submit" value="Login" name="pulsante">Login</button>
 			
-			<a id="signup" href="RegisterServlet" >Sign Up</a>
+			<a id="signup" href="/User/register" >Sign Up</a>
 						
-			<%if (request.getAttribute("error")!=null){%><text id="error" >Errore di Login!</a><%}%>
+			<%if (request.getAttribute("error")!=null){%><a id="error" >Errore di Login!</a><%}%>
 		</form>
 
 	

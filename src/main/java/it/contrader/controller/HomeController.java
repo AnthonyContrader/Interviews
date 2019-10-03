@@ -31,6 +31,10 @@ public class HomeController {
 		final String username = request.getParameter("username");
 		final String password = request.getParameter("password");
 		final UserDTO userDTO = userService.getByUsernameAndPassword(username, password);
+		if(userDTO == null) {
+			request.setAttribute("error", true);
+			return "index";
+		}
 		final String userType = userDTO.getUserType();
 		if (!StringUtils.isEmpty(userType)) {
 			session.setAttribute("user", userDTO);
