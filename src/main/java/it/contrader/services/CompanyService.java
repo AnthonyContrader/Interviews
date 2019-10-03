@@ -1,5 +1,6 @@
 package it.contrader.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,17 @@ public class CompanyService {
 	public CompanyService(CompanyRepository companyRepository) {
 		this.companyRepository=companyRepository;
 	}
-		
+	
+	public List<String> getDistinctSector (){
+		List<String> sectorList = companyRepository.getDistinctSector();
+/*		List<String> sectorList = new ArrayList<> ();
+		for(Company company : companyList) {
+			sectorList.add(company.getSector());
+		}
+*/
+		return sectorList;
+	}
+	
 	public List<CompanyDTO>getListCompanyDTO(){
 		return CompanyConverter.toListDTO((List<Company>) companyRepository.findAll());
 	}
@@ -29,7 +40,7 @@ public class CompanyService {
 	}
 	
 	public List<CompanyDTO> getAllByAll (String name,String address,String city,String sector){
-		return CompanyConverter.toListDTO(companyRepository.findByNameAndAddressAndCityAndSector(name, address, city, sector));
+		return CompanyConverter.toListDTO(companyRepository.findAllByAll(name, address, city, sector));
 	}
 	
 	public boolean insertCompany(CompanyDTO companyDTO) {

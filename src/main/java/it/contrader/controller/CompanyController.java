@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import it.contrader.dto.CompanyDTO;
 import it.contrader.services.CompanyService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,6 +32,11 @@ public class CompanyController {
 		request.setAttribute("allCompanyDTO",allCompany);
 	}
 	
+	private void getDistinctSector (HttpServletRequest request) {
+		List<String> sector= companyService.getDistinctSector();
+		request.setAttribute("allDistinctSector", sector);
+	}
+	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualCompany(request);
@@ -40,7 +46,7 @@ public class CompanyController {
 	public String update_get(HttpServletRequest request) {
 		Integer id=Integer.parseInt(request.getParameter("id"));
 		CompanyDTO companyDTO= companyService.getCompanyDTOById(id);
-		request.setAttribute("companyDTO", companyDTO);
+		request.setAttribute("allCompanyDTO", companyDTO);
 		return "company/update";
 	}
 	
@@ -70,18 +76,27 @@ public class CompanyController {
 	public String read(HttpServletRequest request) {
 		Integer id= Integer.parseInt(request.getParameter("id"));
 		CompanyDTO companyDTO= companyService.getCompanyDTOById(id);
-		request.setAttribute("companyDTO",companyDTO);
+		request.setAttribute("allCompanyDTO",companyDTO);
 		return "company/read";		
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request) {
+	public String search_get(HttpServletRequest request) {
+		List<CompanyDTO> allCompany=new ArrayList<>();
+		request.setAttribute("allCompanyDTO", allCompany);
+		getDistinctSector (request);
+		return "company/search";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	public String search_post(HttpServletRequest request) {
 		final String name = request.getParameter("name");
 		final String address = request.getParameter("address");
 		final String city = request.getParameter("city");
 		final String sector = request.getParameter("sector");
-		List<CompanyDTO> allCompany = this.companyService.getAllByAll(name, address, city, sector);
+		List<CompanyDTO> allCompany = this.companyService.getAllByAll("%"+name+"%", "%"+address+"%", "%"+city+"%", sector);
 		request.setAttribute("allCompanyDTO", allCompany);
+		getDistinctSector (request);
 		return "company/search";
 	}
 	

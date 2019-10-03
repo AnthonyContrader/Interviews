@@ -15,7 +15,7 @@
 	<br>
 	
 	<div class="main">
-	<% CompanyDTO u = (CompanyDTO) request.getAttribute("companyDTO");%>
+	<% CompanyDTO u = (CompanyDTO) request.getAttribute("allCompanyDTO");%>
 	
 	
 	<table>

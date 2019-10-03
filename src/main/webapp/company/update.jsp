@@ -15,7 +15,7 @@
 <br>
 <div class="main">
 
-<% CompanyDTO c = (CompanyDTO) request.getAttribute("companyDTO");%>
+<% CompanyDTO c = (CompanyDTO) request.getAttribute("allCompanyDTO");%>
 
 
 <form id="floatleft" action="/Company/update?update=true&id=<%=c.getId()%>" method="post">

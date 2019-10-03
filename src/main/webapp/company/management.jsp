@@ -92,7 +92,7 @@
 						<label for="sector">Sector</label>
 					</div>
 					<div class="col-75">
-				<input type="text" id="sector" name="sector" placeholder="inserisci il settore" required> 
+						<input type="text" id="sector" name="sector" placeholder="inserisci il settore" required> 
 					</div>
 				</div>
 				<button type="submit" >Insert</button>
