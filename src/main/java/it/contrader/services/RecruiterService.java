@@ -24,7 +24,7 @@ public class RecruiterService {
 		return RecruiterConverter.toListDTO((List<Recruiter>) recruiterRepository.findAll());
 	}
 	
-	public List<RecruiterDTO> getListRecruiterOrderByName() {
+	public List<RecruiterDTO> getListAllRecruiterOrderByNameAsc() {
 		return RecruiterConverter.toListDTO((List<Recruiter>) recruiterRepository.findByAllOrderByNameAsc("%", "%"));
 	}
 	
