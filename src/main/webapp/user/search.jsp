@@ -89,7 +89,7 @@
 				</div>
 				
 				
-				<button type="submit" >Cerca</button>
+				<button type="submit" >Search</button>
 			</form>
 		</div>
 	</div>
