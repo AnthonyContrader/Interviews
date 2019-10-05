@@ -15,7 +15,7 @@ public class QuestionDTO {
 
 	private String question;
 	
-	private String argument;
+	private String topic;
 
 	private String sector;
 	

@@ -14,7 +14,7 @@ public class QuestionConverter {
 			questionDTO = new QuestionDTO();
 			questionDTO.setId(question.getId());
 			questionDTO.setQuestion(question.getQuestion());
-			questionDTO.setArgument(question.getArgument());
+			questionDTO.setTopic(question.getTopic());
 			questionDTO.setSector(question.getSector());
 			questionDTO.setRecruiter(question.getRecruiter());
 			questionDTO.setCompany(question.getCompany());
@@ -28,7 +28,7 @@ public class QuestionConverter {
 			question = new Question();
 			question.setId(questionDTO.getId());
 			question.setQuestion(questionDTO.getQuestion());
-			question.setArgument(questionDTO.getArgument());
+			question.setTopic(questionDTO.getTopic());
 			question.setSector(questionDTO.getSector());
 			question.setRecruiter(questionDTO.getRecruiter());
 			question.setCompany(questionDTO.getCompany());

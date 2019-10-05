@@ -42,13 +42,13 @@ public class QuestionService {
 		questionRepository.deleteById(id);
 	}
 	
-	public List<QuestionDTO> findQuestionByAll(String question, String argument, String sector, String recruiterId, String companyId) {
-		final List<Question> list = questionRepository.findQuestionByAll(question, argument, sector, recruiterId, companyId);
+	public List<QuestionDTO> findQuestionByAll(String question, String topic, String sector, String recruiterId, String companyId) {
+		final List<Question> list = questionRepository.findQuestionByAll(question, topic, sector, recruiterId, companyId);
 //		list.forEach(i -> questionDTOs.add(QuestionConverter.toDTO(i))); espressione gamba
 		return QuestionConverter.toListDTO(list);
 	}
 	
-    public List<QuestionDTO> getAllByArgument(String argument) {
-		return QuestionConverter.toListDTO(questionRepository.findQuestionByArgument(argument));
+    public List<QuestionDTO> getAllByTopic(String topic) {
+		return QuestionConverter.toListDTO(questionRepository.findQuestionByTopic(topic));
 	}
 }

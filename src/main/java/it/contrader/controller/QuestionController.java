@@ -3,6 +3,7 @@ package it.contrader.controller;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -69,18 +70,30 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update_post(HttpServletRequest request) {
-		QuestionDTO question = this.questionService.getQuestionDTOById(Integer.parseInt(request.getParameter("id")));
+/*		QuestionDTO questionDTO = this.questionService.getQuestionDTOById(Integer.parseInt(request.getParameter("id")));
 		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiter")));
 		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);
 		Company company = recruiter.getCompany();
 		String sector = company.getSector();
-		question.setQuestion(request.getParameter("question"));
-		question.setArgument(request.getParameter("argument"));
-		question.setSector(sector);
-		question.setRecruiter(recruiter);
-		question.setCompany(company);
+		questionDTO.setQuestion(StringUtils.capitalize(request.getParameter("question")).toLowerCase());
+		questionDTO.setTopic(StringUtils.capitalize(request.getParameter("topic")).toLowerCase());
+		questionDTO.setSector(sector);
+		questionDTO.setRecruiter(recruiter);
+		questionDTO.setCompany(company);
+*/		
+		Integer id = Integer.parseInt(request.getParameter("id"));
+		String question = StringUtils.capitalize(request.getParameter("question"));
+		String topic = StringUtils.capitalize(request.getParameter("topic").toLowerCase());
+		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiter")));
+		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);
+		Company company = recruiter.getCompany();
+		String sector = company.getSector();
 		
-		this.questionService.updateQuestion(question);
+		
+		QuestionDTO questionDTO = new QuestionDTO(id, question, topic, sector, recruiter, company);		
+
+		
+		this.questionService.updateQuestion(questionDTO);
 		visualQuestion(request);
 		getRecruiters(request);
 		return "question/management";
@@ -99,11 +112,11 @@ public class QuestionController {
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search_post(HttpServletRequest request) {
 		String question = request.getParameter("text");
-		String argument = request.getParameter("argument");
+		String topic = request.getParameter("topic");
 		String sector = request.getParameter("sector");
 		String recruiterId = request.getParameter("recruiterId");
 		String companyId = request.getParameter("companyId");
-		List<QuestionDTO> questions = this.questionService.findQuestionByAll("%"+question+"%", "%"+argument+"%", sector, recruiterId, companyId);
+		List<QuestionDTO> questions = this.questionService.findQuestionByAll("%"+question+"%", "%"+topic+"%", sector, recruiterId, companyId);
 		request.setAttribute("questionResultList", questions);
 		getRecruiters(request);
 		getCompanies(request);
@@ -129,15 +142,15 @@ public class QuestionController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		String question = request.getParameter("question");
-		String argument = request.getParameter("argument");		
+		String question = StringUtils.capitalize(request.getParameter("question"));
+		String topic = StringUtils.capitalize(request.getParameter("topic").toLowerCase());
 		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(Integer.parseInt(request.getParameter("recruiter")));
 		Recruiter recruiter = RecruiterConverter.toEntity(recruiterDTO);			
 		Company company = recruiter.getCompany();
 		String sector = company.getSector();
 		
-		QuestionDTO questionObj = new QuestionDTO(0, question, argument, sector, recruiter, company);		
-		questionService.insertQuestion(questionObj);
+		QuestionDTO questionDTO = new QuestionDTO(0, question, topic, sector, recruiter, company);		
+		questionService.insertQuestion(questionDTO);
 		visualQuestion(request);
 		getRecruiters(request);
 		return "question/management";

@@ -42,7 +42,7 @@
 				</tr>
 				<tr>
 					<td><%=q.getQuestion()%></td>
-					<td> <%=q.getArgument()%></td>
+					<td> <%=q.getTopic()%></td>
 					<td> <%=q.getSector()%></td>
 					<td> <%=q.getRecruiter().getName()%></td>
 					<td> <%=q.getCompany().getName()%></td>

@@ -52,13 +52,11 @@
 				</tr>
 				<% for (QuestionDTO q : listQuestion) {%>
 					<tr>
-						<td><a href=/Question/read?id=<%=q.getId()%>>
-								<%=q.getQuestion()%>
-						</a></td>
-						<td><%=q.getArgument()%></td>
+						<td><a href=/Question/read?id=<%=q.getId()%>><%=q.getQuestion()%></a></td>
+						<td><%=q.getTopic()%></td>
 						<td><%=q.getSector()%></td>
-						<td><%=q.getRecruiter().getName()%></td>
-						<td><%=q.getCompany().getName()%></td>
+						<td><a href=/Recruiter/read?id=<%=q.getRecruiter().getId()%>><%=q.getRecruiter().getName()%></a></td>
+						<td><a href=/Company/read?id=<%=q.getCompany().getId()%>><%=q.getCompany().getName()%></a></td>
 						<%if (user.getUserType().equals("ADMIN")){%>
 							<td><a class="edit" href="/Question/update?id=<%=q.getId()%>">Edit</a>
 							</td>
@@ -96,10 +94,10 @@
 				</div>
 				<div class="row">
 				    <div class="col-25">
-				    	<label for="argument">Topic</label>
+				    	<label for="topic">Topic</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="argument" name="argument" placeholder="insert a topic" required>
+				    	<input type="text" id="topic" name="topic" placeholder="insert a topic" required>
 				    </div> 
 				</div>
 				<div class="row">

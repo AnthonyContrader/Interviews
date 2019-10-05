@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="java.util.List"
+	pageEncoding="ISO-8859-1"
+	import="java.util.List"
 	import="it.contrader.dto.CompanyDTO"
 %>
 <!DOCTYPE html>
@@ -8,6 +9,24 @@
 	<meta charset="ISO-8859-1">
 	<link href="/css/vittoriostyle.css" rel="stylesheet">
 	<title>Company Management</title>
+	
+	
+	<!-- SCRIPT -->
+	
+	<script type="text/javascript">
+		function CheckSectors(val){
+			var label=document.getElementById('sectorLabel');
+			var inputText=document.getElementById('otherSector');
+			if(val=='#') {
+				label.style.display='block';
+				inputText.style.display='block';
+				inputText.required = true;
+			} else {
+				label.style.display='none';
+				inputText.style.display='none';
+			}
+		}
+	</script> 
 </head>
 <body>
 	<!-- HEADER -->
@@ -20,6 +39,7 @@
 	<%@ include file="../css/adminmenu.jsp"%>
 	<script>document.getElementById("companylink").classList.add("active");</script>
 
+
 	<!-- BODY -->
 	
 	<div class="main">
@@ -29,7 +49,9 @@
 	    
 	    	<!-- COMPANYLIST -->
 	            
-			<%List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");%>
+			<%List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
+			  List<String> allDistinctSectorList = (List<String>) request.getAttribute("allDistinctSector");
+			%>
 			<br>
 			<table class="greenTable">
 				<tr>
@@ -53,6 +75,8 @@
 			</table>
 	    </div>
 		<div class="mainright">
+		
+		
 			<!-- SEARCH BUTTON -->
 			
 			<form action="/Company/search" method="get">
@@ -92,7 +116,18 @@
 						<label for="sector">Sector</label>
 					</div>
 					<div class="col-75">
-						<input type="text" id="sector" name="sector" placeholder="insert sector" required> 
+						<select name="sector" onchange='CheckSectors(this.value);'> 
+							<%for (String sector : allDistinctSectorList) {%>
+								<option value=<%=sector%>><%=sector%></option>
+							<%}%>
+							<option value="#">Others...</option>
+						</select>
+					</div>
+					<div class="col-25">
+						<label for="otherSector" id="sectorLabel" style='display:none;'>Sector</label>
+					</div>
+					<div class="col-75">
+						<input type="text" id="otherSector" name="otherSector" placeholder="insert sector" style='display:none;'/>
 					</div>
 				</div>
 				<button type="submit" >Insert</button>
@@ -100,7 +135,7 @@
 		</div>
 	</div>
 	<br>
-
+	
 		
 	<!-- FOOTER -->	
 	

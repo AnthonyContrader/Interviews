@@ -1,8 +1,6 @@
 package it.contrader.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -20,9 +18,7 @@ import java.util.List;
 
 public class CompanyController {
 	private final CompanyService companyService;
-	private HttpSession session;
-	
-    @Autowired
+	@Autowired
     public CompanyController(CompanyService companyService) {
     	this.companyService=companyService;
     }
@@ -40,6 +36,7 @@ public class CompanyController {
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		visualCompany(request);
+		getDistinctSector (request);
 		return "company/management";		
 	}
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -47,19 +44,23 @@ public class CompanyController {
 		Integer id=Integer.parseInt(request.getParameter("id"));
 		CompanyDTO companyDTO= companyService.getCompanyDTOById(id);
 		request.setAttribute("allCompanyDTO", companyDTO);
+		getDistinctSector (request);
 		return "company/update";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update_post(HttpServletRequest request) {
 		Integer id=Integer.parseInt(request.getParameter("id"));
-		String name=request.getParameter("name");
-		String address=request.getParameter("address");
-		String city=request.getParameter("city");
-		String sector=request.getParameter("sector");
+		String name = StringUtils.capitalize(request.getParameter("name").toLowerCase());
+		String address = StringUtils.capitalize(request.getParameter("address").toLowerCase());
+		String city = StringUtils.capitalize(request.getParameter("city").toLowerCase());
+		String sector = request.getParameter("sector");
+		if (sector.equals("#"))
+			sector = StringUtils.capitalize(request.getParameter("otherSector").toLowerCase());
 		CompanyDTO companyDTO= new CompanyDTO (id,name,address,city,sector);
 		companyService.updateCompany(companyDTO);
 		visualCompany(request);
+		getDistinctSector (request);
 		return "company/management";	
 	}
 	
@@ -69,6 +70,7 @@ public class CompanyController {
 //		request.setAttribute("id", id);
 		this.companyService.deleteCompanyById(id);
 		visualCompany(request);
+		getDistinctSector (request);
 		return "company/management";
 	}
 	
@@ -90,10 +92,10 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String search_post(HttpServletRequest request) {
-		final String name = request.getParameter("name");
-		final String address = request.getParameter("address");
-		final String city = request.getParameter("city");
-		final String sector = request.getParameter("sector");
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String city = request.getParameter("city");
+		String sector = request.getParameter("sector");
 		List<CompanyDTO> allCompany = this.companyService.findCompanyByAllOrderByNameAsc("%"+name+"%", "%"+address+"%", "%"+city+"%", sector);
 		request.setAttribute("allCompanyDTO", allCompany);
 		getDistinctSector (request);
@@ -102,13 +104,16 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		final String name = request.getParameter("name");
-		final String address = request.getParameter("address");
-		final String city = request.getParameter("city");
-		final String sector = request.getParameter("sector");
+		String name = StringUtils.capitalize(request.getParameter("name").toLowerCase());
+		String address = StringUtils.capitalize(request.getParameter("address").toLowerCase());
+		String city = StringUtils.capitalize(request.getParameter("city").toLowerCase());
+		String sector = request.getParameter("sector");
+		if (sector.equals("#"))
+			sector = StringUtils.capitalize(request.getParameter("otherSector").toLowerCase());
 		CompanyDTO companyObj = new CompanyDTO(0, name, address, city,sector);
 		companyService.insertCompany(companyObj);
 		visualCompany(request);
+		getDistinctSector (request);
 		return "company/management";
 	}
 	

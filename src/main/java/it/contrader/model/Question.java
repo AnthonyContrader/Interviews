@@ -30,9 +30,9 @@ public class Question {
 	@NotNull
 	private String question;
 
-	@Column(name = "argument")
+	@Column(name = "topic")
 	@NotNull
-	private String argument;
+	private String topic;
 
 	@NotNull
 	@Column(name = "sector")

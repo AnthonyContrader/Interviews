@@ -50,10 +50,10 @@
 			</div>
 			<div class="row">
 			    <div class="col-25">
-			    	<label for="argument">Topic</label>
+			    	<label for="topic">Topic</label>
 			    </div>
 			    <div class="col-75">
-			    	<input type="text" id="argument" name="argument" value="<%=q.getArgument()%>" required>
+			    	<input type="text" id="topic" name="topic" value="<%=q.getTopic()%>" required>
 			    </div> 
 			</div>
 			<div class="row">

@@ -48,7 +48,7 @@
 			<%for (RecruiterDTO r : recruiterList) {%>
 				<tr>
 					<td><a href=/Recruiter/read?id=<%=r.getId()%>><%=r.getName()%></a></td>
-					<td><%=r.getCompany().getName()%></td>
+					<td><a href=/Company/read?id=<%=r.getCompany().getId()%>><%=r.getCompany().getName()%></a></td>
 					<td><a class="edit" href=/Recruiter/update?update=false&id=<%=r.getId()%>>Edit</a></td>
 					<td><a class="delete" href=/Recruiter/delete?id=<%=r.getId()%>>Delete</a></td>
 				</tr>
