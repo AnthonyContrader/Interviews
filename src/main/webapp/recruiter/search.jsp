@@ -60,7 +60,7 @@
 		
 			<!-- SEARCH FORM -->
 		
-			<form id="floatright" action="/Recruiter/search?search=true" method="post">
+			<form id="floatright" action="/Recruiter/search?" method="post">
 				<div class="row">
 				    <div class="col-25">
 				    	<label for="name">Name</label>

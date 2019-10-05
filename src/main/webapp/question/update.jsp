@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"
     import="it.contrader.dto.QuestionDTO" 
     import="it.contrader.dto.RecruiterDTO"
+    import="it.contrader.dto.RecruiterNameAndIdDTO"
     import="it.contrader.dto.UserDTO"
     import="java.util.List"
 %>
@@ -18,7 +19,7 @@
 	
 	<%@ include file="/css/header.jsp" %>
 	
-	<% List<RecruiterDTO> listRecruiter = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");	%>
+	<% List<RecruiterNameAndIdDTO> listRecruiter = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");	%>
 	
 	<!-- NAVBAR -->
 	
@@ -61,7 +62,7 @@
 			    </div>
 			    <div class="col-75">
 					<select id="recruiter" name="recruiter">
-			    		<%for (RecruiterDTO r : listRecruiter) {
+			    		<%for (RecruiterNameAndIdDTO r : listRecruiter) {
 			    		    if(r.getId()==q.getRecruiter().getId()){%>
 			    				<option value=<%=r.getId()%> selected><%=r.getName()%></option>	
 			    			<%}else{%>

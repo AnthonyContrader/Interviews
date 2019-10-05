@@ -1,6 +1,5 @@
 package it.contrader.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import it.contrader.converter.RecruiterConverter;
 import it.contrader.dao.RecruiterRepository;
 import it.contrader.dto.RecruiterDTO;
+import it.contrader.dto.RecruiterNameAndIdDTO;
 import it.contrader.model.Recruiter;
 
 @Service
@@ -34,6 +34,10 @@ public class RecruiterService {
 	
 	public List<RecruiterDTO> getAllRecruiterOrderByNameAsc() {
 		return findRecruiterByAllOrderByNameAsc("%", "%");
+	}
+	
+	public List<RecruiterNameAndIdDTO> getAllRecruiterNameAndIdOrderByNameAsc() {
+		return RecruiterConverter.toNameAndIdListDTO(recruiterRepository.findRecruiterByAllOrderByNameAsc("%", "%"));
 	}
 	
 	public boolean insertRecruiter (RecruiterDTO recruiterDTO) {

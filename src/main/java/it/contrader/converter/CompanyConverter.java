@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.CompanyNameAndIdDTO;
 import it.contrader.model.Company;
 
 
@@ -54,6 +55,18 @@ public class CompanyConverter {
 			}
 		}
 		return list;
+	}
+	
+	public static List<CompanyNameAndIdDTO> toNameAndIdListDTO (List<Company> listCompany) {
+		List<CompanyNameAndIdDTO> listCompanyDTO = new ArrayList<>();
+		if (!listCompany.isEmpty()) {
+			CompanyNameAndIdDTO companyDTO;
+			for (Company company : listCompany) {
+				companyDTO = new CompanyNameAndIdDTO(company.getId(), company.getName());
+				listCompanyDTO.add(companyDTO);
+			}
 		}
+		return listCompanyDTO;
+	}
 }
 	

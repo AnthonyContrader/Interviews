@@ -1,6 +1,5 @@
 package it.contrader.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import it.contrader.converter.CompanyConverter;
 import it.contrader.dao.CompanyRepository;
 import it.contrader.dto.CompanyDTO;
-import it.contrader.dto.RecruiterDTO;
+import it.contrader.dto.CompanyNameAndIdDTO;
 import it.contrader.model.Company;
 
 @Service
@@ -46,6 +45,10 @@ public class CompanyService {
 	
 	public List<CompanyDTO> getAllCompanyOrderByNameAsc() {
 		return findCompanyByAllOrderByNameAsc("%", "%", "%", "%");
+	}
+	
+	public List<CompanyNameAndIdDTO> getAllCompanyNameAndIdOrderByNameAsc() {
+		return CompanyConverter.toNameAndIdListDTO(companyRepository.findCompanyByAllOrderByNameAsc("%", "%", "%", "%"));
 	}
 	
 	public boolean insertCompany(CompanyDTO companyDTO) {

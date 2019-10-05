@@ -1,18 +1,16 @@
 package it.contrader.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import it.contrader.converter.CompanyConverter;
 import it.contrader.converter.RecruiterConverter;
-import it.contrader.dto.CompanyDTO;
+import it.contrader.dto.CompanyNameAndIdDTO;
 import it.contrader.dto.QuestionDTO;
 import it.contrader.dto.RecruiterDTO;
+import it.contrader.dto.RecruiterNameAndIdDTO;
 import it.contrader.model.Company;
 import it.contrader.model.Recruiter;
 import it.contrader.services.CompanyService;
@@ -26,11 +24,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/Question")
 public class QuestionController {
-
 	private final QuestionService questionService;
 	private final CompanyService companyService;
 	private final RecruiterService recruiterService;
-	private HttpSession session;
 	
 	@Autowired
 	public QuestionController(QuestionService questionService, CompanyService companyService, RecruiterService recruiterService) {
@@ -45,12 +41,12 @@ public class QuestionController {
 	}
 	
 	private void getRecruiters(HttpServletRequest request){
-		List<RecruiterDTO> allRecruiter = this.recruiterService.getAllRecruiterOrderByNameAsc();
+		List<RecruiterNameAndIdDTO> allRecruiter = this.recruiterService.getAllRecruiterNameAndIdOrderByNameAsc();
 		request.setAttribute("allRecruiterDTO", allRecruiter);
 	}
 	
 	private void getCompanies(HttpServletRequest request) {
-		List<CompanyDTO> allCompany = companyService.getAllCompanyOrderByNameAsc();
+		List<CompanyNameAndIdDTO> allCompany = companyService.getAllCompanyNameAndIdOrderByNameAsc();
 		request.setAttribute("allCompanyDTO", allCompany);
 	}
 	
@@ -130,22 +126,6 @@ public class QuestionController {
 		getRecruiters(request);
 		return "question/management";		
 	}
-		
-	/*@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request) {
-
-		final String question = request.getParameter("word");
-		final String argument = request.getParameter("argument");
-		final String sector = request.getParameter("sector");
-		final Integer recruiterId = Integer.parseInt(request.getParameter("recruiterId"));
-		final Integer companyId = Integer.parseInt(request.getParameter("companyId"));
-
-		List<QuestionDTO> allQuestion = this.questionService.getAllByAll(question, argument, sector, recruiterId, companyId);
-		request.setAttribute("allQuestionDTO", allQuestion);
-
-		return "question/search";
-
-	}*/
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {

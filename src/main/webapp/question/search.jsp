@@ -3,8 +3,10 @@
     import="java.util.List"
     import="it.contrader.dto.QuestionDTO"
     import="it.contrader.dto.CompanyDTO"
+    import="it.contrader.dto.CompanyNameAndIdDTO"
 	import="it.contrader.dto.UserDTO"
 	import="it.contrader.dto.RecruiterDTO"
+	import="it.contrader.dto.RecruiterNameAndIdDTO"
 %>
 <!DOCTYPE html>
 <html>
@@ -37,8 +39,8 @@
 			<!-- QUESTIONLIST -->
 	
 			<%List<QuestionDTO> questionResultList = (List<QuestionDTO>) request.getAttribute("questionResultList");
-			  List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
-			  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
+			  List<RecruiterNameAndIdDTO> recruiterList = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");
+			  List<CompanyNameAndIdDTO> companyList = (List<CompanyNameAndIdDTO>) request.getAttribute("allCompanyDTO");
 			  List<String> sectorDistinctList = (List<String>) request.getAttribute("sectorDistinctList");
 			  /* List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
 			   List<UserRecruiterDTO> recruiterAllList = (List<UserRecruiterDTO>) request.getAttribute("recruiterAllList");		   
@@ -120,7 +122,7 @@
 				    <div class="col-75">
 				    	<select id="recruiter" name="recruiterId">
 				    		<option value="%">ALL</option>
-				    		<%for (RecruiterDTO recruiter : recruiterList) {%>
+				    		<%for (RecruiterNameAndIdDTO recruiter : recruiterList) {%>
 				    			<option value="<%=recruiter.getId()%>"><%=recruiter.getName()%></option>	
 				    		<%}%>
 				    	</select>
@@ -133,7 +135,7 @@
 				    <div class="col-75">
 				    	<select id="company" name="companyId">
 				    		<option value="%">All</option>
-				    		<%for (CompanyDTO company : companyList) {%>
+				    		<%for (CompanyNameAndIdDTO company : companyList) {%>
 				    			<option value="<%=company.getId()%>"><%=company.getName()%></option>	
 				    		<%}%>
 				    	</select>

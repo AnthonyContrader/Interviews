@@ -46,7 +46,7 @@
 						<td><%=u.getAddress()%></td>
 						<td><%=u.getCity()%></td>
 						<td><%=u.getSector()%></td>
-						<td><a class="edit" href=/Company/update?update=false&id=<%=u.getId()%>>Edit</a></td>
+						<td><a class="edit" href=/Company/update?id=<%=u.getId()%>>Edit</a></td>
 						<td><a class="delete" href=/Company/delete?id=<%=u.getId()%>>Delete</a></td>
 					</tr>
 				<%}%>

@@ -4,6 +4,7 @@
 	import="it.contrader.dto.QuestionDTO"
 	import="it.contrader.dto.UserDTO"
 	import="it.contrader.dto.RecruiterDTO"
+	import="it.contrader.dto.RecruiterNameAndIdDTO"
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
 	
 	<%
 		List<QuestionDTO> listQuestion = (List<QuestionDTO>) request.getAttribute("allQuestionDTO");
-		List<RecruiterDTO> listRecruiter = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
+		List<RecruiterNameAndIdDTO> listRecruiter = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");
 	%>
 	<!-- NAVBAR -->
 
@@ -107,7 +108,7 @@
 				    </div>
 				    <div class="col-75">
 						<select id="recruiter" name="recruiter">
-				    		<%for (RecruiterDTO r : listRecruiter) {%>
+				    		<%for (RecruiterNameAndIdDTO r : listRecruiter) {%>
 				    			<option value=<%=r.getId()%>><%=r.getName()%></option>	
 				    		<%}%>
 						</select>

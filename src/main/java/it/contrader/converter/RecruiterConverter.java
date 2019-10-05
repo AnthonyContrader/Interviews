@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.contrader.dto.RecruiterDTO;
+import it.contrader.dto.RecruiterNameAndIdDTO;
 import it.contrader.model.Recruiter;
 
 public class RecruiterConverter {
@@ -45,5 +46,17 @@ public class RecruiterConverter {
 			}
 		}
 		return listRecruiter;
+	}
+	
+	public static List<RecruiterNameAndIdDTO> toNameAndIdListDTO (List<Recruiter> listRecruiter) {
+		List<RecruiterNameAndIdDTO> listRecruiterDTO = new ArrayList<>();
+		if (!listRecruiter.isEmpty()) {
+			RecruiterNameAndIdDTO recruiterDTO;
+			for (Recruiter recruiter : listRecruiter) {
+				recruiterDTO = new RecruiterNameAndIdDTO(recruiter.getId(), recruiter.getName());
+				listRecruiterDTO.add(recruiterDTO);
+			}
+		}
+		return listRecruiterDTO;
 	}
 }
