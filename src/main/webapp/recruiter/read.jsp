@@ -27,7 +27,7 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<%RecruiterDTO r = (RecruiterDTO) request.getAttribute("recruiterDTO");%>
+		<%RecruiterDTO recruiter = (RecruiterDTO) request.getAttribute("recruiter");%>
 		<div class="mainleft">
 			<table class="greenTable">
 				<tr> 
@@ -35,8 +35,8 @@
 					<th>Company</th>
 				</tr>
 				<tr>
-					<td><%=r.getName()%></td>
-					<td><%=r.getCompany().getName()%></td>
+					<td><%=recruiter.getName()%></td>
+					<td><%=recruiter.getCompany().getName()%></td>
 				</tr>	
 			</table>
 		</div>

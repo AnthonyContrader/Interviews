@@ -23,11 +23,6 @@ public class CompanyService {
 	
 	public List<String> getDistinctSectorOrderAsc (){
 		List<String> sectorList = companyRepository.getDistinctSectorOrderAsc();
-/*		List<String> sectorList = new ArrayList<> ();
-		for(Company company : companyList) {
-			sectorList.add(company.getSector());
-		}
-*/
 		return sectorList;
 	}
 	

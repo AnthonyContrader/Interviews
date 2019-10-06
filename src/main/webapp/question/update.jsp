@@ -13,13 +13,34 @@
 <head>
 	<link href="/css/vittoriostyle.css" rel="stylesheet">
 	<title>Edit Question</title>
+	
+	
+	<!-- SCRIPT -->
+	
+	<script type="text/javascript">
+		function CheckTopics(val){
+			var label=document.getElementById('topicLabel');
+			var inputText=document.getElementById('otherTopic');
+			if(val=='#') {
+				label.style.display='block';
+				inputText.style.display='block';
+				inputText.required = true;
+			} else {
+				label.style.display='none';
+				inputText.style.display='none';
+			}
+		}
+	</script>
 </head>
 <body>
 	<!-- HEADER -->
 	
 	<%@ include file="/css/header.jsp" %>
 	
-	<% List<RecruiterNameAndIdDTO> listRecruiter = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");	%>
+	<%List<RecruiterNameAndIdDTO> allRecruiterList = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterList");
+	  List<String> topicDistinctList = (List<String>) request.getAttribute("topicDistinctList");
+	%>
+	
 	
 	<!-- NAVBAR -->
 	
@@ -38,35 +59,46 @@
 	
 		<!-- UPDATE FORM -->
 		
-		<% QuestionDTO q = (QuestionDTO) request.getAttribute("questionDTO");%>
-		<form id="floatleft" action="/Question/update?id=<%=q.getId()%>" method="post">
+		<% QuestionDTO question = (QuestionDTO) request.getAttribute("question");%>
+		<form id="floatleft" action="/Question/update?id=<%=question.getId()%>" method="post">
 			<div class="row">
 			    <div class="col-25">
 			    	<label for="question">Question</label>
 			    </div>
 			    <div class="col-75">
-			    	<input type="text" id="question" name="question" value="<%=q.getQuestion()%>" required>
+			    	<input type="text" id="question" name="question" value="<%=question.getQuestion()%>" required>
 			    </div>    
 			</div>
 			<div class="row">
-			    <div class="col-25">
-			    	<label for="topic">Topic</label>
-			    </div>
-			    <div class="col-75">
-			    	<input type="text" id="topic" name="topic" value="<%=q.getTopic()%>" required>
-			    </div> 
-			</div>
+					<div class="col-25">
+						<label for="topic">Topic</label>
+					</div>
+					<div class="col-75">
+						<select name="topic" onchange='CheckTopics(this.value);'> 
+							<%for (String topic : topicDistinctList) {%>
+								<option value=<%=topic%>><%=topic%></option>
+							<%}%>
+							<option value="#">Others...</option>
+						</select>
+					</div>
+					<div class="col-25">
+						<label for="otherTopic" id="topicLabel" style='display:none;'>Topic</label>
+					</div>
+					<div class="col-75">
+						<input type="text" id="otherTopic" name="otherTopic" placeholder="insert topic" style='display:none;'/>
+					</div>
+				</div>
 			<div class="row">
 			    <div class="col-25">
 			    	<label for="recruiter">Recruiter</label>
 			    </div>
 			    <div class="col-75">
 					<select id="recruiter" name="recruiter">
-			    		<%for (RecruiterNameAndIdDTO r : listRecruiter) {
-			    		    if(r.getId()==q.getRecruiter().getId()){%>
-			    				<option value=<%=r.getId()%> selected><%=r.getName()%></option>	
+			    		<%for (RecruiterNameAndIdDTO recruiter : allRecruiterList) {
+			    		    if(recruiter.getId()==question.getRecruiter().getId()){%>
+			    				<option value=<%=recruiter.getId()%> selected><%=recruiter.getName()%></option>	
 			    			<%}else{%>
-			    				<option value=<%=r.getId()%>><%=r.getName()%></option>
+			    				<option value=<%=recruiter.getId()%>><%=recruiter.getName()%></option>
 			    			<%}
 			    		}%>
 					</select>

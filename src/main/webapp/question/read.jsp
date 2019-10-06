@@ -30,7 +30,7 @@
 	<!-- BODY -->
 
 	<div class="main">
-		<% QuestionDTO q = (QuestionDTO) request.getAttribute("questionDTO");%>
+		<% QuestionDTO question = (QuestionDTO) request.getAttribute("question");%>
 		<div class="mainleft">
 			<table class="greenTable">
 				<tr> 
@@ -41,11 +41,11 @@
 					<th>Company</th>
 				</tr>
 				<tr>
-					<td><%=q.getQuestion()%></td>
-					<td> <%=q.getTopic()%></td>
-					<td> <%=q.getSector()%></td>
-					<td> <%=q.getRecruiter().getName()%></td>
-					<td> <%=q.getCompany().getName()%></td>
+					<td><%=question.getQuestion()%></td>
+					<td> <%=question.getTopic()%></td>
+					<td> <%=question.getSector()%></td>
+					<td> <%=question.getRecruiter().getName()%></td>
+					<td> <%=question.getCompany().getName()%></td>
 				</tr>	
 			</table>
 		</div>

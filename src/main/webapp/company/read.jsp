@@ -15,7 +15,7 @@
 	<br>
 	
 	<div class="main">
-	<% CompanyDTO u = (CompanyDTO) request.getAttribute("allCompanyDTO");%>
+	<% CompanyDTO company = (CompanyDTO) request.getAttribute("company");%>
 	
 	<div class="mainleft">
 		<table class="greenTable">
@@ -26,10 +26,10 @@
 				<th>Sector</th>
 			</tr>
 			<tr>
-				<td><%=u.getName()%></td>
-				<td> <%=u.getAddress()%></td>
-				<td> <%=u.getCity()%></td>
-				<td> <%=u.getSector()%></td>
+				<td><%=company.getName()%></td>
+				<td> <%=company.getAddress()%></td>
+				<td> <%=company.getCity()%></td>
+				<td> <%=company.getSector()%></td>
 			</tr>	
 		</table>
 	</div>

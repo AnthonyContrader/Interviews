@@ -36,15 +36,15 @@
 	<div class="main">
 		<h1>Search Question</h1>
 		<div class="mainleft">
+		
+		
 			<!-- QUESTIONLIST -->
 	
 			<%List<QuestionDTO> questionResultList = (List<QuestionDTO>) request.getAttribute("questionResultList");
-			  List<RecruiterNameAndIdDTO> recruiterList = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");
-			  List<CompanyNameAndIdDTO> companyList = (List<CompanyNameAndIdDTO>) request.getAttribute("allCompanyDTO");
+			  List<RecruiterNameAndIdDTO> allRecruiterList = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterList");
+			  List<CompanyNameAndIdDTO> allCompanyList = (List<CompanyNameAndIdDTO>) request.getAttribute("allCompanyList");
 			  List<String> sectorDistinctList = (List<String>) request.getAttribute("sectorDistinctList");
-			  /* List<CompanyNameDTO> companyAllList = (List<CompanyNameDTO>) request.getAttribute("companyAllList");
-			   List<UserRecruiterDTO> recruiterAllList = (List<UserRecruiterDTO>) request.getAttribute("recruiterAllList");		   
-			   CompanyDTO company = (CompanyDTO) request.getAttribute("company");*/
+			  List<String> topicDistinctList = (List<String>) request.getAttribute("topicDistinctList");
 			%>
 			<br>
 			<table class="greenTable">
@@ -57,17 +57,17 @@
 					<th></th>
 					<th></th>
 				</tr>
-				<% for (QuestionDTO q : questionResultList) {%>
+				<% for (QuestionDTO question : questionResultList) {%>
 					<tr>
-						<td><a href=/Question/read?id=<%=q.getId()%>><%=q.getQuestion()%></a></td>
-						<td><%=q.getTopic()%></td>
-						<td><%=q.getSector()%></td>
-						<td><a href=/Recruiter/read?id=<%=q.getRecruiter().getId()%>><%=q.getRecruiter().getName()%></a></td>
-						<td><a href=/Company/read?id=<%=q.getCompany().getId()%>><%=q.getCompany().getName()%></a></td>
+						<td><a href=/Question/read?id=<%=question.getId()%>><%=question.getQuestion()%></a></td>
+						<td><%=question.getTopic()%></td>
+						<td><%=question.getSector()%></td>
+						<td><a href=/Recruiter/read?id=<%=question.getRecruiter().getId()%>><%=question.getRecruiter().getName()%></a></td>
+						<td><a href=/Company/read?id=<%=question.getCompany().getId()%>><%=question.getCompany().getName()%></a></td>
 						<%if (user.getUserType().equals("ADMIN")){%>
-							<td><a class="edit" href="/Question/update?id=<%=q.getId()%>">Edit</a>
+							<td><a class="edit" href="/Question/update?id=<%=question.getId()%>">Edit</a>
 							</td>
-							<td><a class="delete" href="/Question/delete?id=<%=q.getId()%>">Delete</a>
+							<td><a class="delete" href="/Question/delete?id=<%=question.getId()%>">Delete</a>
 							</td>
 						<%}else{%>
 							<td><a class="disabled">Edit</a>
@@ -98,7 +98,12 @@
 				    	<label for="topic">Topic</label>
 				    </div>
 				    <div class="col-75">
-				    	<input type="text" id="topic" name="topic" placeholder="insert a topic">
+						<select id="topic" name="topic">
+							<option value="%">ALL</option>
+							<%for (String topic : topicDistinctList) {%>
+								<option value=<%=topic%>><%=topic%></option>
+							<%}%>
+						</select>
 				    </div>
 				</div>
 				<div class="row">
@@ -121,7 +126,7 @@
 				    <div class="col-75">
 				    	<select id="recruiter" name="recruiterId">
 				    		<option value="%">ALL</option>
-				    		<%for (RecruiterNameAndIdDTO recruiter : recruiterList) {%>
+				    		<%for (RecruiterNameAndIdDTO recruiter : allRecruiterList) {%>
 				    			<option value="<%=recruiter.getId()%>"><%=recruiter.getName()%></option>	
 				    		<%}%>
 				    	</select>
@@ -134,7 +139,7 @@
 				    <div class="col-75">
 				    	<select id="company" name="companyId">
 				    		<option value="%">ALL</option>
-				    		<%for (CompanyNameAndIdDTO company : companyList) {%>
+				    		<%for (CompanyNameAndIdDTO company : allCompanyList) {%>
 				    			<option value="<%=company.getId()%>"><%=company.getName()%></option>	
 				    		<%}%>
 				    	</select>

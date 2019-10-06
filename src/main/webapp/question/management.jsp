@@ -9,8 +9,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/css/vittoriostyle.css" rel="stylesheet">
-<title>Question Manager</title>
+	<link href="/css/vittoriostyle.css" rel="stylesheet">
+	<title>Question Manager</title>
+	
+	
+	<!-- SCRIPT -->
+	
+	<script type="text/javascript">
+		function CheckTopics(val){
+			var label=document.getElementById('topicLabel');
+			var inputText=document.getElementById('otherTopic');
+			if(val=='#') {
+				label.style.display='block';
+				inputText.style.display='block';
+				inputText.required = true;
+			} else {
+				label.style.display='none';
+				inputText.style.display='none';
+			}
+		}
+	</script>
 </head>
 <body>
 	<!-- HEADER -->
@@ -18,8 +36,9 @@
 	<%@ include file="/css/header.jsp" %>
 	
 	<%
-		List<QuestionDTO> listQuestion = (List<QuestionDTO>) request.getAttribute("allQuestionDTO");
-		List<RecruiterNameAndIdDTO> listRecruiter = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterDTO");
+		List<QuestionDTO> allQuestionList = (List<QuestionDTO>) request.getAttribute("allQuestionList");
+		List<RecruiterNameAndIdDTO> allRecruiterList = (List<RecruiterNameAndIdDTO>) request.getAttribute("allRecruiterList");
+		List<String> topicDistinctList = (List<String>) request.getAttribute("topicDistinctList");
 	%>
 	<!-- NAVBAR -->
 
@@ -50,17 +69,17 @@
 					<th></th>
 					<th></th>
 				</tr>
-				<% for (QuestionDTO q : listQuestion) {%>
+				<% for (QuestionDTO question : allQuestionList) {%>
 					<tr>
-						<td><a href=/Question/read?id=<%=q.getId()%>><%=q.getQuestion()%></a></td>
-						<td><%=q.getTopic()%></td>
-						<td><%=q.getSector()%></td>
-						<td><a href=/Recruiter/read?id=<%=q.getRecruiter().getId()%>><%=q.getRecruiter().getName()%></a></td>
-						<td><a href=/Company/read?id=<%=q.getCompany().getId()%>><%=q.getCompany().getName()%></a></td>
+						<td><a href=/Question/read?id=<%=question.getId()%>><%=question.getQuestion()%></a></td>
+						<td><%=question.getTopic()%></td>
+						<td><%=question.getSector()%></td>
+						<td><a href=/Recruiter/read?id=<%=question.getRecruiter().getId()%>><%=question.getRecruiter().getName()%></a></td>
+						<td><a href=/Company/read?id=<%=question.getCompany().getId()%>><%=question.getCompany().getName()%></a></td>
 						<%if (user.getUserType().equals("ADMIN")){%>
-							<td><a class="edit" href="/Question/update?id=<%=q.getId()%>">Edit</a>
+							<td><a class="edit" href="/Question/update?id=<%=question.getId()%>">Edit</a>
 							</td>
-							<td><a class="delete" href="/Question/delete?id=<%=q.getId()%>">Delete</a>
+							<td><a class="delete" href="/Question/delete?id=<%=question.getId()%>">Delete</a>
 							</td>
 						<%}else{%>
 							<td><a class="disabled">Edit</a>
@@ -93,12 +112,23 @@
 				    </div>    
 				</div>
 				<div class="row">
-				    <div class="col-25">
-				    	<label for="topic">Topic</label>
-				    </div>
-				    <div class="col-75">
-				    	<input type="text" id="topic" name="topic" placeholder="insert a topic" required>
-				    </div> 
+					<div class="col-25">
+						<label for="topic">Topic</label>
+					</div>
+					<div class="col-75">
+						<select name="topic" onchange='CheckTopics(this.value);'> 
+							<%for (String topic : topicDistinctList) {%>
+								<option value=<%=topic%>><%=topic%></option>
+							<%}%>
+							<option value="#">Others...</option>
+						</select>
+					</div>
+					<div class="col-25">
+						<label for="otherTopic" id="topicLabel" style='display:none;'>Topic</label>
+					</div>
+					<div class="col-75">
+						<input type="text" id="otherTopic" name="otherTopic" placeholder="insert topic" style='display:none;'/>
+					</div>
 				</div>
 				<div class="row">
 				    <div class="col-25">
@@ -106,8 +136,8 @@
 				    </div>
 				    <div class="col-75">
 						<select id="recruiter" name="recruiter">
-				    		<%for (RecruiterNameAndIdDTO r : listRecruiter) {%>
-				    			<option value=<%=r.getId()%>><%=r.getName()%></option>	
+				    		<%for (RecruiterNameAndIdDTO recruiter : allRecruiterList) {%>
+				    			<option value=<%=recruiter.getId()%>><%=recruiter.getName()%></option>	
 				    		<%}%>
 						</select>
 					</div> 

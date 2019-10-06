@@ -3,7 +3,6 @@ package it.contrader.controller;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,6 +12,7 @@ import it.contrader.dto.RecruiterDTO;
 import it.contrader.model.Company;
 import it.contrader.services.CompanyService;
 import it.contrader.services.RecruiterService;
+import it.contrader.utils.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +29,26 @@ public class RecruiterController {
 		this.companyService = companyService;
 	}
 	
-	private void visualRecruiter(HttpServletRequest request){
+	private void getAllRecruiter(HttpServletRequest request){
 		List<RecruiterDTO> allRecruiter = this.recruiterService.getListRecruiterDTO();
-		request.setAttribute("allRecruiterDTO", allRecruiter);
+		request.setAttribute("allRecruiterList", allRecruiter);
 	}
 	
 	private void getCompanies(HttpServletRequest request) {
 		List<CompanyDTO> allCompany = companyService.getAllCompanyOrderByNameAsc();
-		request.setAttribute("allCompanyDTO", allCompany);
+		request.setAttribute("allCompanyList", allCompany);
+	}
+	
+	private RecruiterDTO getFormattedRecruiterFromRequest (HttpServletRequest request, Integer id) {
+		String name = Formatting.formatRecruiterName(request.getParameter("name"));
+		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("company")));
+		Company company = CompanyConverter.toEntity(companyDTO);
+		return new RecruiterDTO(id,name,company);
 	}
 	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
-		visualRecruiter(request);
+		getAllRecruiter(request);
 		getCompanies(request);
 		return "recruiter/management";		
 	}
@@ -50,16 +57,15 @@ public class RecruiterController {
 	public String read(HttpServletRequest request) {
 		Integer id =Integer.parseInt(request.getParameter("id"));
 		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(id);
-		request.setAttribute("recruiterDTO", recruiterDTO);
+		request.setAttribute("recruiter", recruiterDTO);
 		return "recruiter/read";		
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
-	//	request.setAttribute("id", id);
-		this.recruiterService.deleteRecruiterById(id);
-		visualRecruiter(request);
+		recruiterService.deleteRecruiterById(id);
+		getAllRecruiter(request);
 		getCompanies(request);
 		return "recruiter/management";
 	}
@@ -67,7 +73,7 @@ public class RecruiterController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search_get(HttpServletRequest request) {
 		List<RecruiterDTO> recruiterDTOList = new ArrayList<>();
-		request.setAttribute("allRecruiterDTO", recruiterDTOList);
+		request.setAttribute("allRecruiterList", recruiterDTOList);
 		getCompanies(request);
 		return "recruiter/search";
 	}
@@ -76,8 +82,8 @@ public class RecruiterController {
 	public String search_post(HttpServletRequest request) {
 		String name = request.getParameter("name");
 		String companyId = request.getParameter("company");
-		List<RecruiterDTO> allRecruiter = recruiterService.findRecruiterByAllOrderByNameAsc("%"+name+"%", companyId);
-		request.setAttribute("allRecruiterDTO", allRecruiter);
+		List<RecruiterDTO> allRecruiterDTO = recruiterService.findRecruiterByAllOrderByNameAsc("%"+name+"%", companyId);
+		request.setAttribute("allRecruiterList", allRecruiterDTO);
 		getCompanies(request);
 		return "recruiter/search";
 	}
@@ -86,7 +92,7 @@ public class RecruiterController {
 	public String update_get(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		RecruiterDTO recruiterDTO = recruiterService.getRecruiterDTOById(id);
-		request.setAttribute("recruiterDTO", recruiterDTO);
+		request.setAttribute("recruiter", recruiterDTO);
 		getCompanies(request);
 		return "recruiter/update";
 	}
@@ -94,24 +100,18 @@ public class RecruiterController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update_post(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
-		String name = StringUtils.capitalize(request.getParameter("name").toLowerCase());
-		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("company")));
-		Company company = CompanyConverter.toEntity(companyDTO);
-		RecruiterDTO recruiterDTO = new RecruiterDTO(id,name,company);
+		RecruiterDTO recruiterDTO = getFormattedRecruiterFromRequest(request, id);
 		recruiterService.updateRecruiter(recruiterDTO);
-		visualRecruiter(request);
+		getAllRecruiter(request);
 		getCompanies(request);
 		return "recruiter/management";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		String name = StringUtils.capitalize(request.getParameter("name").toLowerCase());
-		CompanyDTO companyDTO = companyService.getCompanyDTOById(Integer.parseInt(request.getParameter("company")));
-		Company company = CompanyConverter.toEntity(companyDTO);
-		RecruiterDTO recruiter = new RecruiterDTO(0, name, company);
-		recruiterService.insertRecruiter(recruiter);
-		visualRecruiter(request);
+		RecruiterDTO recruiterDTO = getFormattedRecruiterFromRequest(request, 0);
+		recruiterService.insertRecruiter(recruiterDTO);
+		getAllRecruiter(request);
 		getCompanies(request);
 		return "recruiter/management";
 	}

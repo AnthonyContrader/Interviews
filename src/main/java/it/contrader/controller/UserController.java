@@ -23,14 +23,22 @@ public class UserController {
 		this.userService = userService;
 	}
 
-	private void visualUser(HttpServletRequest request){
+	private void getAllUser(HttpServletRequest request){
 		List<UserDTO> allUser = this.userService.getListaUserDTO();
-		request.setAttribute("allUserDTO", allUser);
+		request.setAttribute("allUserList", allUser);
+	}
+	
+	private UserDTO getFormattedUserDTOFromRequest(HttpServletRequest request, Integer id) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String userType = request.getParameter("userType");
+		String email = request.getParameter("email");
+		return new UserDTO(id, username, password, userType, email);
 	}
 	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
-		visualUser(request);
+		getAllUser(request);
 		return "user/management";		
 	}
 
@@ -38,7 +46,7 @@ public class UserController {
 	public String read(HttpServletRequest request) {
 		Integer id =Integer.parseInt(request.getParameter("id"));
 		UserDTO userDTO = userService.getUserDTOById(id);
-		request.setAttribute("userDTO", userDTO);
+		request.setAttribute("user", userDTO);
 		return "user/read";		
 	}
 	
@@ -46,7 +54,7 @@ public class UserController {
 	public String delete(HttpServletRequest request) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		this.userService.deleteUserById(id);
-		visualUser(request);
+		getAllUser(request);
 		return "user/management";
 	}
 	
@@ -71,33 +79,25 @@ public class UserController {
 	public String update_get(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		UserDTO userDTO = userService.getUserDTOById(id);
-		request.setAttribute("userDTO", userDTO);
+		request.setAttribute("user", userDTO);
 		return "user/update";
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update_post(HttpServletRequest request) {
 		Integer id = Integer.parseInt(request.getParameter("id"));
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String userType = request.getParameter("userType");
-		String email = request.getParameter("email");
-		UserDTO userDTO= new UserDTO(id, username, password, userType,email);
+		UserDTO userDTO = getFormattedUserDTOFromRequest(request, id);
 		userService.updateUser(userDTO);
-		visualUser(request);
+		getAllUser(request);
 		return "user/management";
 		
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String userType = request.getParameter("userType");
-		String email = request.getParameter("email");
-		UserDTO userObj = new UserDTO(0, username, password, userType, email);
-		userService.insertUser(userObj);
-		visualUser(request);
+		UserDTO userDTO = getFormattedUserDTOFromRequest(request, 0);
+		userService.insertUser(userDTO);
+		getAllUser(request);
 		return "user/management";
 	}
 	
@@ -112,9 +112,9 @@ public class UserController {
 		String password = request.getParameter("password");
 		String userType = "USER";
 		String email = request.getParameter("email");
-		UserDTO userObj = new UserDTO(0, username, password, userType, email);
-		userService.insertUser(userObj);
-		visualUser(request);
+		UserDTO userDTO = new UserDTO(0, username, password, userType, email);
+		userService.insertUser(userDTO);
+		getAllUser(request);
 		return "index";
 	}
 }

@@ -15,7 +15,7 @@
 <br>
 
 <div class="main">
-<%UserDTO u = (UserDTO) request.getAttribute("userDTO");%>
+<%UserDTO user = (UserDTO) request.getAttribute("user");%>
 	<div class="mainleft">
 		<table class="greenTable">
 			<tr> 
@@ -25,10 +25,10 @@
 				<th>Email</th>
 			</tr>
 			<tr>
-				<td><%=u.getUsername()%></td>
-				<td><%=u.getPassword()%></td>
-				<td><%=u.getUserType()%></td>
-				<td><%=u.getEmail()%></td>
+				<td><%=user.getUsername()%></td>
+				<td><%=user.getPassword()%></td>
+				<td><%=user.getUserType()%></td>
+				<td><%=user.getEmail()%></td>
 			</tr>	
 		</table>
 	</div>

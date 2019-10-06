@@ -45,16 +45,16 @@
 	<!-- BODY -->
 	
 	<div class="main">
-		<%CompanyDTO c = (CompanyDTO) request.getAttribute("allCompanyDTO");
-		  List<String> allDistinctSectorList = (List<String>) request.getAttribute("allDistinctSector");
+		<%CompanyDTO company = (CompanyDTO) request.getAttribute("company");
+		  List<String> sectorDistinctList = (List<String>) request.getAttribute("sectorDistinctList");
 		%>
-		<form id="floatleft" action="/Company/update?update=true&id=<%=c.getId()%>" method="post">
+		<form id="floatleft" action="/Company/update?update=true&id=<%=company.getId()%>" method="post">
 			<div class="row">
 				<div class="col-25">
 					<label for="name">Name</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="name" name="name" value="<%=c.getName()%>">
+					<input type="text" id="name" name="name" value="<%=company.getName()%>">
 				</div>
 			</div>
 			<div class="row">
@@ -62,7 +62,7 @@
 					<label for="address">Address</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="address" name="address" value="<%=c.getAddress()%>"> 
+					<input type="text" id="address" name="address" value="<%=company.getAddress()%>"> 
 				</div>
 			</div>
 			<div class="row">
@@ -70,7 +70,7 @@
 					<label for="city">City</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="city" name="city" value="<%=c.getCity()%>"> 
+					<input type="text" id="city" name="city" value="<%=company.getCity()%>"> 
 				</div>
 			</div>
 			<div class="row">
@@ -79,7 +79,7 @@
 				</div>
 				<div class="col-75">
 					<select name="sector" onchange='CheckSectors(this.value);'> 
-						<%for (String sector : allDistinctSectorList) {%>
+						<%for (String sector : sectorDistinctList) {%>
 						<option value=<%=sector%>><%=sector%></option>
 					<%}%>
 						<option value="#">Others...</option>

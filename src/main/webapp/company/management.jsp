@@ -26,7 +26,7 @@
 				inputText.style.display='none';
 			}
 		}
-	</script> 
+	</script>
 </head>
 <body>
 	<!-- HEADER -->
@@ -49,8 +49,8 @@
 	    
 	    	<!-- COMPANYLIST -->
 	            
-			<%List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
-			  List<String> allDistinctSectorList = (List<String>) request.getAttribute("allDistinctSector");
+			<%List<CompanyDTO> allCompanyList = (List<CompanyDTO>) request.getAttribute("allCompanyList");
+			  List<String> sectorDistinctList = (List<String>) request.getAttribute("sectorDistinctList");
 			%>
 			<br>
 			<table class="greenTable">
@@ -62,14 +62,14 @@
 					<th></th>
 					<th></th>
 				</tr>
-				<%for (CompanyDTO u : companyList) {%>
+				<%for (CompanyDTO company : allCompanyList) {%>
 					<tr>
-						<td><a href=/Company/read?id=<%=u.getId()%>><%=u.getName()%></a></td>
-						<td><%=u.getAddress()%></td>
-						<td><%=u.getCity()%></td>
-						<td><%=u.getSector()%></td>
-						<td><a class="edit" href=/Company/update?id=<%=u.getId()%>>Edit</a></td>
-						<td><a class="delete" href=/Company/delete?id=<%=u.getId()%>>Delete</a></td>
+						<td><a href=/Company/read?id=<%=company.getId()%>><%=company.getName()%></a></td>
+						<td><%=company.getAddress()%></td>
+						<td><%=company.getCity()%></td>
+						<td><%=company.getSector()%></td>
+						<td><a class="edit" href=/Company/update?id=<%=company.getId()%>>Edit</a></td>
+						<td><a class="delete" href=/Company/delete?id=<%=company.getId()%>>Delete</a></td>
 					</tr>
 				<%}%>
 			</table>
@@ -117,7 +117,7 @@
 					</div>
 					<div class="col-75">
 						<select name="sector" onchange='CheckSectors(this.value);'> 
-							<%for (String sector : allDistinctSectorList) {%>
+							<%for (String sector : sectorDistinctList) {%>
 								<option value=<%=sector%>><%=sector%></option>
 							<%}%>
 							<option value="#">Others...</option>

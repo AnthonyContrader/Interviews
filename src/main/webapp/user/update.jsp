@@ -16,15 +16,15 @@
 <br>
 <div class="main">
 	<%
-		UserDTO u = (UserDTO) request.getAttribute("userDTO");
+		UserDTO user = (UserDTO) request.getAttribute("user");
 	%>
-	<form id="floatleft" action="/User/update?id=<%=u.getId()%>" method="post">
+	<form id="floatleft" action="/User/update?id=<%=user.getId()%>" method="post">
 		<div class="row">
   			<div class="col-25">
     			<label for="user">Username</label>
   			</div>
   			<div class="col-75">
-    			<input type="text" id="user" name="username" value="<%=u.getUsername()%>">
+    			<input type="text" id="user" name="username" value="<%=user.getUsername()%>">
   			</div>
   		</div>
 		<div class="row">
@@ -32,7 +32,7 @@
 				<label for="pass">Password</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="pass" name="password" value="<%=u.getPassword()%>"> 
+				<input type="text" id="pass" name="password" value="<%=user.getPassword()%>"> 
 			</div>
 		</div>
 		<div class="row">
@@ -41,8 +41,8 @@
 			</div>
 			<div class="col-75">
 				<select id="userType" name="userType" >
-					<option value="ADMIN" <% if(u.getUserType().equals("ADMIN")){ %>selected<%} %>>ADMIN</option>
-					<option value="USER" <%if(u.getUserType().equals("USER")){ %>selected<%} %>>USER</option>
+					<option value="ADMIN" <% if(user.getUserType().equals("ADMIN")){ %>selected<%} %>>ADMIN</option>
+					<option value="USER" <%if(user.getUserType().equals("USER")){ %>selected<%} %>>USER</option>
 				</select>
 			</div>
 		</div><div class="row">
@@ -50,7 +50,7 @@
 				<label for="email">Email</label>
 			</div>
 			<div class="col-75">
-				<input type="text" id="email" name="email" value="<%=u.getEmail()%>"> 
+				<input type="text" id="email" name="email" value="<%=user.getEmail()%>"> 
 			</div>
 		</div>
 		<button type="submit" >Edit</button>

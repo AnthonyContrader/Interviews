@@ -1,6 +1,5 @@
 package it.contrader.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,11 @@ public class QuestionService {
 		this.questionRepository = questionRepository;
 	}
 
+	public List<String> getDistinctTopicOrderAsc (){
+		List<String> topicList = questionRepository.getDistinctTopicOrderAsc();
+		return topicList;
+	}
+	
 	public List<QuestionDTO> getListQuestionDTO() {
 		return QuestionConverter.toListDTO((List<Question>) questionRepository.findAll());
 	}

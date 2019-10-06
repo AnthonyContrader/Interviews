@@ -31,8 +31,8 @@
 	
 		<!-- RECRUITERLIST -->
 		
-		<%RecruiterDTO recruiter = (RecruiterDTO) request.getAttribute("recruiterDTO");
-		  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
+		<%RecruiterDTO recruiter = (RecruiterDTO) request.getAttribute("recruiter");
+		  List<CompanyDTO> allCompanyList = (List<CompanyDTO>) request.getAttribute("allCompanyList");
 		%>
 		<form id="floatleft" action="/Recruiter/update?update=true&id=<%=recruiter.getId()%>" method="post">
 			<div class="row">
@@ -49,11 +49,11 @@
 				</div>
 				<div class="col-75">
 					<select id="company" name="company">
-						<%for (CompanyDTO c : companyList) {
-							 if(c.getId()==recruiter.getCompany().getId()){%>
-					    		<option value=<%=c.getId()%> selected><%=c.getName()%></option>	
+						<%for (CompanyDTO company : allCompanyList) {
+							 if(company.getId()==recruiter.getCompany().getId()){%>
+					    		<option value=<%=company.getId()%> selected><%=company.getName()%></option>	
 					    	<%}else{%>
-					    		<option value=<%=c.getId()%>><%=c.getName()%></option>
+					    		<option value=<%=company.getId()%>><%=company.getName()%></option>
 					    	<%}
 						}%>
 					</select>

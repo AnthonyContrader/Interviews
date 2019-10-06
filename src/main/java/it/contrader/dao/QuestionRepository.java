@@ -13,5 +13,8 @@ public interface QuestionRepository extends CrudRepository<Question, Integer> {
 			nativeQuery = true)
 	public List<Question> findQuestionByAll(String question, String topic, String sector, String recruiterId, String companyId);
 	
+	@Query(value = "SELECT DISTINCT topic FROM question ORDER BY topic ASC", nativeQuery = true)
+	public List<String> getDistinctTopicOrderAsc();
+	
 	public List<Question> findQuestionByTopic(String topic);
 }

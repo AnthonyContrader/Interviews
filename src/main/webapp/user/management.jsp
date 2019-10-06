@@ -27,7 +27,7 @@
 	    <div class="mainleft">
 			<!-- USERLIST -->
 			
-			<%List<UserDTO> userlist = (List<UserDTO>) request.getAttribute("allUserDTO");%>
+			<%List<UserDTO> allUserList = (List<UserDTO>) request.getAttribute("allUserList");%>
 			<br>
 			<table class="greenTable">
 				<tr>
@@ -38,14 +38,14 @@
 					<th></th>
 					<th></th>
 				</tr>
-			<%for (UserDTO u : userlist) {%>
+			<%for (UserDTO user : allUserList) {%>
 				<tr>
-					<td><a href=/User/read?id=<%=u.getId()%>><%=u.getUsername()%></a></td>
-					<td><%=u.getPassword()%></td>
-					<td><%=u.getUserType()%></td>
-					<td><%=u.getEmail()%></td>
-					<td><a class="edit" href=/User/update?update=false&id=<%=u.getId()%>>Edit</a></td>
-					<td><a class="delete" href=/User/delete?id=<%=u.getId()%>>Delete</a></td>
+					<td><a href=/User/read?id=<%=user.getId()%>><%=user.getUsername()%></a></td>
+					<td><%=user.getPassword()%></td>
+					<td><%=user.getUserType()%></td>
+					<td><%=user.getEmail()%></td>
+					<td><a class="edit" href=/User/update?update=false&id=<%=user.getId()%>>Edit</a></td>
+					<td><a class="delete" href=/User/delete?id=<%=user.getId()%>>Delete</a></td>
 				</tr>
 			<%}%>
 			</table>

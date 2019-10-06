@@ -34,8 +34,8 @@
 	    
 			<!-- RECRUITERLIST -->
 			
-			<%List<RecruiterDTO> recruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterDTO");
-			  List<CompanyDTO> companyList = (List<CompanyDTO>) request.getAttribute("allCompanyDTO");
+			<%List<RecruiterDTO> allRecruiterList = (List<RecruiterDTO>) request.getAttribute("allRecruiterList");
+			  List<CompanyDTO> allCompanyList = (List<CompanyDTO>) request.getAttribute("allCompanyList");
 			%>
 			<br>
 			<table class="greenTable">
@@ -45,12 +45,12 @@
 					<th></th>
 					<th></th>
 				</tr>
-			<%for (RecruiterDTO r : recruiterList) {%>
+			<%for (RecruiterDTO recruiter : allRecruiterList) {%>
 				<tr>
-					<td><a href=/Recruiter/read?id=<%=r.getId()%>><%=r.getName()%></a></td>
-					<td><a href=/Company/read?id=<%=r.getCompany().getId()%>><%=r.getCompany().getName()%></a></td>
-					<td><a class="edit" href=/Recruiter/update?update=false&id=<%=r.getId()%>>Edit</a></td>
-					<td><a class="delete" href=/Recruiter/delete?id=<%=r.getId()%>>Delete</a></td>
+					<td><a href=/Recruiter/read?id=<%=recruiter.getId()%>><%=recruiter.getName()%></a></td>
+					<td><a href=/Company/read?id=<%=recruiter.getCompany().getId()%>><%=recruiter.getCompany().getName()%></a></td>
+					<td><a class="edit" href=/Recruiter/update?update=false&id=<%=recruiter.getId()%>>Edit</a></td>
+					<td><a class="delete" href=/Recruiter/delete?id=<%=recruiter.getId()%>>Delete</a></td>
 				</tr>
 			<%}%>
 			</table>
@@ -82,8 +82,8 @@
 					</div>
 					<div class="col-75">
 						<select id="company" name="company">
-							<%for (CompanyDTO c : companyList) {%>
-								<option value=<%=c.getId()%>><%=c.getName()%></option>
+							<%for (CompanyDTO company : allCompanyList) {%>
+								<option value=<%=company.getId()%>><%=company.getName()%></option>
 							<%}%>
 						</select>
 					</div>
