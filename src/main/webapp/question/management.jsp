@@ -20,7 +20,7 @@
 		var topicSelecter=document.getElementById('selecter');
 		var inputText=document.getElementById('inputText');
 		if(val=='#') {
-			topicSelecter.style.display='none;'
+			topicSelecter.style.display='none';
 			inputText.style.display='block';
 			inputText.required = true;
 		} else {
