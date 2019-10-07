@@ -19,14 +19,13 @@
 	
 	<script type="text/javascript">
 		function CheckTopics(val){
-			var label=document.getElementById('topicLabel');
-			var inputText=document.getElementById('otherTopic');
+			var topicSelecter=document.getElementById('selecter');
+			var inputText=document.getElementById('inputText');
 			if(val=='#') {
-				label.style.display='block';
+				topicSelecter.style.display='none;'
 				inputText.style.display='block';
 				inputText.required = true;
 			} else {
-				label.style.display='none';
 				inputText.style.display='none';
 			}
 		}
@@ -69,25 +68,28 @@
 			    	<input type="text" id="question" name="question" value="<%=question.getQuestion()%>" required>
 			    </div>    
 			</div>
-			<div class="row">
-					<div class="col-25">
-						<label for="topic">Topic</label>
-					</div>
-					<div class="col-75">
-						<select name="topic" onchange='CheckTopics(this.value);'> 
-							<%for (String topic : topicDistinctList) {%>
-								<option value=<%=topic%>><%=topic%></option>
-							<%}%>
-							<option value="#">Others...</option>
-						</select>
-					</div>
-					<div class="col-25">
-						<label for="otherTopic" id="topicLabel" style='display:none;'>Topic</label>
-					</div>
-					<div class="col-75">
-						<input type="text" id="otherTopic" name="otherTopic" placeholder="insert topic" style='display:none;'/>
-					</div>
+			<div id="selecter" class="row">
+				<div class="col-25">
+					<label for="topic">Topic</label>
 				</div>
+				<div class="col-75">
+					<select id="topic" name="topic" onchange='CheckTopics(this.value);'>
+						<option>choose a topic</option>
+						<%for (String topic : topicDistinctList) {%>
+							<option value=<%=topic%>><%=topic%></option>
+						<%}%>
+						<option value="#">Others...</option>
+					</select>
+				</div>
+			</div>
+			<div id="inputText" class="row" style='display:none;'>
+				<div class="col-25">
+					<label for="otherTopic" id="topicLabel">Topic</label>
+				</div>
+				<div class="col-75">
+					<input type="text" id="otherTopic" name="otherTopic" placeholder="insert topic"/>
+				</div>
+			</div>
 			<div class="row">
 			    <div class="col-25">
 			    	<label for="recruiter">Recruiter</label>

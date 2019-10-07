@@ -15,14 +15,13 @@
 	
 	<script type="text/javascript">
 		function CheckSectors(val){
-			var label=document.getElementById('sectorLabel');
-			var inputText=document.getElementById('otherSector');
+			var sectorSelecter=document.getElementById('selecter');
+			var inputText=document.getElementById('inputText');
 			if(val=='#') {
-				label.style.display='block';
+				sectorSelecter.style.display='none';
 				inputText.style.display='block';
 				inputText.required = true;
 			} else {
-				label.style.display='none';
 				inputText.style.display='none';
 			}
 		}
@@ -73,23 +72,26 @@
 					<input type="text" id="city" name="city" value="<%=company.getCity()%>"> 
 				</div>
 			</div>
-			<div class="row">
+			<div id="selecter" class="row">
 				<div class="col-25">
 					<label for="sector">Sector</label>
 				</div>
 				<div class="col-75">
-					<select name="sector" onchange='CheckSectors(this.value);'> 
+					<select id="sector" name="sector" onchange='CheckSectors(this.value);'> 
+						<option>choose a sector</option>
 						<%for (String sector : sectorDistinctList) {%>
-						<option value=<%=sector%>><%=sector%></option>
-					<%}%>
+							<option value=<%=sector%>><%=sector%></option>
+						<%}%>
 						<option value="#">Others...</option>
 					</select>
 				</div>
+			</div>
+			<div id="inputText" class="row" style='display:none;'>
 				<div class="col-25">
-					<label for="otherSector" id="sectorLabel" style='display:none;'>Sector</label>
+					<label for="otherSector" id="sectorLabel">Sector</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="otherSector" name="otherSector" placeholder="insert sector" style='display:none;'/>
+					<input type="text" id="otherSector" name="otherSector" placeholder="insert sector"/>
 				</div>
 			</div>
 			<button type="submit" >Edit</button>   

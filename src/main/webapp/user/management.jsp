@@ -40,20 +40,23 @@
 				</tr>
 			<%for (UserDTO user : allUserList) {%>
 				<tr>
-					<td><a href=/User/read?id=<%=user.getId()%>><%=user.getUsername()%></a></td>
+					<td><a href=/User/read?prevPage=/User/management&id=<%=user.getId()%>><%=user.getUsername()%></a></td>
 					<td><%=user.getPassword()%></td>
 					<td><%=user.getUserType()%></td>
 					<td><%=user.getEmail()%></td>
-					<td><a class="edit" href=/User/update?update=false&id=<%=user.getId()%>>Edit</a></td>
+					<td><a class="edit" href=/User/update?prevPage=/User/management&update=false&id=<%=user.getId()%>>Edit</a></td>
 					<td><a class="delete" href=/User/delete?id=<%=user.getId()%>>Delete</a></td>
 				</tr>
 			<%}%>
 			</table>
 	    </div>
 		<div class="mainright">
+		
+		
 	 		<!-- SEARCH BUTTON -->   
 		
 			<form action="/User/search" method="get">
+				<input type="hidden" name="prevPage" value="/User/management">
 				<button type="submit" ><i class="searchicon"></i>Search</button>
 			</form>
 	

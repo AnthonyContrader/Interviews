@@ -1,6 +1,8 @@
 package it.contrader.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequestMapping("/User")
 public class UserController {
 	private final UserService userService;
+	private HttpSession session;
 	
 	@Autowired
 	public UserController(UserService userService) {
@@ -36,6 +39,11 @@ public class UserController {
 		return new UserDTO(id, username, password, userType, email);
 	}
 	
+	private void setBackPage(HttpServletRequest request) {
+		session = request.getSession();
+		session.setAttribute("prevPage", request.getParameter("prevPage"));
+	}
+	
 	@RequestMapping(value = "/management", method = RequestMethod.GET)
 	public String management(HttpServletRequest request) {
 		getAllUser(request);
@@ -44,6 +52,7 @@ public class UserController {
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String read(HttpServletRequest request) {
+		setBackPage(request);
 		Integer id =Integer.parseInt(request.getParameter("id"));
 		UserDTO userDTO = userService.getUserDTOById(id);
 		request.setAttribute("user", userDTO);
@@ -60,6 +69,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public String search_get(HttpServletRequest request) {
+		setBackPage(request);
 		List<UserDTO> users = new ArrayList<UserDTO>();
 		request.setAttribute("userResultList", users);
 		return "user/search";
@@ -77,6 +87,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String update_get(HttpServletRequest request) {
+		setBackPage(request);
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		UserDTO userDTO = userService.getUserDTOById(id);
 		request.setAttribute("user", userDTO);
@@ -85,6 +96,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String update_post(HttpServletRequest request) {
+		setBackPage(request);
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		UserDTO userDTO = getFormattedUserDTOFromRequest(request, id);
 		userService.updateUser(userDTO);
@@ -99,22 +111,5 @@ public class UserController {
 		userService.insertUser(userDTO);
 		getAllUser(request);
 		return "user/management";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String register_get(HttpServletRequest request) {
-		return "user/register";
-	}
-	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register_post(HttpServletRequest request) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String userType = "USER";
-		String email = request.getParameter("email");
-		UserDTO userDTO = new UserDTO(0, username, password, userType, email);
-		userService.insertUser(userDTO);
-		getAllUser(request);
-		return "index";
 	}
 }

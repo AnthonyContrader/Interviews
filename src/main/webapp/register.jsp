@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <html>
 <head>
+<meta charset="ISO-8859-1">
 <link href="/css/vittoriostyle.css" rel="stylesheet">
 
-<title>Login</title>
+<title>Register</title>
 </head>
 <body>
 <%@ include file="/css/header.jsp" %>
-	<form class="registerform" action="/User/register" method="post">
+	<form class="registerform" action="/Home/register" method="post">
 		<div class="row">
 			<div class="col-25">
 				<label for="username">Username</label>

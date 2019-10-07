@@ -13,7 +13,7 @@ public class InterceptorController extends HandlerInterceptorAdapter {
 		switch(uri) {
 		case "/css/vittoriostyle.css":
 		case "/Home/login":
-		case "/User/register":
+		case "/Home/register":
 			return true;
 		default:			
 			if(request.getSession().getAttribute("user")==null) {

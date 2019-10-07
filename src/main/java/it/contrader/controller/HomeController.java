@@ -1,7 +1,5 @@
 package it.contrader.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -24,7 +22,7 @@ public class HomeController {
 	public HomeController(UserService userService) {
 		this.userService = userService;
 	}
-
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginControl(HttpServletRequest request) {
 		session = request.getSession();
@@ -38,6 +36,7 @@ public class HomeController {
 		final String userType = userDTO.getUserType();
 		if (!StringUtils.isEmpty(userType)) {
 			session.setAttribute("user", userDTO);
+			session.setAttribute("prevPage", request.getParameter("prevPage"));
 			if (userType.equals("ADMIN")) {
 				return "homeadmin";
 			} else if (userType.equals("USER")) {
@@ -63,4 +62,59 @@ public class HomeController {
 	public String homeUser(HttpServletRequest request) {
 		return "homeuser";
 	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register_get(HttpServletRequest request) {
+		System.out.println("ok");
+		return "register";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String register_post(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String userType = "USER";
+		String email = request.getParameter("email");
+		UserDTO userDTO = new UserDTO(0, username, password, userType, email);
+		userService.insertUser(userDTO);
+		return "index";
+	}
+/*	
+	@RequestMapping(value = "/back", method = RequestMethod.GET)
+	public String back(HttpServletRequest request) {
+		session = request.getSession();
+		String prevPage = (String) session.getAttribute("prevPage");
+		if (prevPage.equals("index"))
+			return logout(request);
+		String[] splittedPrevPage = prevPage.split("/");
+		String EntityName = StringUtils.capitalize(splittedPrevPage[0]);
+		String controllerName = "it.contrader.controller." + EntityName + "Controller";
+		System.out.println(controllerName);
+		String methodName = splittedPrevPage[1];
+		System.out.println(methodName);
+		String serviceName = "it.contrader.services." + EntityName + "Service";
+		System.out.println(serviceName);
+		Constructor<?> controllerConstructor;
+		Method method = null;
+		Object controller = null;
+		String page = null;
+		try {
+	        Class<?> controllerClass = Class.forName(controllerName);
+	        Class<?> serviceClass = Class.forName(serviceName);
+			System.out.println("ok0");
+			controllerConstructor = controllerClass.getConstructor(serviceClass);
+			System.out.println("ok1");
+	        controller = controllerConstructor.newInstance(this.getClass().getDeclaredField("userService").get(this));
+	        System.out.println("ok2");
+	        method = controller.getClass().getMethod(methodName, HttpServletRequest.class);
+	        System.out.println("ok3");
+	        page = (String) method.invoke(controller, request);
+	        System.out.println("ok4");
+		} catch (Exception e) {
+			System.out.println("no no");
+		}
+		System.out.println(page);
+		return page;
+	}
+*/
 }
