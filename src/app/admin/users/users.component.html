@@ -30,7 +30,7 @@
             <input placeholder="username" [(ngModel)]="usertoinsert.username">
           </td>
           <td>
-            <input placeholder="password" [(ngModel)]="usertoinsert.password">
+            <input type="password" [(ngModel)]="usertoinsert.password">
           </td>
           <td>
             <select placeholder="usertype" [(ngModel)]="usertoinsert.userType">
@@ -39,7 +39,7 @@
             </select>
           </td>
           <td>
-            <input placeholder="email" [(ngModel)]="usertoinsert.email">
+            <input type="email" placeholder="email" [(ngModel)]="usertoinsert.email">
           </td>
           <td>
             <button (click)="insert(usertoinsert)">Insert</button>
@@ -53,7 +53,7 @@
             <input [(ngModel)]="user.username">
           </td>
           <td>
-            <input [(ngModel)]="user.password">
+            <input type="password" [(ngModel)]="user.password">
           </td>
           <td>
             <select [(ngModel)]="user.userType">
@@ -62,7 +62,7 @@
             </select>
           </td>
           <td>
-            <input [(ngModel)]="user.email">
+            <input type="email" [(ngModel)]="user.email">
           </td>
           <td>
             <button (click)=update(user)>Save</button>

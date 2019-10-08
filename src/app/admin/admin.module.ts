@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UsersComponent } from './users/users.component';
+import { CompaniesComponent } from './companies/companies.component';
+import { RecruitersComponent } from './recruiters/recruiters.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 /**
  * Modulo dell'admin, qui vengono dichiarate le component che utilizza 
@@ -14,7 +17,7 @@ import { UsersComponent } from './users/users.component';
  * @see AdminRoutingModule
  */
 @NgModule({
-  declarations: [AdminDashboardComponent, UsersComponent],
+  declarations: [AdminDashboardComponent, UsersComponent, CompaniesComponent, RecruitersComponent, QuestionsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
