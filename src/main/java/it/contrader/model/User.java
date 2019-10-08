@@ -1,11 +1,9 @@
 package it.contrader.model;
 
-import javax.persistence.Entity;
-
 import javax.persistence.*;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,11 +33,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@NotNull
 	@Column(unique = true)
 	private String username;
 	
+	@NotNull
 	private String password;
 
-	private Usertype usertype;
+	@NotNull
+	private Usertype userType;
 	
+	@Nullable
+	private String email;	
 }
