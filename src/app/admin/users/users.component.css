@@ -3,32 +3,67 @@
 }
 
 /*Tables*/
-table {
-	border-collapse: collapse;
-	width: 100%;
-	float: left;
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-}
-
-th, td {
+table.orangeTable {
+	float: center;
+	width: 98%;
+	max-width: 650px;
+	background-color: #f2f2f2;
 	text-align: center;
-	padding: 2px;
-}
+	margin: 7px;
+	border-radius: 5px;
+	-webkit-box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+	box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+  }
 
-td{
-    font-size: 16px;
-}
+  table.orangeTable th {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+	font-size: 15px;
+	background: #ea7575;
+	color: white;
+  }
 
+  table.orangeTable td {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+	font-size: 15px;
+  }
 
-tr:nth-child(even) {
-	background-color: #ffdb99;
-}
+  table.orangeTable tbody td {
+	font-size: 15px;
+  }
 
-th {
-	background-color: darkorange;
-	color: #ffffff;
-}
+  table.orangeTable tr:nth-child(even) {
+	background: #ffffff;
+  }
+
+  table.orangeTable thead th {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+	border-left: 2px solid #D0E4F5;
+  }
+
+  table.orangeTable thead th:first-child {
+	border-left: none;
+  }
+  
+  table.orangeTable tfoot td {
+	font-size: 15px;
+  }
+  table.orangeTable tfoot .links {
+	text-align: right;
+  }
+  table.orangeTable tfoot .links a{
+	display: inline-block;
+	background: #00a990;
+	color: #FFFFFF;
+	padding: 2px 8px;
+	border-radius: 5px;
+  }
 
 a:hover {
 	color: #999999;
@@ -43,6 +78,14 @@ input:hover,  input:active, input:focus{
     border: 2px solid crimson;
 }
 
+button{
+	width: 60px;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+}
+
 button:hover{
-    background-color: crimson;
+	width: 60px;
+	background-color: #ffffff;
+	color: #ea7575;
 }

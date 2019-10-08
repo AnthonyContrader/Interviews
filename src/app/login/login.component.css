@@ -1,53 +1,73 @@
-form{
-    margin-top:270px;
-    width: 55%;
-    padding: 10px;
-    border-radius:0;
-    border-color: crimson;
-}
-
-img{
-    position: inherit;
-    width:50%;
-    margin: 12%;
-}
-
-input, input:hover, input::selection, input:checked, input:focus{
-    border: 0;
-    background-color: darkorange;
-    border-radius: 0;
-    color: white;
-    border-bottom: 1px solid crimson;
-    margin: 0px; 
-}
-
-.container-fluid{
-    background-color: darkorange;
-    height: 100vh;
-}
-input::placeholder{
-    color: white;
-}
-.form-control{
-border: none;
-background-color: darkorange;
-color: white;
-border-bottom: 1px solid white;
-}
-
 .login{
-border: none;
-background-color: darkorange;
-color: white;
-border: 1px solid white;
-border-radius: 2px;
-padding-top: 10px;
-padding-right: auto;
-padding-bottom: 10px;
-padding-left: auto;
+	position:relative;
+	max-width: 75%;
+    overflow: hidden;
+    margin: auto;
+    font-size: 1vw;
 }
 
-p{
-font-size: 14px;
-color: white;
+.login input {
+	position:absolute;
+	width:30%;
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.loginimg{
+	width: 100%;
+}
+
+.login label {
+	position:absolute;
+	text-align: center;
+}
+
+.login #usernamelabel{
+	color: white;
+    position: absolute;
+    right: 25%;
+    top: 30%;
+    padding: 1%;
+    text-align: center;
+}
+
+.login #user{
+	position: absolute;
+    right: 9%;
+    top: 35%;
+    padding: 1%;
+}
+
+.login #passwordlabel{
+	color: white;
+    position: absolute;
+    right: 25%;
+    top: 44%;
+    padding: 1%;
+    text-align: center;
+}
+
+.login #pass{
+	position: absolute;
+    right: 9%;
+    top: 49%;
+    padding: 1%;
+}
+
+.login #signup{
+	position: absolute;
+    color: white;
+    right: 24%;
+    top: 68%;
+}
+
+.login #loginbutton{
+	position: absolute;
+    right: 3.5%;
+    margin: 0;
+    background-color: transparent;
+    width: 10%;
+    padding-top: 9%;
+    border: none;
+    top: 79%;
 }

@@ -16,7 +16,9 @@ export class UserDTO {
 
    password: string;
 
-   usertype: Usertype;
+   userType: Usertype;
+
+   email: string;
 
 }
 

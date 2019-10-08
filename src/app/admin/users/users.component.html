@@ -4,7 +4,7 @@
 
     </div>
     <div class="col-md-10">
-      <table>
+      <table class="orangeTable">
         <tr>
           <th>
             Username
@@ -14,6 +14,9 @@
           </th>
           <th>
             Usertype
+          </th>
+          <th>
+            Email
           </th>
           <th>
             Edit
@@ -30,10 +33,13 @@
             <input placeholder="password" [(ngModel)]="usertoinsert.password">
           </td>
           <td>
-            <select placeholder="usertype" [(ngModel)]="usertoinsert.usertype">
+            <select placeholder="usertype" [(ngModel)]="usertoinsert.userType">
               <option value="ADMIN">ADMIN</option>
               <option value="USER">USER</option>
             </select>
+          </td>
+          <td>
+            <input placeholder="email" [(ngModel)]="usertoinsert.email">
           </td>
           <td>
             <button (click)="insert(usertoinsert)">Insert</button>
@@ -50,10 +56,13 @@
             <input [(ngModel)]="user.password">
           </td>
           <td>
-            <select [(ngModel)]="user.usertype">
-              <option [selected]="user.usertype===ADMIN" value="ADMIN">ADMIN</option>
-              <option [selected]="user.usertype===USER" value="USER">USER</option>
+            <select [(ngModel)]="user.userType">
+              <option [selected]="user.userType===ADMIN" value="ADMIN">ADMIN</option>
+              <option [selected]="user.userType===USER" value="USER">USER</option>
             </select>
+          </td>
+          <td>
+            <input [(ngModel)]="user.email">
           </td>
           <td>
             <button (click)=update(user)>Save</button>

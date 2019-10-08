@@ -10,7 +10,9 @@ export class AdminMenuComponent implements OnInit {
 
   isUserCollapsed = false;
   isClientCollapsed = false;
-  isAccountCollapsed = false;
+  isRecruiterCollapsed = false;
+  isCompanyCollapsed = false;
+  isQuestionCollapsed = false;
 
   constructor(private router: Router) {
   }
@@ -29,9 +31,21 @@ export class AdminMenuComponent implements OnInit {
     } else { this.isUserCollapsed = false; }
   }
 
-  accountcollapse() {
-    if (this.isAccountCollapsed === false) {
-      this.isAccountCollapsed = true;
-    } else { this.isAccountCollapsed = false; }
+  recruiterscollapse() {
+    if (this.isRecruiterCollapsed === false) {
+      this.isRecruiterCollapsed = true;
+    } else { this.isRecruiterCollapsed = false; }
+  }
+
+  companiescollapse() {
+    if (this.isCompanyCollapsed === false) {
+      this.isCompanyCollapsed = true;
+    } else { this.isCompanyCollapsed = false; }
+  }
+
+  questionscollapse() {
+    if (this.isQuestionCollapsed === false) {
+      this.isQuestionCollapsed = true;
+    } else { this.isQuestionCollapsed = false; }
   }
 }
