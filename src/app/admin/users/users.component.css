@@ -71,7 +71,8 @@ a:hover {
 
 input, select{
     background-color: inherit;
-    font-size: inherit;
+	font-size: inherit;
+	border: 2px solid transparent;
 }
 
 input:hover,  input:active, input:focus{

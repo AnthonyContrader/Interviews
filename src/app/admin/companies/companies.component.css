@@ -1,0 +1,93 @@
+*{
+    text-align: center;
+}
+
+/*Tables*/
+table.orangeTable {
+	float: center;
+	width: 98%;
+	max-width: 650px;
+	background-color: #f2f2f2;
+	text-align: center;
+	margin: 7px;
+	border-radius: 5px;
+	-webkit-box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+	box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+  }
+
+  table.orangeTable th {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+	font-size: 15px;
+	background: #ea7575;
+	color: white;
+  }
+
+  table.orangeTable td {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+	font-size: 15px;
+  }
+
+  table.orangeTable tbody td {
+	font-size: 15px;
+  }
+
+  table.orangeTable tr:nth-child(even) {
+	background: #ffffff;
+  }
+
+  table.orangeTable thead th {
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+	border-left: 2px solid #D0E4F5;
+  }
+
+  table.orangeTable thead th:first-child {
+	border-left: none;
+  }
+  
+  table.orangeTable tfoot td {
+	font-size: 15px;
+  }
+  table.orangeTable tfoot .links {
+	text-align: right;
+  }
+  table.orangeTable tfoot .links a{
+	display: inline-block;
+	background: #00a990;
+	color: #FFFFFF;
+	padding: 2px 8px;
+	border-radius: 5px;
+  }
+
+a:hover {
+	color: #999999;
+}
+
+input, select{
+	border: none;
+    background-color: inherit;
+	font-size: inherit;
+	border: 2px solid transparent;
+}
+
+input:hover,  input:active, input:focus{
+    border: 2px solid crimson;
+}
+
+button{
+	width: 60px;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+}
+
+button:hover{
+	width: 60px;
+	background-color: #ffffff;
+	color: #ea7575;
+}

@@ -1,80 +1,71 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-1">
-
-    </div>
+    <div class="col-md-1"></div>
     <div class="col-md-10">
       <table class="orangeTable">
-        <tr>
-          <th>
-            Username
-          </th>
-          <th>
-            Password
-          </th>
-          <th>
-            Usertype
-          </th>
-          <th>
-            Email
-          </th>
-          <th>
-            Edit
-          </th>
-          <th>
-            User
-          </th>
-        </tr>
-        <tr>
-          <td>
-            <input placeholder="username" [(ngModel)]="usertoinsert.username">
-          </td>
-          <td>
-            <input type="password" [(ngModel)]="usertoinsert.password">
-          </td>
-          <td>
-            <select placeholder="usertype" [(ngModel)]="usertoinsert.userType">
-              <option value="ADMIN">ADMIN</option>
-              <option value="USER">USER</option>
-            </select>
-          </td>
-          <td>
-            <input type="email" placeholder="email" [(ngModel)]="usertoinsert.email">
-          </td>
-          <td>
-            <button (click)="insert(usertoinsert)">Insert</button>
-          </td>
-          <td>
-            <button (click)="clear()">Clear</button>
-          </td>
-        </tr>
-        <tr *ngFor="let user of users">
-          <td>
-            <input [(ngModel)]="user.username">
-          </td>
-          <td>
-            <input type="password" [(ngModel)]="user.password">
-          </td>
-          <td>
-            <select [(ngModel)]="user.userType">
-              <option [selected]="user.userType===ADMIN" value="ADMIN">ADMIN</option>
-              <option [selected]="user.userType===USER" value="USER">USER</option>
-            </select>
-          </td>
-          <td>
-            <input type="email" [(ngModel)]="user.email">
-          </td>
-          <td>
-            <button (click)=update(user)>Save</button>
-          </td>
-          <td>
-            <button (click)="delete(user)">Delete</button>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Usertype</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>
+              <input autocomplete="off" placeholder="insert username" type="text" [(ngModel)]="usertoinsert.username">
+            </td>
+            <td>
+              <input autocomplete="off" placeholder="insert password" type="text" [(ngModel)]="usertoinsert.password">
+            </td>
+            <td>
+              <select [(ngModel)]="usertoinsert.userType">
+                <option [ngValue]="undefined" hidden selected>choose a usertype</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+              </select>
+            </td>
+            <td>
+              <input type="email" placeholder="email" [(ngModel)]="usertoinsert.email">
+            </td>
+            <td>
+              <button (click)="insert(usertoinsert)">Insert</button>
+            </td>
+            <td>
+              <button (click)="clear()">Clear</button>
+            </td>
+          </tr>
+          <tr *ngFor="let user of users">
+            <td>
+              <input autocomplete="off" [(ngModel)]="user.username">
+            </td>
+            <td>
+              <input autocomplete="off" type="password" [(ngModel)]="user.password" (dblclick)='showPassword($event);'>
+            </td>
+            <td>
+              <select [(ngModel)]="user.userType">
+                <option [selected]="user.userType===ADMIN" value="ADMIN">
+                  ADMIN
+                </option>
+                <option [selected]="user.userType===USER" value="USER">
+                  USER
+                </option>
+              </select>
+            </td>
+            <td>
+              <input type="email" [(ngModel)]="user.email">
+            </td>
+            <td>
+              <button (click)=update(user)>Save</button>
+            </td>
+            <td>
+              <button (click)="delete(user)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-    <div class="col-md-1">
-
-    </div>
+    <div class="col-md-1"></div>
   </div>
 </div>
