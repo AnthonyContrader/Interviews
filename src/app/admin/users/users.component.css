@@ -5,8 +5,8 @@
 /*Tables*/
 table.orangeTable {
 	float: center;
-	width: 98%;
-	max-width: 650px;
+	font-size: 1vw;
+	max-width: 90%;
 	background-color: #f2f2f2;
 	text-align: center;
 	margin: 7px;
@@ -19,7 +19,6 @@ table.orangeTable {
 	padding: 3px 2px;
 	border-radius: 10px;
 	height: 35px;
-	font-size: 15px;
 	background: #ea7575;
 	color: white;
   }
@@ -28,11 +27,6 @@ table.orangeTable {
 	padding: 3px 2px;
 	border-radius: 10px;
 	height: 35px;
-	font-size: 15px;
-  }
-
-  table.orangeTable tbody td {
-	font-size: 15px;
   }
 
   table.orangeTable tr:nth-child(even) {
@@ -40,7 +34,6 @@ table.orangeTable {
   }
 
   table.orangeTable thead th {
-	font-size: 15px;
 	font-weight: bold;
 	color: #FFFFFF;
 	text-align: center;
@@ -51,9 +44,6 @@ table.orangeTable {
 	border-left: none;
   }
   
-  table.orangeTable tfoot td {
-	font-size: 15px;
-  }
   table.orangeTable tfoot .links {
 	text-align: right;
   }
@@ -71,8 +61,8 @@ a:hover {
 
 input, select{
     background-color: inherit;
-	font-size: inherit;
-	border: 2px solid transparent;
+    font-size: inherit;
+    border: 2px solid transparent;
 }
 
 input:hover,  input:active, input:focus{

@@ -1,10 +1,8 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { QuestionDTO } from 'src/dto/questiondto';
 import { RecruiterDTO } from 'src/dto/recruiterdto';
-import { CompanyDTO } from 'src/dto/companydto';
 import { QuestionService } from 'src/service/question.service';
 import { RecruiterService } from 'src/service/recruiter.service';
-import { CompanyService } from 'src/service/company.service';
 
 @Component({
   selector: 'app-questions',
@@ -52,13 +50,12 @@ export class QuestionsComponent implements OnInit {
     this.questiontoinsert.sector = this.questiontoinsert.recruiter.company.sector;
   }
 
-  changeCompanyAndSector(question: QuestionDTO, recruiterId: string) {
-    const id = parseInt(recruiterId.split(':')[1].trim(), 10 );
-    this.recruiters.forEach(x => {
-      if (x.id == id) {
-        question.recruiter = x;
-        question.company = question.recruiter.company;
-        question.sector = question.recruiter.company.sector;
+  changeCompanyAndSector(question: QuestionDTO, id: number) {
+    this.recruiters.forEach(r => {
+      if (r.id == id) {
+        question.recruiter = r;
+        question.company = r.company;
+        question.sector = r.company.sector;
       }
     });
   }

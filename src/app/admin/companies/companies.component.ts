@@ -11,6 +11,7 @@ export class CompaniesComponent implements OnInit {
 
   companies: CompanyDTO[];
   companytoinsert: CompanyDTO = new CompanyDTO();
+  sectorList: string[];
 
   constructor(private service: CompanyService) { }
 
@@ -19,7 +20,10 @@ export class CompaniesComponent implements OnInit {
   }
 
   getCompanies() {
-    this.service.getAll().subscribe(companies => this.companies = companies);
+    this.service.getAll().subscribe(companies => {
+      this.companies = companies;
+      this.sectorList = Array.from(new Set(companies.map((item: CompanyDTO) => item.sector)));
+    });
   }
 
   delete(company: CompanyDTO) {
@@ -51,10 +55,10 @@ export class CompaniesComponent implements OnInit {
   showSectorInputText() {
     const sectorSelecter = document.getElementById('sectorSelecter');
     const sectorInputText = document.getElementById('sectorInputText') as HTMLInputElement;
-    sectorSelecter.style.display='none';
+    sectorSelecter.style.display = 'none';
     this.companytoinsert.sector = undefined;
     sectorInputText.required = true;
-    sectorInputText.style.display='block';
+    sectorInputText.style.display = 'block';
   }
 
   showSectorSelecter() {

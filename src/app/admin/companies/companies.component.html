@@ -1,6 +1,5 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-md-1"></div>
     <div class="col-md-10">
       <table class="orangeTable">
         <tbody>
@@ -25,7 +24,7 @@
             <td>
               <select id="sectorSelecter" [(ngModel)]="companytoinsert.sector" (click)='checkSectors($event.target.value);'>
                 <option [ngValue]="undefined" hidden selected>choose a sector</option>
-                <option *ngFor="let company of companies" [ngValue]="company.sector">{{company.sector}}</option>
+                <option *ngFor="let sector of sectorList" [ngValue]="sector">{{sector}}</option>
                 <option [value]="'#'" >Others...</option>
               </select>
               <input id="sectorInputText" type="text" [(ngModel)]="companytoinsert.sector" placeholder="insert sector" style='display:none;'/> 
@@ -62,6 +61,5 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-1"></div>
   </div>
 </div>

@@ -1,6 +1,5 @@
 <div class="container">
     <div class="row mt-5">
-      <div class="col-md-1"></div>
       <div class="col-md-10">
         <table class="orangeTable">
           <tbody>
@@ -47,8 +46,8 @@
                 <input [(ngModel)]="question.topic">
               </td>
               <td>
-                  <select [(ngModel)]="question.recruiter.id">
-                    <option *ngFor="let r of recruiters" [ngValue]="r.id">{{r.name}}</option>
+                  <select (change)="changeCompanyAndSector(question, $event.target.value)">
+                    <option [selected]="question.recruiter.id==r.id" *ngFor="let r of recruiters" [value]="r.id">{{r.name}}</option>
                   </select>
               </td>
               <td>
@@ -67,6 +66,5 @@
           </tbody>
         </table>
       </div>
-      <div class="col-md-1"></div>
     </div>
   </div>
