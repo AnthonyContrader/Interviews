@@ -64,5 +64,4 @@ export class CompaniesComponent implements OnInit {
     sectorInputText.required = false;
     sectorSelecter.style.display = 'block';
   }
-
 }

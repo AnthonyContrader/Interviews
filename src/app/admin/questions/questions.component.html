@@ -1,3 +1,72 @@
-<p>
-  questions works!
-</p>
+<div class="container">
+    <div class="row mt-5">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <table class="orangeTable">
+          <tbody>
+            <tr>
+              <th>Question</th>
+              <th>Topic</th>              
+              <th>Recruiter</th>
+              <th>Company</th>
+              <th>Sector</th>
+              <th></th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>
+                <input placeholder="insert question" [(ngModel)]="questiontoinsert.question">
+              </td>
+              <td>
+                <input placeholder="insert topic" [(ngModel)]="questiontoinsert.topic">
+              </td>              
+              <td>
+                  <select [(ngModel)]="questiontoinsert.recruiter" (change)="setCompanyAndSector()">
+                      <option [ngValue]="undefined" hidden selected>choose a recruiter</option>
+                      <option *ngFor="let r of recruiters" [ngValue]="r">{{r.name}}</option>
+                  </select>
+              </td>
+              <td>
+                  <input id="companyField" disabled type="text">
+              </td>
+              <td>
+                  <input id="sectorField" disabled type="text">
+              </td>
+              <td>
+                <button (click)="insert(questiontoinsert)">Insert</button>
+              </td>
+              <td>
+                <button (click)="clear()">Clear</button>
+              </td>
+            </tr>
+            <tr *ngFor="let question of questions">
+              <td>
+                <input [(ngModel)]="question.question">
+              </td>
+              <td>
+                <input [(ngModel)]="question.topic">
+              </td>
+              <td>
+                  <select [(ngModel)]="question.recruiter.id">
+                    <option *ngFor="let r of recruiters" [ngValue]="r.id">{{r.name}}</option>
+                  </select>
+              </td>
+              <td>
+                  <input disabled [(ngModel)]="question.company.name">
+              </td>
+              <td>
+                  <input disabled [(ngModel)]="question.sector">
+              </td>
+              <td>
+                <button (click)="update(question)">Save</button>
+              </td>
+              <td>
+                <button (click)="delete(question)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
