@@ -18,7 +18,6 @@ public class RecruiterConverter extends AbstractConverter<Recruiter,RecruiterDTO
 		RecruiterDTO recruiterDTO = null;
 		if (recruiter != null) {
 			recruiterDTO = new RecruiterDTO(recruiter.getId(),recruiter.getName(),recruiter.getCompany());
-			
 		}
 		return recruiterDTO;
 	}
