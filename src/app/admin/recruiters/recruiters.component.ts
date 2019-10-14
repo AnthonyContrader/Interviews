@@ -12,8 +12,10 @@ import { CompanyService } from 'src/service/company.service';
 export class RecruitersComponent implements OnInit {
 
   recruiters: RecruiterDTO[];
+  recruitersOld: RecruiterDTO[];
   companies: CompanyDTO[];
   recruitertoinsert: RecruiterDTO = new RecruiterDTO();
+  recruitertosearch: RecruiterDTO = new RecruiterDTO();
 
   constructor(private service: RecruiterService, private companyService: CompanyService) { }
 
@@ -22,7 +24,7 @@ export class RecruitersComponent implements OnInit {
   }
 
   getRecruiters() {
-    this.service.getAll().subscribe(recruiters => this.recruiters = recruiters);
+    this.service.getAll().subscribe(recruiters => this.recruiters = this.recruitersOld = recruiters);
     this.companyService.getAll().subscribe(companies => this.companies = companies);
   }
 
@@ -41,6 +43,21 @@ export class RecruitersComponent implements OnInit {
 
   clear() {
     this.recruitertoinsert = new RecruiterDTO();
+  }
+
+  search() {
+    this.recruiters = [];
+    this.recruitersOld.forEach(r => {
+      if ((!this.recruitertosearch.name || r.name.toLowerCase().includes(this.recruitertosearch.name.toLowerCase()))
+          && (!this.recruitertosearch.company || r.company.id == this.recruitertosearch.company.id)) {
+        this.recruiters.push(r);
+      }
+    });
+  }
+
+  clearSearch() {
+    this.recruitertosearch = new RecruiterDTO();
+    this.recruiters = this.recruitersOld;
   }
 
 }

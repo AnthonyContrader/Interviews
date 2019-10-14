@@ -2,14 +2,41 @@
     text-align: center;
 }
 
+.btn-search {
+	width: auto;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+	text-align: center;
+	margin: 0;
+	padding: 1px 6px;
+    font-family: inherit;
+    font-size: inherit;
+	line-height: inherit;
+	border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+  }
+  .btn-search:link, .btn-search:visited {
+	width: auto;
+	background-color: #ffffff;
+	color: #ea7575;
+  }
+  .btn-search:active, .btn-search:hover {
+	width: auto;
+	background-color: #ffffff;
+	color: #ea7575;
+  }
+
 /*Tables*/
 table.orangeTable {
-	float: center;
+	margin-top: 20px;
+	margin-left:auto;
+    margin-right:auto;
 	font-size: 1vw;
 	max-width: 90%;
 	background-color: #f2f2f2;
 	text-align: center;
-	margin: 7px;
 	border-radius: 5px;
 	-webkit-box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
 	box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
@@ -54,6 +81,21 @@ table.orangeTable {
 	padding: 2px 8px;
 	border-radius: 5px;
   }
+
+  .searchRow input, .searchRow select{
+	border-radius: 15px;
+	font-family: inherit;
+    font-size: inherit;
+	line-height: inherit;
+	border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+	border-image: initial;
+  }
+
+  .searchRow select{
+	padding: 1.5% 7%;
+}
 
 a:hover {
 	color: #999999;

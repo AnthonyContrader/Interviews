@@ -10,7 +10,9 @@ import { UserDTO } from 'src/dto/userdto';
 export class UsersComponent implements OnInit {
 
   users: UserDTO[];
+  usersOld: UserDTO[];
   usertoinsert: UserDTO = new UserDTO();
+  usertosearch: UserDTO = new UserDTO();
 
   constructor(private service: UserService) { }
 
@@ -19,7 +21,7 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
-    this.service.getAll().subscribe(users => this.users = users);
+    this.service.getAll().subscribe(users => this.users = this.usersOld = users);
   }
 
   delete(user: UserDTO) {
@@ -42,6 +44,22 @@ export class UsersComponent implements OnInit {
   showPassword(e) {
     e.target.value = '';
     e.target.type = 'text';
+  }
+
+  search() {
+    this.users = [];
+    this.usersOld.forEach(u => {
+      if ((!this.usertosearch.username || u.username.toLowerCase().includes(this.usertosearch.username.toLowerCase()))
+          && (!this.usertosearch.userType || u.userType == this.usertosearch.userType)
+          && (!this.usertosearch.email || u.email.toLowerCase().includes(this.usertosearch.email.toLowerCase()))) {
+        this.users.push(u);
+      }
+    });
+  }
+
+  clearSearch() {
+    this.usertosearch = new UserDTO();
+    this.users = this.usersOld;
   }
 
 }

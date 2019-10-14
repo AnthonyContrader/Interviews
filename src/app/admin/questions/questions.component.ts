@@ -3,6 +3,8 @@ import { QuestionDTO } from 'src/dto/questiondto';
 import { RecruiterDTO } from 'src/dto/recruiterdto';
 import { QuestionService } from 'src/service/question.service';
 import { RecruiterService } from 'src/service/recruiter.service';
+import { CompanyService } from 'src/service/company.service';
+import { CompanyDTO } from 'src/dto/companydto';
 
 @Component({
   selector: 'app-questions',
@@ -12,18 +14,27 @@ import { RecruiterService } from 'src/service/recruiter.service';
 export class QuestionsComponent implements OnInit {
 
   questions: QuestionDTO[];
+  questionsOld: QuestionDTO[];
   recruiters: RecruiterDTO[];
   questiontoinsert: QuestionDTO = new QuestionDTO();
+  questiontosearch: QuestionDTO = new QuestionDTO();
+  companies: CompanyDTO[];
+  sectorList: string[];
 
-  constructor(private service: QuestionService, private recruiterService: RecruiterService) { }
+  constructor(private service: QuestionService, private recruiterService: RecruiterService,
+              private companyService: CompanyService) { }
 
   ngOnInit() {
     this.getQuestions();
   }
 
   getQuestions() {
-    this.service.getAll().subscribe(questions => this.questions = questions);
+    this.service.getAll().subscribe(questions => this.questions = this.questionsOld = questions);
     this.recruiterService.getAll().subscribe(recruiters => this.recruiters = recruiters);
+    this.companyService.getAll().subscribe(companies => {
+      this.companies = companies;
+      this.sectorList = Array.from(new Set(companies.map((item: CompanyDTO) => item.sector)));
+    });
   }
 
   delete(question: QuestionDTO) {
@@ -58,5 +69,23 @@ export class QuestionsComponent implements OnInit {
         question.sector = r.company.sector;
       }
     });
+  }
+
+  search() {
+    this.questions = [];
+    this.questionsOld.forEach(q => {
+      if ((!this.questiontosearch.question || q.question.toLowerCase().includes(this.questiontosearch.question.toLowerCase()))
+          && (!this.questiontosearch.topic || q.topic.toLowerCase().includes(this.questiontosearch.topic.toLowerCase()))
+          && (!this.questiontosearch.recruiter || q.recruiter.id == this.questiontosearch.recruiter.id)
+          && (!this.questiontosearch.company || q.company.id == this.questiontosearch.company.id)
+          && (!this.questiontosearch.sector || q.sector.includes(this.questiontosearch.sector))) {
+        this.questions.push(q);
+      }
+    });
+  }
+
+  clearSearch() {
+    this.questiontosearch = new QuestionDTO();
+    this.questions = this.questionsOld;
   }
 }
