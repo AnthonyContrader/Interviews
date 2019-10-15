@@ -14,6 +14,12 @@
           </td>
           <td><input placeholder="email" [(ngModel)]="usertosearch.email"></td>
           <td>
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="usertosearch.activated">
+                <span class="slider round"></span>
+              </label>
+            </td>
+          <td>
               <button class="btn btn-search" (click)="search()"><i class="fas fa-search"></i>Search</button>
           </td>
           <td>
@@ -27,6 +33,7 @@
       <th>Last Name</th>
       <th>Usertype</th>
       <th>Email</th>
+      <th>Activated</th>
       <th></th>
       <th></th>
     </tr>
@@ -53,6 +60,7 @@
       <td>
         <input type="email" placeholder="email" [(ngModel)]="usertoinsert.email">
       </td>
+      <td></td>
       <td>
         <button (click)="insert(usertoinsert)">Insert</button>
       </td>
@@ -85,6 +93,12 @@
       </td>
       <td>
         <input type="email" [(ngModel)]="user.email">
+      </td>
+      <td>
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="user.activated">
+          <span class="slider round"></span>
+        </label>
       </td>
       <td>
         <button (click)=update(user)>Save</button>

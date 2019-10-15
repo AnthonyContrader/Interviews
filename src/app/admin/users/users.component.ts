@@ -50,7 +50,8 @@ export class UsersComponent implements OnInit {
           && (!this.usertosearch.firstName || u.firstName.toLowerCase().includes(this.usertosearch.firstName.toLowerCase()))
           && (!this.usertosearch.lastName || u.lastName.toLowerCase().includes(this.usertosearch.lastName.toLowerCase()))
           && (!this.usertosearch.authorities || u.authorities.some(a => this.usertosearch.authorities.includes(a)))
-          && (!this.usertosearch.email || u.email.toLowerCase().includes(this.usertosearch.email.toLowerCase()))) {
+          && (!this.usertosearch.email || u.email.toLowerCase().includes(this.usertosearch.email.toLowerCase()))
+          && ((this.usertosearch.activated == undefined && !u.activated) || u.activated == this.usertosearch.activated)) {
         this.users.push(u);
       }
     });

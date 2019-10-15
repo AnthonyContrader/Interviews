@@ -21,5 +21,7 @@ export class UserDTO {
    authorities: string[];
 
    email: string;
+
+   activated: boolean;
 }
 
