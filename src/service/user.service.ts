@@ -29,17 +29,14 @@ export class UserService extends AbstractService<UserDTO> {
   }
 
   getAccount(): Observable<UserDTO> {
-    const heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
-    return this.http.get<any>('http://localhost:8080/api/account', {headers: heads});
+    return this.http.get<any>('http://localhost:8080/api/account', {headers: this.heads});
   }
 
   read(login: string): Observable<UserDTO> {
-    const heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
     return this.http.get<UserDTO>('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: this.heads});
   }
 
   delete(login: string): Observable<any> {
-    const heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
     return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: this.heads});
   }
 
