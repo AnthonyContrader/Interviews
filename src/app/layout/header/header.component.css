@@ -1,0 +1,23 @@
+
+#header{
+  background-color: #f2f2f2;
+}
+ 
+p{  
+  margin-top: 10%;
+  text-align: center;
+  font-size: 16px;
+  color: #f1f1f1;
+  height: inherit;
+  width: 100%;
+  background-color: #1e282d !important;
+}
+
+.col-md-4{
+  width: 50%;
+  margin: 0 auto;
+}
+
+i:hover{
+  background-color: crimson;
+}

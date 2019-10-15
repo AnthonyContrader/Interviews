@@ -1,0 +1,97 @@
+<table class="orangeTable">
+  <tbody>
+      <tr class="searchRow">
+          <td><input placeholder="username" [(ngModel)]="usertosearch.login"></td>
+          <td></td>
+          <td><input placeholder="first name" [(ngModel)]="usertosearch.firstName"></td>
+          <td><input placeholder="last name" [(ngModel)]="usertosearch.lastName"></td>
+          <td>
+            <select [(ngModel)]="usertosearch.authorities">
+                <option [ngValue]="undefined" hidden selected>choose a usertype</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_USER">USER</option>
+            </select>
+          </td>
+          <td><input placeholder="email" [(ngModel)]="usertosearch.email"></td>
+          <td>
+              <button class="btn btn-search" (click)="search()"><i class="fas fa-search"></i>Search</button>
+          </td>
+          <td>
+              <button (click)="clearSearch()">Clear</button>
+          </td>
+    </tr>
+    <tr>
+      <th>Username</th>
+      <th>Password</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Usertype</th>
+      <th>Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>
+        <input autocomplete="off" placeholder="insert username" type="text" [(ngModel)]="usertoinsert.login">
+      </td>
+      <td>
+        <input autocomplete="off" placeholder="insert password" type="text" [(ngModel)]="usertoinsert.password">
+      </td>
+      <td>
+        <input placeholder="insert first name" type="text" [(ngModel)]="usertoinsert.firstName">
+      </td>
+      <td>
+        <input placeholder="insert last name" type="text" [(ngModel)]="usertoinsert.lastName">
+      </td>
+      <td>
+        <select [(ngModel)]="usertoinsert.authorities">
+          <option [ngValue]="undefined" hidden selected>choose a usertype</option>
+          <option [ngValue]="['ROLE_ADMIN']">ADMIN</option>
+          <option [ngValue]="['ROLE_USER']">USER</option>
+        </select>
+      </td>
+      <td>
+        <input type="email" placeholder="email" [(ngModel)]="usertoinsert.email">
+      </td>
+      <td>
+        <button (click)="insert(usertoinsert)">Insert</button>
+      </td>
+      <td>
+        <button (click)="clear()">Clear</button>
+      </td>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>
+        <input autocomplete="off" [(ngModel)]="user.login">
+      </td>
+      <td>
+        <input autocomplete="off" type="password" disabled>
+      </td>
+      <td>
+          <input [(ngModel)]="user.firstName">
+      </td>
+      <td>
+          <input [(ngModel)]="user.lastName">
+      </td>
+      <td>
+        <select id="usertype_{{user.login}}" [(ngModel)]="user.authorities">
+          <option value="ROLE_ADMIN">
+            ADMIN
+          </option>
+          <option value="ROLE_USER">
+            USER
+          </option>
+        </select>
+      </td>
+      <td>
+        <input type="email" [(ngModel)]="user.email">
+      </td>
+      <td>
+        <button (click)=update(user)>Save</button>
+      </td>
+      <td>
+        <button (click)="delete(user)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

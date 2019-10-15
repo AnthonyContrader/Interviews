@@ -1,0 +1,64 @@
+<table class="orangeTable">
+  <tr class="searchRow">
+      <td>
+          <input placeholder="name" [(ngModel)]="recruitertosearch.name">
+        </td>
+        <td>
+          <select [(ngModel)]="recruitertosearch.company">
+              <option [ngValue]="undefined" hidden selected>choose a company</option>
+              <option *ngFor="let c of companies" [ngValue]="c">{{c.name}}</option>
+          </select>
+        </td>
+        <td>
+            <button class="btn btn-search" (click)="search()"><i class="fas fa-search"></i>Search</button>
+        </td>
+        <td>
+            <button (click)="clearSearch()">Clear</button>
+        </td>
+  </tr>
+  <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Company
+    </th>
+    <th>
+    </th>
+    <th>
+    </th>
+  </tr>
+  <tr>
+    <td>
+      <input placeholder="insert name" [(ngModel)]="recruitertoinsert.name">
+    </td>
+    <td>
+      <select [(ngModel)]="recruitertoinsert.company">
+          <option [ngValue]="undefined" hidden selected>choose a company</option>
+          <option *ngFor="let c of companies" [ngValue]="c">{{c.name}}</option>
+      </select>
+    </td>
+    <td>
+      <button (click)="insert(recruitertoinsert)">Insert</button>
+    </td>
+    <td>
+      <button (click)="clear()">Clear</button>
+    </td>
+  </tr>
+  <tr *ngFor="let r of recruiters">
+    <td>
+      <input class="inputTable" [(ngModel)]="r.name">
+    </td>
+    <td>
+      <select [(ngModel)]="r.company.id">
+        <option *ngFor="let c of companies" [ngValue]="c.id">{{c.name}}</option>
+      </select>
+    </td>
+    <td>
+      <button (click)="update(r)">Save</button>
+    </td>
+    <td>
+      <button (click)="delete(r)">Delete</button>
+    </td>
+  </tr>
+</table>

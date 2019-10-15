@@ -1,0 +1,73 @@
+.login{
+	position:relative;
+	max-width: 75%;
+    overflow: hidden;
+    margin: auto;
+    font-size: 1vw;
+}
+
+.login input {
+	position:absolute;
+	width:30%;
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.loginimg{
+	width: 100%;
+}
+
+.login label {
+	position:absolute;
+	text-align: center;
+}
+
+.login #usernamelabel{
+	color: white;
+    position: absolute;
+    right: 25%;
+    top: 30%;
+    padding: 1%;
+    text-align: center;
+}
+
+.login #user{
+	position: absolute;
+    right: 9%;
+    top: 35%;
+    padding: 1%;
+}
+
+.login #passwordlabel{
+	color: white;
+    position: absolute;
+    right: 25%;
+    top: 44%;
+    padding: 1%;
+    text-align: center;
+}
+
+.login #pass{
+	position: absolute;
+    right: 9%;
+    top: 49%;
+    padding: 1%;
+}
+
+.login #signup{
+	position: absolute;
+    color: white;
+    right: 24%;
+    top: 68%;
+}
+
+.login #loginbutton{
+	position: absolute;
+    right: 3.5%;
+    margin: 0;
+    background-color: transparent;
+    width: 10%;
+    padding-top: 9%;
+    border: none;
+    top: 79%;
+}

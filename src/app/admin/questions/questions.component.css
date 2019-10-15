@@ -1,0 +1,124 @@
+*{
+    text-align: center;
+}
+
+.btn-search {
+	width: auto;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+	text-align: center;
+	margin: 0;
+	padding: 1px 6px;
+    font-family: inherit;
+    font-size: inherit;
+	line-height: inherit;
+	border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+  }
+  .btn-search:link, .btn-search:visited {
+	width: auto;
+	background-color: #ffffff;
+	color: #ea7575;
+  }
+  .btn-search:active, .btn-search:hover {
+	width: auto;
+	background-color: #ffffff;
+	color: #ea7575;
+  }
+
+/*Tables*/
+table.orangeTable {
+	margin-top: 20px;
+	margin-left:auto;
+    margin-right:auto;
+	font-size: 1vw;
+	max-width: 90%;
+	background-color: #f2f2f2;
+	text-align: center;
+	border-radius: 5px;
+	-webkit-box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+	box-shadow: 4px 4px 6px 1px rgba(0,0,0,0.4) ;
+  }
+
+  table.orangeTable th {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+	background: #ea7575;
+	color: white;
+  }
+
+  table.orangeTable td {
+	padding: 3px 2px;
+	border-radius: 10px;
+	height: 35px;
+  }
+
+  table.orangeTable tr:nth-child(even) {
+	background: #ffffff;
+  }
+
+  table.orangeTable thead th {
+	font-weight: bold;
+	color: #FFFFFF;
+	text-align: center;
+	border-left: 2px solid #D0E4F5;
+  }
+
+  table.orangeTable thead th:first-child {
+	border-left: none;
+  }
+  
+  table.orangeTable tfoot .links {
+	text-align: right;
+  }
+  table.orangeTable tfoot .links a{
+	display: inline-block;
+	background: #00a990;
+	color: #FFFFFF;
+	padding: 2px 8px;
+	border-radius: 5px;
+  }
+
+  .searchRow input, .searchRow select{
+	border-radius: 15px;
+	font-family: inherit;
+    font-size: inherit;
+	line-height: inherit;
+	border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+	border-image: initial;
+  }
+
+  .searchRow select{
+	padding: 1.5% 7%;
+}
+
+a:hover {
+	color: #999999;
+}
+
+input, select{
+    background-color: inherit;
+    font-size: inherit;
+    border: 2px solid transparent;
+}
+
+input:hover,  input:active, input:focus{
+    border: 2px solid crimson;
+}
+
+button{
+	width: 60px;
+	background-color: #f2f2f2;
+	border-radius: 5px;
+}
+
+button:hover{
+	width: 60px;
+	background-color: #ffffff;
+	color: #ea7575;
+}
