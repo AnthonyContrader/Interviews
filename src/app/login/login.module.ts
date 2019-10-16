@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from '../register/register.component';
 
 /**
  * Questo modulo serve unicamente Login e Registrazione (non implementata)
@@ -11,13 +12,14 @@ import { FormsModule } from '@angular/forms';
  * @author Vittorio Valent
  */
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
 
   imports: [
     CommonModule,
     LoginRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
-  
+
 })
 export class LoginModule { }

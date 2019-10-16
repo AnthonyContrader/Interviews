@@ -29,19 +29,23 @@ export class UserService extends AbstractService<UserDTO> {
   }
 
   getAccount(): Observable<UserDTO> {
-    return this.http.get<any>('http://localhost:8080/api/account', {headers: this.heads});
+    let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+    return this.http.get<any>('http://localhost:8080/api/account', {headers: heads});
   }
 
-  read(login: string): Observable<UserDTO> {
-    return this.http.get<UserDTO>('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: this.heads});
+  readUser(login: string): Observable<UserDTO> {
+    let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+    return this.http.get<UserDTO>('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: heads});
   }
 
-  delete(login: string): Observable<any> {
-    return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: this.heads});
+  deleteUser(login: string): Observable<any> {
+    let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+    return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/' + login, {headers: heads});
   }
 
   insert(dto: UserDTO): Observable<any> {
-    return this.http.post('http://localhost:' + this.port + '/api/register', dto, {headers: this.heads});
+    let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+    return this.http.post('http://localhost:' + this.port + '/api/register', dto, {headers: heads});
   }
 
 }

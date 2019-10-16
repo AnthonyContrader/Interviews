@@ -15,29 +15,33 @@ export abstract class AbstractService<DTO> implements Service<DTO> {
 
     type: string;
     port: string = '8080';
-    heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
 
     constructor(protected http: HttpClient) {
     }
 
     getAll(): Observable<DTO[]> {
-        return this.http.get<DTO[]>('http://localhost:' + this.port + '/' + this.type, {headers: this.heads});
+        let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+        return this.http.get<DTO[]>('http://localhost:' + this.port + '/' + this.type, {headers: heads});
     }
 
-    read(id: any): Observable<DTO> {
-        return this.http.get<DTO>('http://localhost:' + this.port + '/' + this.type + '/' + id, {headers: this.heads});
+    read(id: number): Observable<DTO> {
+        let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+        return this.http.get<DTO>('http://localhost:' + this.port + '/' + this.type + '/' + id, {headers: heads});
     }
 
-    delete(id: any): Observable<any> {
-        return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/' + id, {headers: this.heads});
+    delete(id: number): Observable<any> {
+        let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+        return this.http.delete('http://localhost:' + this.port + '/' + this.type + '/' + id, {headers: heads});
     }
 
     insert(dto: DTO): Observable<any> {
-        return this.http.post('http://localhost:' + this.port + '/' + this.type, dto, {headers: this.heads});
+        let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+        return this.http.post('http://localhost:' + this.port + '/' + this.type, dto, {headers: heads});
     }
 
     update(dto: DTO): Observable<DTO> {
-        return this.http.put<DTO>('http://localhost:' + this.port + '/' + this.type, dto, {headers: this.heads});
+        let heads = {'Authorization': 'Bearer ' + localStorage.getItem('id_token')};
+        return this.http.put<DTO>('http://localhost:' + this.port + '/' + this.type, dto, {headers: heads});
 
     }
 

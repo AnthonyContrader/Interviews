@@ -14,11 +14,12 @@
           </td>
           <td><input placeholder="email" [(ngModel)]="usertosearch.email"></td>
           <td>
-              <label class="switch">
-                <input type="checkbox" [(ngModel)]="usertosearch.activated">
-                <span class="slider round"></span>
-              </label>
-            </td>
+            <select [(ngModel)]="usertosearch.activated">
+                <option [ngValue]="undefined" hidden selected>status</option>
+                <option [ngValue]="true">Activated</option>
+                <option [ngValue]="false">Deactivated</option>
+            </select>
+          </td>
           <td>
               <button class="btn btn-search" (click)="search()"><i class="fas fa-search"></i>Search</button>
           </td>

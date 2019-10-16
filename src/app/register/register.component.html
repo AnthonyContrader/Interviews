@@ -1,0 +1,85 @@
+<div id="header" class="row no-gutters">
+  <div class="col-md-4" style="text-align: center">
+      <img src="../../../assets/logo.png" alt="header" style="max-width:70%;">
+  </div>
+</div>
+<div class="row no-gutters" style="height: 92vh">
+    <div class="col-md-12 no-gutters" style="height: 72vh">
+      <form class="registerform" [formGroup]="angForm" (submit)="signUp()">
+        <div class="row">
+          <h1>Sign Up</h1>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="login">Username</label>
+            <div *ngIf="isInvalid('login')" class="alert alert-danger">
+              <div *ngIf="angForm.controls['login'].errors.required">
+                Required !
+              </div>
+            </div>          
+          </div>
+          <div class="col-75">
+            <input type="text" id="login" name="login" placeholder="insert username" formControlName="login">        
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="pass">Password</label>
+            <div *ngIf="isInvalid('password')" class="alert alert-danger">
+                <div *ngIf="angForm.controls['password'].errors.required">
+                  Required !
+                </div>
+            </div> 
+          </div>
+          <div class="col-75">
+            <input type="password" id="pass" name="password" placeholder="insert password" formControlName="password"> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="firstName">First Name</label>
+            <div *ngIf="isInvalid('firstName')" class="alert alert-danger">
+                <div *ngIf="angForm.controls['firstName'].errors.required">
+                  Required !
+                </div>
+              </div> 
+          </div>
+          <div class="col-75">
+            <input type="text" id="firstName" name="firstName" placeholder="insert first name" formControlName="firstName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="lastName">Last Name</label>
+            <div *ngIf="isInvalid('lastName')" class="alert alert-danger">
+                <div *ngIf="angForm.controls['lastName'].errors.required">
+                  Required !
+                </div>
+              </div> 
+          </div>
+          <div class="col-75">
+            <input type="text" id="lastName" name="lastName" placeholder="insert last name" formControlName="lastName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="email">Email</label>
+            <div *ngIf="isInvalid('email')" class="alert alert-danger">
+                <div *ngIf="angForm.controls['email'].errors.required">
+                  Required !
+                </div>
+            </div> 
+          </div>
+          <div class="col-75">
+            <input type="text" id="email" name="email" placeholder="insert email" formControlName="email">
+          </div>
+        </div>
+        <div class="row">          
+          <button type="submit" >Sign Up</button>
+        </div>
+        <div class="row">
+            <a class="backlink" href="login">&lt;--- Back</a>
+          </div>
+      </form>
+    </div>
+</div>

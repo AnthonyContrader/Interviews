@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
  */
 export interface Service<DTO> {
 
-    read(id: any): Observable<DTO> ;
+    read(id: number): Observable<DTO> ;
 
-    delete(id: any): Observable<any>;
+    delete(id: number): Observable<any>;
 
     update(dto: DTO): Observable<any> ;
 
