@@ -10,6 +10,6 @@ export class QuestionService extends AbstractService<QuestionDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'question';
+    this.type = 'interviews/api/questions';
   }
 }

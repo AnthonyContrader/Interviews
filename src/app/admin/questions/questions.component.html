@@ -1,18 +1,19 @@
-<table class="orangeTable">
+
+  <table class="orangeTable">
   <tbody>
     <tr class="searchRow">
       <td><input placeholder="question" [(ngModel)]="questiontosearch.question"></td>
       <td><input placeholder="topic" [(ngModel)]="questiontosearch.topic"></td>
       <td>
-          <select [(ngModel)]="questiontosearch.recruiter">
+          <select [(ngModel)]="questiontosearch.recruiterId">
               <option [ngValue]="undefined" hidden selected>choose a recruiter</option>
-              <option *ngFor="let r of recruiters" [ngValue]="r">{{r.name}}</option>
+              <option *ngFor="let r of recruiters" [ngValue]="r.id">{{r.name}}</option>
           </select>
       </td>
       <td>
-          <select [(ngModel)]="questiontosearch.company">
+          <select [(ngModel)]="questiontosearch.companyName">
               <option [ngValue]="undefined" hidden selected>choose a company</option>
-              <option *ngFor="let c of companies" [ngValue]="c">{{c.name}}</option>
+              <option *ngFor="let c of companies" [ngValue]="c.name">{{c.name}}</option>
           </select>
       </td>
       <td>
@@ -45,16 +46,16 @@
         <input placeholder="insert topic" [(ngModel)]="questiontoinsert.topic">
       </td>              
       <td>
-          <select [(ngModel)]="questiontoinsert.recruiter" (change)="setCompanyAndSector()">
+          <select [(ngModel)]="questiontoinsert.recruiterId" (change)="setCompanyAndSector()">
               <option [ngValue]="undefined" hidden selected>choose a recruiter</option>
-              <option *ngFor="let r of recruiters" [ngValue]="r">{{r.name}}</option>
+              <option *ngFor="let r of recruiters" [ngValue]="r.id">{{r.name}}</option>
           </select>
       </td>
       <td>
-          <input id="companyField" disabled type="text">
+          <input id="companyField"  disabled type="text">
       </td>
       <td>
-          <input id="sectorField" disabled type="text">
+          <input id="sectorField"  disabled type="text">
       </td>
       <td>
         <button (click)="insert(questiontoinsert)">Insert</button>
@@ -72,14 +73,14 @@
       </td>
       <td>
           <select (change)="changeCompanyAndSector(question, $event.target.value)">
-            <option [selected]="question.recruiter.id==r.id" *ngFor="let r of recruiters" [value]="r.id">{{r.name}}</option>
+            <option [selected]="question.recruiterId==r.id" *ngFor="let r of recruiters" [value]="r.id">{{r.name}}</option>
           </select>
       </td>
       <td>
-          <input disabled [(ngModel)]="question.company.name">
+          <input [id]= "'companyName' + question.id" [value]="setCompanyName(question)" disabled>
       </td>
       <td>
-          <input disabled [(ngModel)]="question.sector">
+          <input [id]= "'companySector' + question.id" [value]="setCompanySector(question)" disabled>
       </td>
       <td>
         <button (click)="update(question)">Save</button>

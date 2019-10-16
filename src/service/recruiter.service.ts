@@ -10,6 +10,6 @@ export class RecruiterService extends AbstractService<RecruiterDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'recruiter';
+    this.type = 'interviews/api/recruiters';
   }
 }

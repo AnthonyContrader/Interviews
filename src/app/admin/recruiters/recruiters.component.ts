@@ -49,7 +49,7 @@ export class RecruitersComponent implements OnInit {
     this.recruiters = [];
     this.recruitersOld.forEach(r => {
       if ((!this.recruitertosearch.name || r.name.toLowerCase().includes(this.recruitertosearch.name.toLowerCase()))
-          && (!this.recruitertosearch.company || r.company.id == this.recruitertosearch.company.id)) {
+          && (!this.recruitertosearch.companyId || r.companyId == this.recruitertosearch.companyId)) {
         this.recruiters.push(r);
       }
     });
@@ -59,5 +59,4 @@ export class RecruitersComponent implements OnInit {
     this.recruitertosearch = new RecruiterDTO();
     this.recruiters = this.recruitersOld;
   }
-
 }

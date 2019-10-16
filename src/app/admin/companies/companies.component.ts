@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyDTO } from 'src/dto/companydto';
 import { CompanyService } from 'src/service/company.service';
+import { clearResolutionOfComponentResourcesQueue } from '@angular/core/src/metadata/resource_loading';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-companies',
@@ -8,7 +10,7 @@ import { CompanyService } from 'src/service/company.service';
   styleUrls: ['./companies.component.css']
 })
 export class CompaniesComponent implements OnInit {
-
+  companySectorOld: string;
   companies: CompanyDTO[];
   companiesOld: CompanyDTO[];
   companytoinsert: CompanyDTO = new CompanyDTO();
@@ -33,42 +35,56 @@ export class CompaniesComponent implements OnInit {
   }
 
   update(company: CompanyDTO) {
-    this.service.update(company).subscribe(() => this.getCompanies());
+    if (company.sector !== undefined) {
+      this.service.update(company).subscribe(() => this.getCompanies());
+      this.clear(company);
+    }
   }
 
   insert(company: CompanyDTO) {
     this.service.insert(company).subscribe(() => this.getCompanies());
-    this.clear();
+    this.clear(company);
   }
 
-  clear(){
+  clear(company){
     this.companytoinsert = new CompanyDTO();
-    this.showSectorSelecter();
+    this.showSectorSelecter(company);
   }
 
-  checkSectors(e) {
+  saveSector(sector) {
+    this.companySectorOld=sector;
+  }
+
+  restoreSelecter(company) {
+    company.id !== undefined ? company.sector = this.companySectorOld : company.sector = undefined;
+    this.showSectorSelecter(company);
+  }
+
+  checkSectors(e, company) {
     if (e === '#') {
-      this.showSectorInputText();
-    } else {
-      this.showSectorSelecter();
+      this.showSectorInputText(company);
     }
   }
-
-  showSectorInputText() {
-    const sectorSelecter = document.getElementById('sectorSelecter');
-    const sectorInputText = document.getElementById('sectorInputText') as HTMLInputElement;
+  showSectorInputText(company) {
+    let id: string;
+    company.id === undefined ? id = '' : id = company.id;
+    const sectorSelecter = document.getElementById('sectorSelecter' + id);
+    const sectorInputText = document.getElementById('sectorInputText' + id) as HTMLInputElement;
     sectorSelecter.style.display = 'none';
-    this.companytoinsert.sector = undefined;
+    company.sector = undefined;
     sectorInputText.required = true;
-    sectorInputText.style.display = 'block';
+    sectorInputText.style.display = 'inline-block';
+    sectorInputText.focus();
   }
 
-  showSectorSelecter() {
-    const sectorSelecter = document.getElementById('sectorSelecter');
-    const sectorInputText = document.getElementById('sectorInputText') as HTMLInputElement;
+  showSectorSelecter(company) {
+    let id: string;
+    company.id === undefined ? id = '' : id = company.id;
+    const sectorSelecter = document.getElementById('sectorSelecter' + id);
+    const sectorInputText = document.getElementById('sectorInputText' + id) as HTMLInputElement;
     sectorInputText.style.display = 'none';
     sectorInputText.required = false;
-    sectorSelecter.style.display = 'block';
+    sectorSelecter.style.display = 'inline-block';
   }
 
   search() {

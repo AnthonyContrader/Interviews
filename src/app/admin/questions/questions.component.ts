@@ -1,4 +1,4 @@
-import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { QuestionDTO } from 'src/dto/questiondto';
 import { RecruiterDTO } from 'src/dto/recruiterdto';
 import { QuestionService } from 'src/service/question.service';
@@ -11,6 +11,7 @@ import { CompanyDTO } from 'src/dto/companydto';
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css']
 })
+
 export class QuestionsComponent implements OnInit {
 
   questions: QuestionDTO[];
@@ -52,23 +53,47 @@ export class QuestionsComponent implements OnInit {
 
   clear() {
     this.questiontoinsert = new QuestionDTO();
+    (document.getElementById('companyField') as HTMLInputElement).value = '';
+    (document.getElementById('sectorField') as HTMLInputElement).value = '';
   }
 
   setCompanyAndSector() {
-    (document.getElementById('companyField') as HTMLInputElement).value = this.questiontoinsert.recruiter.company.name;
-    (document.getElementById('sectorField') as HTMLInputElement).value = this.questiontoinsert.recruiter.company.sector;
-    this.questiontoinsert.company = this.questiontoinsert.recruiter.company;
-    this.questiontoinsert.sector = this.questiontoinsert.recruiter.company.sector;
+    let recruiter = this.recruiters.find(r => r.id == this.questiontoinsert.recruiterId);
+    (document.getElementById('companyField') as HTMLInputElement).value = recruiter.companyName;
+    let company = this.companies.find(c => c.id == recruiter.companyId);
+    (document.getElementById('sectorField') as HTMLInputElement).value = company.sector;
   }
 
   changeCompanyAndSector(question: QuestionDTO, id: number) {
+    let companyNameField= (document.getElementById('companyName'+question.id) as HTMLInputElement);
+    let companySectorField= (document.getElementById('companySector'+question.id) as HTMLInputElement);
     this.recruiters.forEach(r => {
       if (r.id == id) {
-        question.recruiter = r;
-        question.company = r.company;
-        question.sector = r.company.sector;
+        question.recruiterId = r.id;
+        companyNameField.value = r.companyName;
+        let sector = this.companies.find(c => c.id == r.companyId).sector;
+        companySectorField.value =sector;
       }
     });
+  }
+
+  setCompanyName(question): string {
+    if (this.recruiters) {
+      let recruiter = this.recruiters.find(r => r.id == question.recruiterId);
+      question.companyName = recruiter.companyName;
+      return question.companyName;
+    }
+    return '';
+  }
+
+  setCompanySector(question): string{
+    if (this.recruiters && this.companies){
+      let recruiter = this.recruiters.find(r => r.id == question.recruiterId);
+      let company = this.companies.find(c => c.id == recruiter.companyId);
+      question.sector = company.sector;
+      return question.sector;
+    }
+    return '';
   }
 
   search() {
@@ -76,9 +101,9 @@ export class QuestionsComponent implements OnInit {
     this.questionsOld.forEach(q => {
       if ((!this.questiontosearch.question || q.question.toLowerCase().includes(this.questiontosearch.question.toLowerCase()))
           && (!this.questiontosearch.topic || q.topic.toLowerCase().includes(this.questiontosearch.topic.toLowerCase()))
-          && (!this.questiontosearch.recruiter || q.recruiter.id == this.questiontosearch.recruiter.id)
-          && (!this.questiontosearch.company || q.company.id == this.questiontosearch.company.id)
-          && (!this.questiontosearch.sector || q.sector.includes(this.questiontosearch.sector))) {
+          && (!this.questiontosearch.recruiterId || q.recruiterId === this.questiontosearch.recruiterId)
+          && (!this.questiontosearch.companyName || q.companyName === this.questiontosearch.companyName)
+          && (!this.questiontosearch.sector || q.sector === this.questiontosearch.sector)) {
         this.questions.push(q);
       }
     });

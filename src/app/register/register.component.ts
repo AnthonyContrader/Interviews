@@ -34,8 +34,6 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     if (this.angForm.valid) {
       this.service.insert(this.angForm.value).subscribe(() => this.router.navigateByUrl('/login'));
-      this.angForm.reset();
-      this.submitted = false;
     }
   }
 
