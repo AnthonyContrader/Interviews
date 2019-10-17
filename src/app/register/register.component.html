@@ -77,6 +77,21 @@
         <div class="row">          
           <button type="submit" >Sign Up</button>
         </div>
+        <div class="row rowalert" *ngIf="errorUserExists">
+          <div class="alert alert-danger">
+            <strong>Login name already registered!</strong> Please choose another one.
+          </div>
+        </div>
+        <div class="row rowalert" *ngIf="errorEmailExists">
+          <div class="alert alert-danger">
+            <strong>Email is already in use!</strong> Please choose another one.
+          </div>
+        </div>
+        <div class="row rowalert" *ngIf="error">
+          <div class="alert alert-danger">
+            <strong>Registration Error.</strong>
+          </div>
+        </div>
         <div class="row">
             <a class="backlink" [routerLink] = "['/login']">&lt;--- Back</a>
           </div>
