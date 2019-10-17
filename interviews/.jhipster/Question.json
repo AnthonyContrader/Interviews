@@ -3,15 +3,6 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "company",
-            "otherEntityName": "company",
-            "relationshipType": "many-to-one",
-            "relationshipValidateRules": [
-                "required"
-            ],
-            "otherEntityField": "name"
-        },
-        {
             "relationshipName": "recruiter",
             "otherEntityName": "recruiter",
             "relationshipType": "many-to-one",
@@ -31,13 +22,6 @@
         },
         {
             "fieldName": "topic",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "sector",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"

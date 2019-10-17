@@ -30,14 +30,6 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="sector" type="varchar(255)">
-                <constraints nullable="false" />
-            </column>
-
-            <column name="company_id" type="bigint">
-                <constraints nullable="false" />
-            </column>
-
             <column name="recruiter_id" type="bigint">
                 <constraints nullable="false" />
             </column>

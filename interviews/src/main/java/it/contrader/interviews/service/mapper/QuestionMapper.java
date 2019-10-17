@@ -8,16 +8,13 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Question and its DTO QuestionDTO.
  */
-@Mapper(componentModel = "spring", uses = {CompanyMapper.class, RecruiterMapper.class})
+@Mapper(componentModel = "spring", uses = {RecruiterMapper.class})
 public interface QuestionMapper extends EntityMapper<QuestionDTO, Question> {
 
-    @Mapping(source = "company.id", target = "companyId")
-    @Mapping(source = "company.name", target = "companyName")
     @Mapping(source = "recruiter.id", target = "recruiterId")
     @Mapping(source = "recruiter.name", target = "recruiterName")
     QuestionDTO toDto(Question question);
 
-    @Mapping(source = "companyId", target = "company")
     @Mapping(source = "recruiterId", target = "recruiter")
     Question toEntity(QuestionDTO questionDTO);
 

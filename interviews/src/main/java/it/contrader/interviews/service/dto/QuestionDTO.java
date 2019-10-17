@@ -17,13 +17,6 @@ public class QuestionDTO implements Serializable {
     @NotNull
     private String topic;
 
-    @NotNull
-    private String sector;
-
-    private Long companyId;
-
-    private String companyName;
-
     private Long recruiterId;
 
     private String recruiterName;
@@ -50,30 +43,6 @@ public class QuestionDTO implements Serializable {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public Long getRecruiterId() {
@@ -119,9 +88,6 @@ public class QuestionDTO implements Serializable {
             "id=" + getId() +
             ", question='" + getQuestion() + "'" +
             ", topic='" + getTopic() + "'" +
-            ", sector='" + getSector() + "'" +
-            ", company=" + getCompanyId() +
-            ", company='" + getCompanyName() + "'" +
             ", recruiter=" + getRecruiterId() +
             ", recruiter='" + getRecruiterName() + "'" +
             "}";

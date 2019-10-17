@@ -3,7 +3,6 @@ package it.contrader.interviews.web.rest;
 import it.contrader.interviews.InterviewsApp;
 
 import it.contrader.interviews.domain.Question;
-import it.contrader.interviews.domain.Company;
 import it.contrader.interviews.domain.Recruiter;
 import it.contrader.interviews.repository.QuestionRepository;
 import it.contrader.interviews.service.QuestionService;
@@ -49,9 +48,6 @@ public class QuestionResourceIntTest {
 
     private static final String DEFAULT_TOPIC = "AAAAAAAAAA";
     private static final String UPDATED_TOPIC = "BBBBBBBBBB";
-
-    private static final String DEFAULT_SECTOR = "AAAAAAAAAA";
-    private static final String UPDATED_SECTOR = "BBBBBBBBBB";
 
     @Autowired
     private QuestionRepository questionRepository;
@@ -100,13 +96,7 @@ public class QuestionResourceIntTest {
     public static Question createEntity(EntityManager em) {
         Question question = new Question()
             .question(DEFAULT_QUESTION)
-            .topic(DEFAULT_TOPIC)
-            .sector(DEFAULT_SECTOR);
-        // Add required entity
-        Company company = CompanyResourceIntTest.createEntity(em);
-        em.persist(company);
-        em.flush();
-        question.setCompany(company);
+            .topic(DEFAULT_TOPIC);
         // Add required entity
         Recruiter recruiter = RecruiterResourceIntTest.createEntity(em);
         em.persist(recruiter);
@@ -138,7 +128,6 @@ public class QuestionResourceIntTest {
         Question testQuestion = questionList.get(questionList.size() - 1);
         assertThat(testQuestion.getQuestion()).isEqualTo(DEFAULT_QUESTION);
         assertThat(testQuestion.getTopic()).isEqualTo(DEFAULT_TOPIC);
-        assertThat(testQuestion.getSector()).isEqualTo(DEFAULT_SECTOR);
     }
 
     @Test
@@ -201,25 +190,6 @@ public class QuestionResourceIntTest {
 
     @Test
     @Transactional
-    public void checkSectorIsRequired() throws Exception {
-        int databaseSizeBeforeTest = questionRepository.findAll().size();
-        // set the field null
-        question.setSector(null);
-
-        // Create the Question, which fails.
-        QuestionDTO questionDTO = questionMapper.toDto(question);
-
-        restQuestionMockMvc.perform(post("/api/questions")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(questionDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Question> questionList = questionRepository.findAll();
-        assertThat(questionList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllQuestions() throws Exception {
         // Initialize the database
         questionRepository.saveAndFlush(question);
@@ -230,8 +200,7 @@ public class QuestionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(question.getId().intValue())))
             .andExpect(jsonPath("$.[*].question").value(hasItem(DEFAULT_QUESTION.toString())))
-            .andExpect(jsonPath("$.[*].topic").value(hasItem(DEFAULT_TOPIC.toString())))
-            .andExpect(jsonPath("$.[*].sector").value(hasItem(DEFAULT_SECTOR.toString())));
+            .andExpect(jsonPath("$.[*].topic").value(hasItem(DEFAULT_TOPIC.toString())));
     }
     
 
@@ -247,8 +216,7 @@ public class QuestionResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(question.getId().intValue()))
             .andExpect(jsonPath("$.question").value(DEFAULT_QUESTION.toString()))
-            .andExpect(jsonPath("$.topic").value(DEFAULT_TOPIC.toString()))
-            .andExpect(jsonPath("$.sector").value(DEFAULT_SECTOR.toString()));
+            .andExpect(jsonPath("$.topic").value(DEFAULT_TOPIC.toString()));
     }
     @Test
     @Transactional
@@ -272,8 +240,7 @@ public class QuestionResourceIntTest {
         em.detach(updatedQuestion);
         updatedQuestion
             .question(UPDATED_QUESTION)
-            .topic(UPDATED_TOPIC)
-            .sector(UPDATED_SECTOR);
+            .topic(UPDATED_TOPIC);
         QuestionDTO questionDTO = questionMapper.toDto(updatedQuestion);
 
         restQuestionMockMvc.perform(put("/api/questions")
@@ -287,7 +254,6 @@ public class QuestionResourceIntTest {
         Question testQuestion = questionList.get(questionList.size() - 1);
         assertThat(testQuestion.getQuestion()).isEqualTo(UPDATED_QUESTION);
         assertThat(testQuestion.getTopic()).isEqualTo(UPDATED_TOPIC);
-        assertThat(testQuestion.getSector()).isEqualTo(UPDATED_SECTOR);
     }
 
     @Test

@@ -29,15 +29,6 @@ public class Question implements Serializable {
     @Column(name = "topic", nullable = false)
     private String topic;
 
-    @NotNull
-    @Column(name = "sector", nullable = false)
-    private String sector;
-
-    @ManyToOne(optional = false)
-    @NotNull
-    @JsonIgnoreProperties("")
-    private Company company;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("")
@@ -76,32 +67,6 @@ public class Question implements Serializable {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public String getSector() {
-        return sector;
-    }
-
-    public Question sector(String sector) {
-        this.sector = sector;
-        return this;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public Question company(Company company) {
-        this.company = company;
-        return this;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public Recruiter getRecruiter() {
@@ -144,7 +109,6 @@ public class Question implements Serializable {
             "id=" + getId() +
             ", question='" + getQuestion() + "'" +
             ", topic='" + getTopic() + "'" +
-            ", sector='" + getSector() + "'" +
             "}";
     }
 }
