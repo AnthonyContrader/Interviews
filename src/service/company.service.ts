@@ -10,6 +10,6 @@ import { CompanyDTO } from 'src/dto/companydto';
 export class CompanyService extends AbstractService<CompanyDTO>{
     constructor(http: HttpClient) {
         super(http);
-        this.type = 'interviews/api/companies';
+        this.type = 'interviews2/api/companies';
       }
 }
