@@ -1,0 +1,28 @@
+
+{
+    "gatewayApp": {
+        "interviews1Question" : {
+            "home": {
+                "title": "Questions",
+                "createLabel": "Genera un nuovo Question",
+                "createOrEditLabel": "Genera o modifica un Question"
+            },
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Question {{ id }}?"
+            },
+            "detail": {
+                "title": "Question"
+            },
+            "question": "Question",
+            "topic": "Topic",
+            "recruiter": "Recruiter"
+        }
+    },
+    "interviews1App": {
+        "interviews1Question" : {
+            "created": "&Egrave; stato generato un nuovo Question con identificatore { param }}",
+            "updated": "&Egrave; stato aggiornato Question identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Question con identificatore {{ param }}"
+        }
+    }
+}

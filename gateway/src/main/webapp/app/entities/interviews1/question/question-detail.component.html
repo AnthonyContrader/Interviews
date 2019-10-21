@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="question">
+            <h2><span jhiTranslate="gatewayApp.interviews1Question.detail.title">Question</span> {{question.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gatewayApp.interviews1Question.question">Question</span></dt>
+                <dd>
+                    <span>{{question.question}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.interviews1Question.topic">Topic</span></dt>
+                <dd>
+                    <span>{{question.topic}}</span>
+                </dd>
+                <dt><span jhiTranslate="gatewayApp.interviews1Question.recruiter">Recruiter</span></dt>
+                <dd>
+                    <div *ngIf="question.recruiterId">
+                        <a [routerLink]="['/recruiter', question.recruiterId, 'view']">{{question.recruiterName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/question', question.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

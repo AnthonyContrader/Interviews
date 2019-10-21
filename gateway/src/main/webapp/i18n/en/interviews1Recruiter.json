@@ -1,0 +1,28 @@
+
+{
+    "gatewayApp": {
+        "interviews1Recruiter" : {
+            "home": {
+                "title": "Recruiters",
+                "createLabel": "Create a new Recruiter",
+                "createOrEditLabel": "Create or edit a Recruiter"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Recruiter {{ id }}?"
+            },
+            "detail": {
+                "title": "Recruiter"
+            },
+            "name": "Name",
+            "companyId": "Company Id",
+            "companyName": "Company Name"
+        }
+    },
+    "interviews1App": {
+        "interviews1Recruiter" : {
+            "created": "A new Recruiter is created with identifier {{ param }}",
+            "updated": "A Recruiter is updated with identifier {{ param }}",
+            "deleted": "A Recruiter is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "gatewayApp": {
+        "interviews2Company" : {
+            "home": {
+                "title": "Companies",
+                "createLabel": "Genera un nuovo Company",
+                "createOrEditLabel": "Genera o modifica un Company"
+            },
+            "delete": {
+                "question": "Sei sicuro di volere eliminare Company {{ id }}?"
+            },
+            "detail": {
+                "title": "Company"
+            },
+            "name": "Name",
+            "address": "Address",
+            "city": "City",
+            "sector": "Sector"
+        }
+    },
+    "interviews2App": {
+        "interviews2Company" : {
+            "created": "&Egrave; stato generato un nuovo Company con identificatore { param }}",
+            "updated": "&Egrave; stato aggiornato Company identificato da {{ param }}",
+            "deleted": "&Egrave; stato eliminato Company con identificatore {{ param }}"
+        }
+    }
+}

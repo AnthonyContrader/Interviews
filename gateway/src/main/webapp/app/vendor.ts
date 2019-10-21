@@ -1,4 +1,4 @@
-/* after changing this file run 'npm run webpack:build' */
+/* after changing this file run 'yarn run webpack:build' */
 /* tslint:disable */
 import '../content/scss/vendor.scss';
 
