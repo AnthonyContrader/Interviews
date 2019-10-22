@@ -28,6 +28,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value="*")
 public class QuestionResource {
 
     private final Logger log = LoggerFactory.getLogger(QuestionResource.class);

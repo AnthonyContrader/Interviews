@@ -31,6 +31,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value="*")
 public class RecruiterResource {
 
 	@Autowired

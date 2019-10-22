@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/management")
+@CrossOrigin(value="*")
 public class LogsResource {
 
     @GetMapping("/logs")

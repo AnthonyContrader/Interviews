@@ -28,6 +28,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value="*")
 public class AccountResource {
 
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);

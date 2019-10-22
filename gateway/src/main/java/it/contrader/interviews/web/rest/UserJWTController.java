@@ -23,6 +23,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value="*")
 public class UserJWTController {
 
     private final TokenProvider tokenProvider;

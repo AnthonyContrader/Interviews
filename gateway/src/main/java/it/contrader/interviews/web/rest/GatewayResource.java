@@ -20,6 +20,7 @@ import com.codahale.metrics.annotation.Timed;
  */
 @RestController
 @RequestMapping("/api/gateway")
+@CrossOrigin(value="*")
 public class GatewayResource {
 
     private final RouteLocator routeLocator;

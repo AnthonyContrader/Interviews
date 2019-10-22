@@ -56,6 +56,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(value="*")
 public class UserResource {
 
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
